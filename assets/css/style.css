@@ -672,7 +672,7 @@ section {
   transform: translateX(-50%);
   font-size: 24px;
   background: #fff;
-  color: #FBF719;
+  color: #013220;
   border-radius: 50px;
   border: 2px solid #fff;
   box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
@@ -726,13 +726,13 @@ section {
 }
 
 .tabs .nav-link:hover {
-  color: #FBF719;
+  color: #013220;
 }
 
 .tabs .nav-link.active {
-  background: #FBF719;
+  background: #013220;
   color: #fff;
-  border-color: #FBF719;
+  border-color: #013220;
 }
 
 @media (max-width: 768px) {
@@ -774,7 +774,7 @@ section {
 .tabs .tab-pane ul i {
   font-size: 20px;
   padding-right: 4px;
-  color: #FBF719;
+  color: #013220;
 }
 
 .tabs .tab-pane p:last-child {
@@ -782,9 +782,9 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Services
+# Alumni Directory
 --------------------------------------------------------------*/
-.services .icon-box {
+.alumni .icon-box {
   margin-bottom: 20px;
   padding: 30px;
   border-radius: 6px;
@@ -793,38 +793,38 @@ section {
   position: relative;
 }
 
-.services .icon-box:hover {
-  background: #2b2b2b;
+.alumni .icon-box:hover {
+  background: #355E3B;
 }
 
-.services .icon-box i {
+.alumni .icon-box i {
   float: left;
   color: #FBF719;
   font-size: 40px;
   line-height: 0;
 }
 
-.services .icon-box h4 {
+.alumni .icon-box h4 {
   margin-left: 70px;
   font-weight: 700;
   margin-bottom: 15px;
   font-size: 18px;
 }
 
-.services .icon-box h4 a {
+.alumni .icon-box h4 a {
   color: #fff;
   transition: 0.3s;
 }
 
-.services .icon-box h4 a:hover {
+.alumni .icon-box h4 a:hover {
   text-decoration: underline;
 }
 
-.services .icon-box .icon-box:hover h4 a {
+.alumni .icon-box .icon-box:hover h4 a {
   color: #FBF719;
 }
 
-.services .icon-box p {
+.alumni .icon-box p {
   margin-left: 70px;
   line-height: 24px;
   font-size: 14px;
@@ -1019,14 +1019,14 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Testimonials
+# Events
 --------------------------------------------------------------*/
-.testimonials .testimonials-carousel,
-.testimonials .testimonials-slider {
+.events .testimonials-carousel,
+.events .testimonials-slider {
   overflow: hidden;
 }
 
-.testimonials .testimonial-item {
+.events .event-item {
   box-sizing: content-box;
   padding: 30px;
   margin: 30px 15px;
@@ -1037,7 +1037,7 @@ section {
   border-radius: 15px;
 }
 
-.testimonials .testimonial-item .testimonial-img {
+.events .event-item .event-img {
   width: 90px;
   border-radius: 10px;
   border: 6px solid #fff;
@@ -1045,58 +1045,58 @@ section {
   margin: 0 10px 0 0;
 }
 
-.testimonials .testimonial-item h3 {
+.events .event-item h3 {
   font-size: 18px;
   font-weight: bold;
   margin: 25px 0 5px 0;
   color: #111;
 }
 
-.testimonials .testimonial-item h4 {
+.events .event-item h4 {
   font-size: 14px;
   color: #999;
   margin: 0;
 }
 
-.testimonials .testimonial-item .quote-icon-left,
-.testimonials .testimonial-item .quote-icon-right {
-  color: #fceaea;
+.events .event-item .quote-icon-left,
+.events .event-item .quote-icon-right {
+  color: #8A9A5B;
   font-size: 26px;
 }
 
-.testimonials .testimonial-item .quote-icon-left {
+.events .event-item .quote-icon-left {
   display: inline-block;
   left: -5px;
   position: relative;
 }
 
-.testimonials .testimonial-item .quote-icon-right {
+.events .event-item .quote-icon-right {
   display: inline-block;
   right: -5px;
   position: relative;
   top: 10px;
 }
 
-.testimonials .testimonial-item p {
+.events .event-item p {
   font-style: italic;
   margin: 30px auto 15px auto;
 }
 
-.testimonials .swiper-pagination {
+.events .swiper-pagination {
   margin-top: 20px;
   position: relative;
 }
 
-.testimonials .swiper-pagination .swiper-pagination-bullet {
+.events .swiper-pagination .swiper-pagination-bullet {
   width: 12px;
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #FBF719;
+  border: 1px solid #355E3B;
 }
 
-.testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #FBF719;
+.events .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #355E3B;
 }
 
 /*--------------------------------------------------------------
