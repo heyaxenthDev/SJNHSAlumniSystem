@@ -125,7 +125,7 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="row no-gutters">
-                    <div class="content col-xl-5 d-flex align-items-stretch">
+                    <div class="content col-xl-5 d-flex justify-content-center">
                         <div class="content">
                             <img src="assets/img/SJNHS-logo.png" alt="">
                         </div>
