@@ -483,7 +483,7 @@
                             lasting change.</p>
                     </div>
                     <div class="col-lg-4 col-md-4">
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="d-grid gap-2 col-6 mx-auto mt-4">
                             <a class=" btn rounded-5 text-white btn-lg" style="background-color: #013220;">Donate</a>
                         </div>
                     </div>

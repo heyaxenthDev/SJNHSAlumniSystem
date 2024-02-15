@@ -29,7 +29,7 @@
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-login.css" rel="stylesheet">
 </head>
 
 <body>
@@ -41,61 +41,71 @@
                 class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center justify-content-center">
                             <a href="\SJNHSAlumniSystem/index.php"
                                 class="text-dark m-3 position-absolute top-0 end-0"><i
                                     class="bi bi-x-circle-fill"></i></a>
 
-                            <div class="d-flex justify-content-center py-4">
+                            <div class="d-flex justify-content-center py-2">
                                 <a href="index.php" class="logo d-flex align-items-center w-auto">
-                                    <img src="assets/img/login-icon.png" alt="">
+                                    <img src="assets/img/SJNHS-logo.png" alt="">
                                 </a>
                             </div><!-- End Logo -->
 
                             <div class="pt-2 pb-2">
-                                <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                                <h5 class="card-title text-center pb-3 fs-4 fw-medium" style="color: #013220;">SJNHS -
+                                    Alumni
+                                    Yearbook
+                                    &
+                                    Directory Website
+                                </h5>
                                 <p class="text-center small">Enter your email & password to login</p>
                             </div>
 
                             <form class="row g-3 needs-validation" novalidate>
 
                                 <div class="col-12">
-                                    <label for="yourEmail" class="form-label">Email</label>
-                                    <div class="input-group has-validation">
+                                    <label for="yourEmail" class="form-label">Email Address</label>
+                                    <div class="input-group input-group-lg has-validation">
                                         <input type="text" name="email" class="form-control" id="yourEmail" required>
                                         <div class="invalid-feedback">Please enter your email.</div>
                                     </div>
                                 </div>
 
-                                <div class="col-12">
+                                <div class="col-12 mb-2">
                                     <label for="yourPassword" class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" id="yourPassword"
-                                        required>
-                                    <div class="invalid-feedback">Please enter your password!</div>
+                                    <div class="input-group input-group-lg has-validation">
+                                        <input type="password" name="password" class="form-control" id="yourPassword"
+                                            required>
+                                        <div class="invalid-feedback">Please enter your password!</div>
+                                    </div>
                                 </div>
 
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="remember" value="true"
                                             id="rememberMe">
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-12">
-                                    <button class="btn btn-success w-100" type="submit">Login</button>
+                                    <button class="btn rounded-5 w-100 text-white btn-lg" type="submit"
+                                        style="background-color: #013220;">Login</button>
                                 </div>
-                                <div class="col-12">
-                                    <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an
+                                <div class="col-12 mt-5 mb-5 text-center">
+                                    <p class="small mb-0">Don't have account? <a href="pages-register.html"
+                                            class="text-success">Create
+                                            an
                                             account</a></p>
                                 </div>
                             </form>
 
-                            <div class="credits">
+                            <div class="credits mt-5">
                                 <!-- All the links in the footer should remain intact. -->
                                 <!-- You can delete the links only if you purchased the pro version. -->
                                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                                Designed by <a href="https://bootstrapmade.com/" class="text-dark">BootstrapMade</a>
                             </div>
 
                         </div>
@@ -121,7 +131,7 @@
     <script src="assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main-login.js"></script>
 
 </body>
 
