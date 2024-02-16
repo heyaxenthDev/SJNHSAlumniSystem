@@ -75,7 +75,7 @@
         </li><!-- End Communications Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="pages-error-404.html">
                 <i class="bi bi-gift"></i>
                 <span>Donation</span>
             </a>
