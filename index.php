@@ -282,7 +282,7 @@
                     <div class="col-md-6">
                         <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
                             <i class="bi bi-briefcase"></i>
-                            <h4><a href="#">Junior High Directory</a></h4>
+                            <h4><a href="#">Junior High</a></h4>
                             <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
                                 occaecati cupiditate non provident</p>
                         </div>
@@ -290,7 +290,7 @@
                     <div class="col-md-6 mt-4 mt-md-0">
                         <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                             <i class="bi bi-card-checklist"></i>
-                            <h4><a href="#">Senior High Directory</a></h4>
+                            <h4><a href="#">Senior High</a></h4>
                             <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                 consequat tarad limino ata</p>
                         </div>
