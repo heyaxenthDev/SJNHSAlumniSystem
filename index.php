@@ -48,7 +48,7 @@
                     <li><a class="nav-link scrollto" href="#events">Events</a></li>
                     <li><a class="nav-link scrollto " href="#alumni">Alumni</a></li>
                     <li><a class="nav-link scrollto" href="#tabs">News</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Donate</a></li>
+                    <li><a class="nav-link scrollto" href="#donation">Donate</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -484,7 +484,8 @@
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="d-grid gap-2 col-6 mx-auto mt-4">
-                            <a class=" btn rounded-5 text-white btn-lg" style="background-color: #013220;">Donate</a>
+                            <a class=" btn rounded-5 text-white btn-lg" href="pages-error-404.html"
+                                style="background-color: #013220;">Donate</a>
                         </div>
                     </div>
                 </div>

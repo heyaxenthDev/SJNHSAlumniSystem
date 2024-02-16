@@ -74,6 +74,12 @@
             </ul>
         </li><!-- End Communications Nav -->
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#">
+                <i class="bi bi-gift"></i>
+                <span>Donation</span>
+            </a>
+        </li><!-- End Doantion Page Nav -->
     </ul>
 
 </aside><!-- End Sidebar-->
