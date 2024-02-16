@@ -12,30 +12,26 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bar-chart"></i><span>Faculty Directory</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-person-badge"></i><span>Faculty Directory</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="charts-chartjs.html">
-                        <i class="bi bi-circle"></i><span>Chart.js</span>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Junior High</span>
                     </a>
                 </li>
                 <li>
-                    <a href="charts-apexcharts.html">
-                        <i class="bi bi-circle"></i><span>ApexCharts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>ECharts</span>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Senior High</span>
                     </a>
                 </li>
             </ul>
         </li><!-- End Faculty Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-register.html">
-                <i class="bi bi-card-list"></i>
+            <a class="nav-link collapsed" href="#">
+                <i class="bi bi-newspaper"></i>
                 <span>News &amp; Updates</span>
             </a>
         </li><!-- End News & Updates Page Nav -->
@@ -48,18 +44,13 @@
             </a>
             <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="icons-bootstrap.html">
-                        <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Junior High</span>
                     </a>
                 </li>
                 <li>
-                    <a href="icons-remix.html">
-                        <i class="bi bi-circle"></i><span>Remix Icons</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons-boxicons.html">
-                        <i class="bi bi-circle"></i><span>Boxicons</span>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Senior High</span>
                     </a>
                 </li>
             </ul>
@@ -67,7 +58,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-mailbox"></i><span>Communications</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-envelope"></i><span>Communications</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>

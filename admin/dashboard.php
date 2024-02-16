@@ -58,7 +58,7 @@ include("includes/sidebar.php");
                                         <i class="bi bi-people-fill"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>$3,264</h6>
+                                        <h6>264</h6>
                                         <span class="text-success small pt-1 fw-bold">8%</span> <span
                                             class="text-muted small pt-2 ps-1">increase</span>
 
@@ -82,9 +82,9 @@ include("includes/sidebar.php");
                                         <i class="bi bi-person-check"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>1244</h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span>
+                                        <h6>44</h6>
+                                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
+                                            class="text-muted small pt-2 ps-1">decrease</span> -->
 
                                     </div>
                                 </div>
