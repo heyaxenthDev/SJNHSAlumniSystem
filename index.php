@@ -135,13 +135,15 @@
                             <div class="row">
                                 <div class="col-md icon-box" data-aos="fade-up" data-aos-delay="100">
                                     <h1>About Us</h1>
-                                    <p>This is the Official page of Sta. Justa National High School.
+                                    <p>This is the Official page of Sta. Justa National High
+                                        School.
                                         Announcements,updates and ot Justa Junior High School was changed to Sta. The
                                         Sta. No. 6655.
                                         in 1975, pursuant to the Presidential Decree No. 557, entitled declaring all
                                         Barrios in the Philippines as Barangay, The Sta. Justa Barangay High School
                                         until it was converted to Sta. Justa National HIgh School is previously
-                                        squatting in Sta. Justa Elementary School. However, through the combined efforts
+                                        squatting in Sta. Justa Elementary School. <br><br>However, through the combined
+                                        efforts
                                         of of the Parents-Teachers Association (PTA), and other civic spirited citizens,
                                         a 1.5563 hectare lot was purchased. On June 10, 1987, by virtue of Executive
                                         Order No. 189
