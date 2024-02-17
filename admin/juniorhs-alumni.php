@@ -18,13 +18,13 @@ include "includes/header.php";
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-person-badge"></i><span>Faculty Directory</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="charts-nav" class="nav-content" data-bs-parent="#sidebar-nav">
+            <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="juniorhs-faculty.php" class="active">
+                    <a href="juniorhs-faculty.php">
                         <i class="bi bi-circle"></i><span>Junior High</span>
                     </a>
                 </li>
