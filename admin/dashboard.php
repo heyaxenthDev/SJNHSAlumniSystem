@@ -1,11 +1,9 @@
 <?php
-// include("authentication.php");
-include_once "includes/header.php";
-include_once "includes/sidebar.php";
+// include 'authentication.php';
+include_once 'includes/header.php';
+include_once 'includes/sidebar.php';
 
 ?>
-
-
 
 <main id="main" class="main">
 
@@ -243,5 +241,5 @@ include_once "includes/sidebar.php";
 
 </main><!-- End #main -->
 <?php
-include_once "includes/footer.php";
+include_once 'includes/footer.php';
 ?>
