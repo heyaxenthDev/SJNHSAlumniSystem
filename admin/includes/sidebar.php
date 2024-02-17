@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="index.html">
+            <a class="nav-link " href="dashboard.php">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -17,12 +17,12 @@
             </a>
             <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="#">
+                    <a href="juniorhs-faculty.php">
                         <i class="bi bi-circle"></i><span>Junior High</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="seniorhs-faculty.php">
                         <i class="bi bi-circle"></i><span>Senior High</span>
                     </a>
                 </li>
@@ -30,7 +30,14 @@
         </li><!-- End Faculty Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="events.php">
+                <i class="bi bi-calendar-week"></i>
+                <span>Events</span>
+            </a>
+        </li><!-- End Events Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="news-and-updates.php">
                 <i class="bi bi-newspaper"></i>
                 <span>News &amp; Updates</span>
             </a>
@@ -44,12 +51,12 @@
             </a>
             <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="#">
+                    <a href="juniorhs-alumni.php">
                         <i class="bi bi-circle"></i><span>Junior High</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="seniorhs-alumni.php">
                         <i class="bi bi-circle"></i><span>Senior High</span>
                     </a>
                 </li>
