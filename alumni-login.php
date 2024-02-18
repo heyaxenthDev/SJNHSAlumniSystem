@@ -5,7 +5,7 @@ session_start();
 ?>
 <script src="js/sweetalert.min.js"></script>
 <?php
-    if (isset($_SESSION['status'])){
+if (isset($_SESSION['status'])) {
     ?>
 <script>
 swal({
@@ -17,9 +17,9 @@ swal({
 </script>
 
 <?php
-    unset($_SESSION['status']);
-    }
-    ?>
+unset($_SESSION['status']);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -124,10 +124,6 @@ swal({
                             </form>
 
                             <div class="credits mt-5">
-                                <!-- All the links in the footer should remain intact. -->
-                                <!-- You can delete the links only if you purchased the pro version. -->
-                                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
                                 Designed by <a href="https://bootstrapmade.com/" class="text-dark">BootstrapMade</a>
                             </div>
 

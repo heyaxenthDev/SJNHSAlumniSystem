@@ -1,8 +1,8 @@
 <?php
-// include 'authentication.php';
+include 'authentication.php';
 include_once 'includes/header.php';
 // include_once 'includes/sidebar.php';
-
+include "alert.php";
 ?>
 
 <!-- ======= Sidebar ======= -->
@@ -18,11 +18,11 @@ include_once 'includes/header.php';
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed" data-bs-target="#faculty-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-person-badge"></i><span>Faculty Directory</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <ul id="faculty-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="juniorhs-faculty.php">
                         <i class="bi bi-circle"></i><span>Junior High</span>
@@ -53,10 +53,10 @@ include_once 'includes/header.php';
         <li class="nav-heading">Alumni</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed" data-bs-target="#alumni-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-gem"></i><span>Alumni Yearbook</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="alumni-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="juniorhs-alumni.php">
                         <i class="bi bi-circle"></i><span>Junior High</span>
@@ -71,10 +71,10 @@ include_once 'includes/header.php';
         </li><!-- End Alumni Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed" data-bs-target="#comms-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-envelope"></i><span>Communications</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="comms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="#">
                         <i class="bi bi-circle"></i><span>Email</span>

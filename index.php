@@ -26,11 +26,18 @@
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
 </head>
+
+<?php
+session_start();
+include "alert.php";
+?>
 
 <body>
 
@@ -49,12 +56,58 @@
                     <li><a class="nav-link scrollto " href="#alumni">Alumni</a></li>
                     <li><a class="nav-link scrollto" href="#tabs">News</a></li>
                     <li><a class="nav-link scrollto" href="#donation">Donate</a></li>
+                    <li><a class="nav-link scrollto" href="#" data-bs-toggle="modal" data-bs-target="#adminlogin"><i
+                                class="bi bi-lock-fill"></i></a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-
         </div>
     </header><!-- End Header -->
+
+    <!-- Start Admin Login Modal-->
+    <div class="modal fade" id="adminlogin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color: #013220;"><img src="assets/img/favicon-32x32.png" alt="">
+                        STA. JUSTA NATIONAL HIGH SCHOOL</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body m-5">
+                    <form class="row g-3" method="POST" action="login-code.php">
+                        <h5 class=" card-title text-center pb-3 fs-4 fw-semibold" style="color: #013220;">
+                            Administrative Log in
+                        </h5>
+                        <div class="col-12">
+                            <label for="yourUsername" class="form-label"><i class="bx bxs-user"></i> Username</label>
+                            <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        </div>
+
+                        <div class="col-12 mb-2">
+                            <label for="yourPassword" class="form-label"><i class="bx bxs-lock-alt"></i>
+                                Password</label>
+                            <input type="password" name="password" class="form-control" id="yourPassword" required>
+                        </div>
+
+                        <!-- <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" value="true"
+                                    id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                            </div>
+                        </div> -->
+
+                        <div class="col-12">
+                            <button class="btn rounded-5 w-100 text-white btn-lg" type="submit"
+                                style="background-color: #013220;" name="adminLogin">Login</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div><!-- End Admin Login Modal-->
 
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
@@ -304,7 +357,7 @@
         <section id="tabs" class="tabs">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
-                    <h2>News & Updates</h2>
+                    <h2>News &amp; Updates</h2>
                     <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
                         sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
                         ea.</p>
@@ -518,21 +571,21 @@
                         <h4>Useful Links</h4>
                         <ul>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Events</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Alumni</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
+                        <h4>Related Links</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#events">Events</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#tabs">News &amp; Updates</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Donate</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#" data-bs-toggle="modal"
+                                    data-bs-target="#adminlogin">Admin</a></li>
                         </ul>
                     </div>
 
@@ -552,13 +605,10 @@
 
             <div class="me-md-auto text-center text-md-start">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>SJNHS</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>SJNHS - Alumni Yearbook & Directory System</span></strong>. All
+                    Rights Reserved
                 </div>
                 <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/presento-bootstrap-corporate-template/ -->
                     Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                 </div>
             </div>
