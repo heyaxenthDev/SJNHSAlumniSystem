@@ -230,6 +230,7 @@ $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     // Loop through each faculty member and display their information
     while ($row = mysqli_fetch_assoc($result)) {
+        $middlenameInitial = substr($row['middlename'], 0, 1);
         ?>
                             <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                                 <div class="member" data-aos="fade-up" data-aos-delay="100">
@@ -243,7 +244,7 @@ if (mysqli_num_rows($result) > 0) {
                                         </div> -->
                                     </div>
                                     <div class="member-info">
-                                        <h4><?php echo $row['firstname'] . " " . $row['middlename'] . " " . $row['lastname']; ?>
+                                        <h4><?php echo $row['firstname'] . " " . $middlenameInitial . ". " . $row['lastname']; ?>
                                         </h4>
                                         <span><?php echo $row['designation'] . " <br> Grade" . $row['grade'] . " - " . $row['sect_subj']; ?></span>
                                     </div>

@@ -1,6 +1,8 @@
 <?php
 include 'authentication.php';
 include_once 'includes/header.php';
+include_once 'includes/conn.php';
+
 // include_once 'includes/sidebar.php';
 include "alert.php";
 ?>
@@ -122,7 +124,7 @@ include "alert.php";
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card jhs-card">
                             <div class="card-body">
-                                <h5 class="card-title">Senior High Alumni</h5>
+                                <h5 class="card-title">Male Alumni</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
@@ -139,13 +141,13 @@ include "alert.php";
                             </div>
 
                         </div>
-                    </div><!-- End Sales Card -->
+                    </div><!-- End Male Card -->
 
                     <!-- SHS Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card shs-card">
                             <div class="card-body">
-                                <h5 class="card-title">Senior High Alumni</h5>
+                                <h5 class="card-title">Female Alumni</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
@@ -162,7 +164,7 @@ include "alert.php";
                             </div>
 
                         </div>
-                    </div><!-- End Revenue Card -->
+                    </div><!-- End Female Card -->
 
                     <!-- Active Card -->
                     <div class="col-xxl-4 col-xl-12">
@@ -187,7 +189,7 @@ include "alert.php";
                             </div>
                         </div>
 
-                    </div><!-- End Customers Card -->
+                    </div><!-- End Active Card -->
 
                     <!-- Batch List -->
                     <div class="col-12">
@@ -200,134 +202,65 @@ include "alert.php";
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Batch Year</th>
-                                            <th scope="col">Section</th>
+                                            <th scope="col">School Type</th>
                                             <th scope="col"># of Members</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row"><a href="#">1</a></th>
-                                            <td>1990</td>
-                                            <td>A</td>
-                                            <td>64</td>
-                                            <td><a href="#" class="btn btn-sm btn-success text-white">View
-                                                    List</a>
-                                            </td>
-                                        </tr>
+                                        <?php
+// Assuming $conn is your database connection
+$sql = "SELECT * FROM batchyear WHERE `hs_type` = 'SHS'";
+$result = mysqli_query($conn, $sql);
+$count = 1;
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<th scope='row'><a href='#'>$count</a></th>";
+    echo "<td>{$row['batch_year']}</td>";
+    echo "<td>{$row['hs_type']}</td>";
+    // You need to fetch the number of members for each batch from your database
+    echo "<td>0</td>";
+    echo "<td><a href='#' class='btn btn-sm btn-success text-white'>View List</a></td>";
+    echo "</tr>";
+    $count++;
+}
+?>
                                     </tbody>
                                 </table>
 
                             </div>
 
                         </div>
-                    </div><!-- End Recent Sales -->
+                    </div><!-- End Batch List -->
+
+
                 </div>
             </div><!-- End Left side columns -->
 
             <!-- Right side columns -->
             <div class="col-lg-4">
 
-                <!-- Upcoming Events -->
+                <!-- Add New Batch -->
                 <div class="card">
-                    <!-- <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div> -->
+                    <div class="card-body m-3">
+                        <h5 class="card-title"><i class="bi bi-calendar-plus"></i> New Batch</h5>
 
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-calendar-week"></i> Upcoming Events</h5>
+                        <form action="code.php" method="POST">
+                            <div class="col-12 mt-2">
+                                <label for="batchyear" class="form-label">Batch Year</label>
+                                <input type="text" name="batchyear" class="form-control" id="batchyear" required>
+                            </div>
 
-                        <div class="events">
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
-
-                        </div>
+                            <div class="d-grid gap-2 col-6 mx-auto mt-4">
+                                <button class="btn rounded-5 w-100 text-white" type="submit"
+                                    style="background-color: #013220;" name="addNewSHSBatch"><i
+                                        class="bi bi-plus-circle"></i> Add New Batch</button>
+                            </div>
+                        </form>
 
                     </div>
-                </div><!-- End Upcoming Events -->
-
-                <!-- News & Updates -->
-                <div class="card">
-                    <!-- <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div> -->
-
-                    <div class="card-body pb-0">
-                        <h5 class="card-title"><i class="bi bi-newspaper"></i> News &amp; Updates</h5>
-
-                        <div class="news">
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Quidem autem et impedit</a></h4>
-                                <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                                <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                                <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
-                                    eius...</p>
-                            </div>
-
-                        </div><!-- End sidebar recent posts-->
-
-                    </div>
-                </div><!-- End News & Updates -->
+                </div><!-- End Add New Batch -->
 
             </div><!-- End Right side columns -->
 

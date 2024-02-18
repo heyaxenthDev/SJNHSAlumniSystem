@@ -178,3 +178,73 @@ if (isset($_POST['addNewSHSFaculty'])) {
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }
+
+if (isset($_POST['addNewSHSBatch'])) {
+
+    // Sanitize and retrieve form data
+    $batchyear = mysqli_real_escape_string($conn, $_POST['batchyear']);
+
+    // Set default value for hs_type
+    $hs_type = "SHS";
+
+    // Prepare the SQL statement
+    $sql = "INSERT INTO batchyear (batch_year, hs_type) VALUES (?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    // Bind parameters and execute the statement
+    mysqli_stmt_bind_param($stmt, "ss", $batchyear, $hs_type);
+    if (mysqli_stmt_execute($stmt)) {
+        $_SESSION['status'] = "Success";
+        $_SESSION['status_text'] = "New batch year added successfully!";
+        $_SESSION['status_code'] = "success";
+        $_SESSION['status_btn'] = "Done";
+        header("Location: seniorhs-alumni");
+        // echo "New batch year added successfully!";
+    } else {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = mysqli_error($conn);
+        $_SESSION['status_code'] = "error";
+        $_SESSION['status_btn'] = "Back";
+        header("Location: seniorhs-faculty");
+        // echo "Error: " . mysqli_error($conn);
+    }
+
+    // Close the statement and database connection
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+}
+
+if (isset($_POST['addNewJHSBatch'])) {
+
+    // Sanitize and retrieve form data
+    $batchyear = mysqli_real_escape_string($conn, $_POST['batchyear']);
+
+    // Set default value for hs_type
+    $hs_type = "JHS";
+
+    // Prepare the SQL statement
+    $sql = "INSERT INTO batchyear (batch_year, hs_type) VALUES (?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    // Bind parameters and execute the statement
+    mysqli_stmt_bind_param($stmt, "ss", $batchyear, $hs_type);
+    if (mysqli_stmt_execute($stmt)) {
+        $_SESSION['status'] = "Success";
+        $_SESSION['status_text'] = "New batch year added successfully!";
+        $_SESSION['status_code'] = "success";
+        $_SESSION['status_btn'] = "Done";
+        header("Location: juniorhs-alumni");
+        // echo "New batch year added successfully!";
+    } else {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = mysqli_error($conn);
+        $_SESSION['status_code'] = "error";
+        $_SESSION['status_btn'] = "Back";
+        header("Location: juniorhs-faculty");
+        // echo "Error: " . mysqli_error($conn);
+    }
+
+    // Close the statement and database connection
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+}
