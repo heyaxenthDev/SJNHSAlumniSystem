@@ -6,7 +6,6 @@ include "includes/conn.php";
 //JHS Faculty INSERT Code
 // Check if the form is submitted
 if (isset($_POST['addNewJHSFaculty'])) {
-    // Include your database connection code Jere if not already included
 
     // Sanitize and retrieve form data
     $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
@@ -95,7 +94,6 @@ if (isset($_POST['addNewJHSFaculty'])) {
 //SHS Faculty INSERT Code
 // Check if the form is submitted
 if (isset($_POST['addNewSHSFaculty'])) {
-    // Include your database connection code here if not already included
 
     // Sanitize and retrieve form data
     $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
