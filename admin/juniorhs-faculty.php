@@ -1,6 +1,8 @@
 <?php
 include 'authentication.php';
 include_once 'includes/header.php';
+include_once 'includes/conn.php';
+
 // include_once 'includes/sidebar.php';
 include "alert.php";
 ?>
@@ -113,223 +115,157 @@ include "alert.php";
 
     <section class="section dashboard">
         <div class="row">
+            <div class="col-lg-12">
+                <div id="user" class="user">
+                    <div class="container" data-aos="fade-up">
 
-            <!-- Left side columns -->
-            <div class="col-lg-8">
-                <div class="row">
+                        <div class="section-title">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+                                <button class="btn text-white" style="background-color:#013220" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#addfaculty"><i
+                                        class="bi bi-person-plus-fill"></i> Add Faculty</button>
+                            </div>
 
-                    <!-- JHS Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card jhs-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Junior High Alumni</h5>
+                            <!-- Start Add Faculty Modal-->
+                            <div class="modal fade" id="addfaculty" tabindex="-1" data-bs-backdrop="static"
+                                data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fw-semibold" style="color: #013220;">Add New Faculty
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body m-2">
+                                            <form class="row g-3" method="POST" action="code.php"
+                                                enctype="multipart/form-data">
+                                                <div class="col-12">
+                                                    <label for="firstname" class="form-label">First Name</label>
+                                                    <input type="text" name="firstname" class="form-control"
+                                                        id="firstname" required>
+                                                </div>
 
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-people-fill"></i>
+                                                <div class="col-12">
+                                                    <label for="middlename" class="form-label">Middle Name</label>
+                                                    <input type="text" name="middlename" class="form-control"
+                                                        id="middlename" required>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="lastname" class="form-label">Last Name</label>
+                                                    <input type="text" name="lastname" class="form-control"
+                                                        id="lastname" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="designation" class="form-label">Designation</label>
+                                                    <select name="designation" class="form-select" id="designation"
+                                                        required>
+                                                        <option value="none">--Select Designation--</option>
+                                                        <option value="Principal">Principal</option>
+                                                        <option value="Teacher I">Teacher I</option>
+                                                        <option value="Teacher II">Teacher II</option>
+                                                        <option value="Teacher III">Teacher III</option>
+                                                        <option value="Teacher IV">Teacher IV</option>
+                                                        <option value="Teacher V">Teacher V</option>
+                                                        <option value="Teacher VI">Teacher VI</option>
+                                                        <option value="Master Teacher I">Master Teacher I</option>
+                                                        <option value="Master Teacher II">Master Teacher II</option>
+                                                        <option value="Master Teacher III">Master Teacher III
+                                                        </option>
+                                                        <option value="Master Teacher IV">Master Teacher IV</option>
+                                                        <option value="Master Teacher V">Master Teacher V</option>
+                                                        <option value="Master Teacher VI">Master Teacher VI</option>
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="col-12">
+                                                    <label for="grade" class="form-label">Grade</label>
+                                                    <select name="grade" class="form-select" id="grade" required>
+                                                        <option value="none">--Select Grade--</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="section" class="form-label">Section/Subject</label>
+                                                    <input type="text" name="section" class="form-control" id="section"
+                                                        required>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="profilePicture" class="form-label">Profile
+                                                        Picture</label>
+                                                    <input type="file" name="profilePicture" class="form-control"
+                                                        id="profilePicture">
+                                                </div>
+
+                                                <div class="col-12 mt-4">
+                                                    <button class="btn rounded-5 w-100 text-white btn-lg" type="submit"
+                                                        style="background-color: #013220;" name="addNewJHSFaculty"><i
+                                                            class="bi bi-plus-circle"></i> Add</button>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                     </div>
-                                    <div class="ps-3">
-                                        <h6>145</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
+                                </div>
+                            </div><!-- End Add Faculty Modal-->
 
+                            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum
+                                quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui
+                                impedit suscipit alias ea.</p>
+                        </div>
+
+                        <div class="row">
+
+                            <?php
+// Query to select faculty members from the database
+$sql = "SELECT * FROM faculty WHERE `hs_type` = 'JHS'";
+$result = mysqli_query($conn, $sql);
+
+// Check if there are any faculty members
+if (mysqli_num_rows($result) > 0) {
+    // Loop through each faculty member and display their information
+    while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+                            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                                <div class="member" data-aos="fade-up" data-aos-delay="100">
+                                    <div class="member-img">
+                                        <img src="<?php echo $row['profile_picture']; ?>" class="img-fluid" alt="">
+                                        <!-- <div class="social">
+                                            <a href=""><i class="bi bi-twitter"></i></a>
+                                            <a href=""><i class="bi bi-facebook"></i></a>
+                                            <a href=""><i class="bi bi-instagram"></i></a>
+                                            <a href=""><i class="bi bi-linkedin"></i></a>
+                                        </div> -->
+                                    </div>
+                                    <div class="member-info">
+                                        <h4><?php echo $row['firstname'] . " " . $row['middlename'] . " " . $row['lastname']; ?>
+                                        </h4>
+                                        <span><?php echo $row['designation'] . " <br> Grade" . $row['grade'] . " - " . $row['sect_subj']; ?></span>
                                     </div>
                                 </div>
                             </div>
+                            <?php
+}
+} else {
+    echo "No team members found.";
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
 
                         </div>
-                    </div><!-- End Sales Card -->
 
-                    <!-- SHS Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card shs-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Senior High Alumni</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-people-fill"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Revenue Card -->
-
-                    <!-- Active Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                        <div class="card info-card active-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Active Members</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-person-check"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>44</h6>
-                                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span> -->
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div><!-- End Customers Card -->
-
-                    <!-- Batch List -->
-                    <div class="col-12">
-                        <div class="card batch-list overflow-auto">
-                            <div class="card-body">
-                                <h5 class="card-title">Batch List</h5>
-
-                                <table class="table table-borderless datatable">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Batch Year</th>
-                                            <th scope="col">Section</th>
-                                            <th scope="col"># of Members</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row"><a href="#">1</a></th>
-                                            <td>1990</td>
-                                            <td>A</td>
-                                            <td>64</td>
-                                            <td><a href="#" class="btn btn-sm btn-success text-white">View
-                                                    List</a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-
-                        </div>
-                    </div><!-- End Recent Sales -->
+                    </div>
                 </div>
-            </div><!-- End Left side columns -->
 
-            <!-- Right side columns -->
-            <div class="col-lg-4">
-
-                <!-- Upcoming Events -->
-                <div class="card">
-                    <!-- <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div> -->
-
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-calendar-week"></i> Upcoming Events</h5>
-
-                        <div class="events">
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
-
-                        </div>
-
-                    </div>
-                </div><!-- End Upcoming Events -->
-
-                <!-- News & Updates -->
-                <div class="card">
-                    <!-- <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div> -->
-
-                    <div class="card-body pb-0">
-                        <h5 class="card-title"><i class="bi bi-newspaper"></i> News &amp; Updates</h5>
-
-                        <div class="news">
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Quidem autem et impedit</a></h4>
-                                <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                                <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                                <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
-                                    eius...</p>
-                            </div>
-
-                        </div><!-- End sidebar recent posts-->
-
-                    </div>
-                </div><!-- End News & Updates -->
-
-            </div><!-- End Right side columns -->
+            </div>
+        </div><!-- End Left side columns -->
 
         </div>
     </section>

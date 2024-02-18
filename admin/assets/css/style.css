@@ -1151,6 +1151,88 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# User
+--------------------------------------------------------------*/
+.user .member {
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #fff;
+  position: relative;
+}
+
+.user .member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.user .member .social {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  right: 0;
+  opacity: 0;
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user .member .social a {
+  transition: color 0.3s;
+  color: #111111;
+  margin: 0 3px;
+  border-radius: 50px;
+  width: 36px;
+  height: 36px;
+  background: #FBF719;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: ease-in-out 0.3s;
+  color: #fff;
+}
+
+.user .member .social a:hover {
+  background: #111111;
+}
+
+.user .member .social i {
+  font-size: 18px;
+  line-height: 0;
+}
+
+.user .member .member-info {
+  padding: 25px 15px;
+}
+
+.user .member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #111111;
+}
+
+.user .member .member-info span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #aaaaaa;
+}
+
+.user .member .member-info p {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 26px;
+  color: #777777;
+}
+
+.user .member:hover .social {
+  opacity: 1;
+  bottom: 15px;
+}
+
+/*--------------------------------------------------------------
 # Error 404
 --------------------------------------------------------------*/
 .error-404 {
