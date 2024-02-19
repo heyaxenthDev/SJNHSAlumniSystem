@@ -4,13 +4,14 @@ session_start();
 include "includes/conn.php";
 
 //JHS Faculty INSERT Code
-// Check if the form is submitted
 if (isset($_POST['addNewJHSFaculty'])) {
 
     // Sanitize and retrieve form data
     $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
     $middlename = mysqli_real_escape_string($conn, $_POST['middlename']);
     $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
     $designation = mysqli_real_escape_string($conn, $_POST['designation']);
     $grade = mysqli_real_escape_string($conn, $_POST['grade']);
     $section = mysqli_real_escape_string($conn, $_POST['section']);
@@ -43,8 +44,7 @@ if (isset($_POST['addNewJHSFaculty'])) {
     }
 
     // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif") {
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
         echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk = 0;
     }
@@ -52,29 +52,26 @@ if (isset($_POST['addNewJHSFaculty'])) {
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
             echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
             // Insert into database
-            $sql = "INSERT INTO faculty (firstname, middlename, lastname, designation, hs_type, grade, sect_subj, profile_picture)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO faculty (firstname, middlename, lastname, email, phone_num, designation, hs_type, grade, sect_subj, profile_picture)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "ssssssss", $firstname, $middlename, $lastname, $designation, $hs_type, $grade, $section, $targetFile);
+            mysqli_stmt_bind_param($stmt, "ssssssssss", $firstname, $middlename, $lastname, $email, $phone_num, $designation, $hs_type, $grade, $section, $targetFile);
             if (mysqli_stmt_execute($stmt)) {
                 $_SESSION['status'] = "Success";
                 $_SESSION['status_text'] = "New faculty added!";
                 $_SESSION['status_code'] = "success";
                 $_SESSION['status_btn'] = "Done";
                 header("Location: juniorhs-faculty");
-                // echo "New faculty added successfully!";
             } else {
                 $_SESSION['status'] = "Error";
                 $_SESSION['status_text'] = mysqli_error($conn);
                 $_SESSION['status_code'] = "error";
                 $_SESSION['status_btn'] = "Back";
                 header("Location: juniorhs-faculty");
-                // echo "Error: " . mysqli_error($conn);
             }
         } else {
             $_SESSION['status'] = "Error";
@@ -82,7 +79,6 @@ if (isset($_POST['addNewJHSFaculty'])) {
             $_SESSION['status_code'] = "error";
             $_SESSION['status_btn'] = "Back";
             header("Location: juniorhs-faculty");
-            // echo "Sorry, there was an error uploading your file.";
         }
     }
 
@@ -91,14 +87,16 @@ if (isset($_POST['addNewJHSFaculty'])) {
     mysqli_close($conn);
 }
 
-//SHS Faculty INSERT Code
-// Check if the form is submitted
-if (isset($_POST['addNewSHSFaculty'])) {
 
+//SHS Faculty INSERT Code
+if (isset($_POST['addNewSHSFaculty'])) {
+ 
     // Sanitize and retrieve form data
     $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
     $middlename = mysqli_real_escape_string($conn, $_POST['middlename']);
     $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
     $designation = mysqli_real_escape_string($conn, $_POST['designation']);
     $grade = mysqli_real_escape_string($conn, $_POST['grade']);
     $section = mysqli_real_escape_string($conn, $_POST['section']);
@@ -131,8 +129,7 @@ if (isset($_POST['addNewSHSFaculty'])) {
     }
 
     // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif") {
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
         echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk = 0;
     }
@@ -140,29 +137,26 @@ if (isset($_POST['addNewSHSFaculty'])) {
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
             echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
             // Insert into database
-            $sql = "INSERT INTO faculty (firstname, middlename, lastname, designation, hs_type, grade, sect_subj, profile_picture)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO faculty (firstname, middlename, lastname, email, phone_num, designation, hs_type, grade, sect_subj, profile_picture)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "ssssssss", $firstname, $middlename, $lastname, $designation, $hs_type, $grade, $section, $targetFile);
+            mysqli_stmt_bind_param($stmt, "ssssssssss", $firstname, $middlename, $lastname, $email, $phone_num, $designation, $hs_type, $grade, $section, $targetFile);
             if (mysqli_stmt_execute($stmt)) {
                 $_SESSION['status'] = "Success";
                 $_SESSION['status_text'] = "New faculty added!";
                 $_SESSION['status_code'] = "success";
                 $_SESSION['status_btn'] = "Done";
                 header("Location: seniorhs-faculty");
-                // echo "New faculty added successfully!";
             } else {
                 $_SESSION['status'] = "Error";
                 $_SESSION['status_text'] = mysqli_error($conn);
                 $_SESSION['status_code'] = "error";
                 $_SESSION['status_btn'] = "Back";
                 header("Location: seniorhs-faculty");
-                // echo "Error: " . mysqli_error($conn);
             }
         } else {
             $_SESSION['status'] = "Error";
@@ -170,7 +164,6 @@ if (isset($_POST['addNewSHSFaculty'])) {
             $_SESSION['status_code'] = "error";
             $_SESSION['status_btn'] = "Back";
             header("Location: seniorhs-faculty");
-            // echo "Sorry, there was an error uploading your file.";
         }
     }
 
@@ -178,6 +171,7 @@ if (isset($_POST['addNewSHSFaculty'])) {
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }
+
 
 if (isset($_POST['addNewSHSBatch'])) {
 
