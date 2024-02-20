@@ -1,6 +1,8 @@
 <?php
 include 'authentication.php';
 include_once 'includes/header.php';
+include_once 'includes/conn.php';
+
 // include_once 'includes/sidebar.php';
 include "alert.php";
 ?>
@@ -112,222 +114,161 @@ include "alert.php";
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Post New Updates</h5>
+                        <h5 class="card-title">Post New News</h5>
 
-                        <!-- General Form Elements -->
-                        <form>
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Text</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                        <!-- News Form Elements -->
+                        <form class="row g-3" method="POST" action="code.php" enctype="multipart/form-data">
+
+                            <div class="row mb-4 mt-2">
+                                <div class="col-lg-12 col-md-12">
+                                    <center>
+                                        <img id="newsPicturePreview" src="assets/img/undraw_Newspaper_re_syf5.png"
+                                            alt="News Picture Preview" style="max-width: 100%; max-height: 300px;">
+                                    </center>
+                                    <small class="mt-2">Add News Picture</small>
+                                    <input type="file" name="newsPicture" class="form-control" id="newsPicture"
+                                        onchange="previewNewsPicture();" accept="image/*" required>
                                 </div>
+                                <script src="js/scripts.js"></script>
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">Number</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="formFile">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
-                                <div class="col-sm-10">
-                                    <input type="time" class="form-control">
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 mb-2">
+                                    <label for="newsTitle" class="form-label">News Title</label>
+                                    <input type="text" name="newsTitle" class="form-control" id="newsTitle" required>
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="inputColor" class="col-sm-2 col-form-label">Color Picker</label>
-                                <div class="col-sm-10">
-                                    <input type="color" class="form-control form-control-color" id="exampleColorInput"
-                                        value="#4154f1" title="Choose your color">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Textarea</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" style="height: 100px"></textarea>
-                                </div>
-                            </div>
-                            <fieldset class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                                            value="option1" checked>
-                                        <label class="form-check-label" for="gridRadios1">
-                                            First radio
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                                            value="option2">
-                                        <label class="form-check-label" for="gridRadios2">
-                                            Second radio
-                                        </label>
-                                    </div>
-                                    <div class="form-check disabled">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios"
-                                            value="option" disabled>
-                                        <label class="form-check-label" for="gridRadios3">
-                                            Third disabled radio
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0">Checkboxes</legend>
-                                <div class="col-sm-10">
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                        <label class="form-check-label" for="gridCheck1">
-                                            Example checkbox
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-                                        <label class="form-check-label" for="gridCheck2">
-                                            Example checkbox 2
-                                        </label>
-                                    </div>
-
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 mb-2">
+                                    <label for="newsContent" class="form-label">News Content</label>
+                                    <textarea name="newsContent" class="form-control" id="newsContent" rows="2"
+                                        required></textarea>
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Disabled</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" value="Read only / Disabled" disabled>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 mb-2">
+                                    <label for="publicationDate" class="form-label">Publication Date</label>
+                                    <input type="date" name="publicationDate" class="form-control" id="publicationDate"
+                                        required>
                                 </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Select</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                <div class="col-lg-6 col-md-6 mb-2">
+                                    <label for="newsStatus" class="form-label">News Status</label>
+                                    <select name="newsStatus" class="form-select" id="newsStatus" required>
+                                        <option value="">Select Status</option>
+                                        <option value="1" class="text-success">Published</option>
+                                        <option value="2" class="text-primary">Draft</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Multi Select</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" multiple aria-label="multiple select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                <button class="btn rounded-5 text-white" type="submit"
+                                    style="background-color: #013220;" name="addNewNews"><i
+                                        class="bi bi-plus-circle"></i> Add New News</button>
                             </div>
+                        </form>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Submit Button</label>
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Submit Form</button>
-                                </div>
-                            </div>
-
-                        </form><!-- End General Form Elements -->
+                        <!-- End News Form Elements -->
 
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-8">
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">News &amp; Updates currently posted</h5>
+                        <h5 class="card-title">News currently posted</h5>
                         <p>add modal view for the details of the news and update.</p>
 
-                        <!-- Table with stripped rows -->
+                        <!-- Table for news posted rows -->
                         <table class="table datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Position</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Start Date</th>
+                                    <th scope="col">News Title</th>
+                                    <th scope="col">Publication Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bridie Kessler</td>
-                                    <td>Developer</td>
-                                    <td>35</td>
-                                    <td>2014-12-05</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td>Finance</td>
-                                    <td>45</td>
-                                    <td>2011-08-12</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Angus Grady</td>
-                                    <td>HR</td>
-                                    <td>34</td>
-                                    <td>2012-06-11</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Raheem Lehner</td>
-                                    <td>Dynamic Division Officer</td>
-                                    <td>47</td>
-                                    <td>2011-04-19</td>
-                                </tr>
+                                <?php
+                            $sql = "SELECT * FROM news";
+                            $result = mysqli_query($conn, $sql);
+                            $count = 1;
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>";
+                                    echo "<th scope='row'><a href='#'>$count</a></th>";
+                                    echo "<td>{$row['title']}</td>";
+                                    echo "<td>" . date("M d, Y", strtotime($row['publication_date'])) . "</td>";                                    echo "<td>";
+                                    switch ($row['newsStatus']) {
+                                        case "1":
+                                            echo '<span class="badge bg-success">Published</span>';
+                                            break;
+                                        case "2":
+                                            echo '<span class="badge bg-primary">Draft</span>';
+                                            break;
+                                        default:
+                                            echo "Unknown";
+                                    }echo "</td>";
+                                    echo "<td>
+                                            <button class='btn btn-primary btn-sm' onclick='viewEditNews({$row['id']})' data-bs-toggle='modal' data-bs-target='#newsModal'>View &amp; Edit</button>
+                                            <button class='btn btn-danger btn-sm'>End</button>
+                                        </td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='5'>No news found</td></tr>";
+                            }
+                            ?>
                             </tbody>
-                        </table>
-                        <!-- End Table with stripped rows -->
+                        </table><!-- End Table for news posted rows -->
 
                     </div>
                 </div>
+
+                <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newsModalLabel">View & Edit News</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- News details will be loaded here dynamically via AJAX -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                function viewEditNews(newsId) {
+                    // Fetch news details using AJAX
+                    $.ajax({
+                        url: 'get_details.php',
+                        type: 'POST',
+                        data: {
+                            id: newsId
+                        },
+                        success: function(response) {
+                            // Display news details in modal body
+                            $('.modal-body').html(response);
+                        }
+                    });
+                }
+                </script>
+
 
             </div>
         </div>

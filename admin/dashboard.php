@@ -2,6 +2,8 @@
 include 'authentication.php';
 include_once 'includes/header.php';
 include_once 'includes/sidebar.php';
+include "includes/conn.php";
+
 include "alert.php";
 
 ?>
@@ -52,6 +54,22 @@ unset($_SESSION['logged']);
             <div class="col-lg-8">
                 <div class="row">
 
+                    <?php
+                    $sql = "SELECT COUNT(`id`) AS total_alumni FROM `alumni_jhs`";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $totalAlumni = $row['total_alumni'];
+                    
+                    $sql = "SELECT COUNT(`id`) AS new_alumni FROM `alumni_jhs` WHERE `date_created` >= DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $newAlumni = $row['new_alumni'];
+
+                    // Calculate the increase percentage
+                    $increasePercentage = ($newAlumni / $totalAlumni) * 100;
+
+                    ?>
+
                     <!-- JHS Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card jhs-card">
@@ -64,16 +82,32 @@ unset($_SESSION['logged']);
                                         <i class="bi bi-people-fill"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>145</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
-
+                                        <h6><?php echo $newAlumni; ?></h6>
+                                        <span
+                                            class="text-success small pt-1 fw-bold"><?php echo number_format($increasePercentage, 2); ?>%</span>
+                                        <span class="text-muted small pt-2 ps-1">increase</span>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div><!-- End Sales Card -->
+                    </div><!-- End JHS Card -->
+
+                    <?php
+                    $sql = "SELECT COUNT(`id`) AS total_alumni FROM `alumni_shs`";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $totalAlumni = $row['total_alumni'];
+
+
+                    $sql = "SELECT COUNT(`id`) AS new_alumni FROM `alumni_shs` WHERE `date_created` >= DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $newAlumni = $row['new_alumni'];
+
+                    // Calculate the increase percentage
+                    $increasePercentage = ($newAlumni / $totalAlumni) * 100;
+
+                    ?>
 
                     <!-- SHS Card -->
                     <div class="col-xxl-4 col-md-6">
@@ -87,16 +121,16 @@ unset($_SESSION['logged']);
                                         <i class="bi bi-people-fill"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
-
+                                        <h6><?php echo $newAlumni; ?></h6>
+                                        <span
+                                            class="text-success small pt-1 fw-bold"><?php echo number_format($increasePercentage, 2); ?>%</span>
+                                        <span class="text-muted small pt-2 ps-1">increase</span>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div><!-- End Revenue Card -->
+                    </div><!-- End SHS Card -->
+
 
                     <!-- Active Card -->
                     <div class="col-xxl-4 col-xl-12">
@@ -121,7 +155,7 @@ unset($_SESSION['logged']);
                             </div>
                         </div>
 
-                    </div><!-- End Customers Card -->
+                    </div><!-- End Active Card -->
 
                     <!-- Batch List -->
                     <div class="col-12">
@@ -134,28 +168,50 @@ unset($_SESSION['logged']);
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Batch Year</th>
-                                            <th scope="col">Section</th>
+                                            <th scope="col">Type</th>
                                             <th scope="col"># of Members</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row"><a href="#">1</a></th>
-                                            <td>1990</td>
-                                            <td>A</td>
-                                            <td>64</td>
-                                            <td><a href="#" class="btn btn-sm btn-success text-white">View
-                                                    List</a>
-                                            </td>
-                                        </tr>
+                                        <?php
+                                        $batchNumber = 1;
+                                        // Fetch data from alumni_jhs
+                                        $sql = "SELECT `year_graduated` AS batch_year, COUNT(`id`) AS num_members FROM `alumni_jhs` GROUP BY `year_graduated`";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<tr>";
+                                            echo "<th scope='row'><a href='#'>$batchNumber</a></th>";
+                                            echo "<td>{$row['batch_year']}</td>";
+                                            echo "<td>Junior High</td>";
+                                            echo "<td>{$row['num_members']}</td>";
+                                            echo "<td><a href='alumni-jhs-view.php?batch={$row['batch_year']}' class='btn btn-sm btn-success text-white'>View List</a></td>";
+                                            echo "</tr>";
+                                            $batchNumber++;
+                                        }
+
+                                        // Fetch data from alumni_shs
+                                        $sql = "SELECT `year_graduated` AS batch_year, COUNT(`id`) AS num_members FROM `alumni_shs` GROUP BY `year_graduated`";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<tr>";
+                                            echo "<th scope='row'><a href='#'>$batchNumber</a></th>";
+                                            echo "<td>{$row['batch_year']}</td>";
+                                            echo "<td>Senior High</td>";
+                                            echo "<td>{$row['num_members']}</td>";
+                                            echo "<td><a href='alumni-shs-view.php?batch={$row['batch_year']}' class='btn btn-sm btn-success text-white'>View List</a></td>";
+                                            echo "</tr>";
+                                            $batchNumber++;
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
 
                             </div>
-
                         </div>
-                    </div><!-- End Recent Sales -->
+                    </div><!-- End Batch List -->
+
+
                 </div>
             </div><!-- End Left side columns -->
 
@@ -182,23 +238,26 @@ unset($_SESSION['logged']);
 
                         <div class="events">
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
+                            <?php
+                            // Fetch ongoing and upcoming events from the database
+                            $sql = "SELECT * FROM `events` WHERE `eventStatus` IN (1, 2)";
+                            $result = mysqli_query($conn, $sql);
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div><!-- End events item-->
+                            if (mysqli_num_rows($result) > 0) {
+                                echo '<div class="events">';
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '
+                                        <div class="post-item clearfix">
+                                            <img src="' . $row['eventPicture'] . '" alt="">
+                                            <h4>'. $row['eventName'] . '</h4>
+                                            <p>' . $row['eventDescription'] . '</p>
+                                        </div><!-- End events item-->';
+                                }
+                                echo '</div>';
+                            } else {
+                                echo 'No events found';
+                            }
+                            ?>
 
                         </div>
 
@@ -224,40 +283,30 @@ unset($_SESSION['logged']);
                         <h5 class="card-title"><i class="bi bi-newspaper"></i> News &amp; Updates</h5>
 
                         <div class="news">
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div>
+                            <?php
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Quidem autem et impedit</a></h4>
-                                <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...
-                                </p>
-                            </div>
+                            // Fetch news items from the database
+                            $sql = "SELECT * FROM `news` WHERE `newsStatus` = 1";
+                            $result = mysqli_query($conn, $sql);
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                                <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...
-                                </p>
-                            </div>
+                            if (mysqli_num_rows($result) > 0) {
+                                echo '<div class="news">';
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '
+                                        <div class="post-item clearfix">
+                                            <img src="' . $row['newsPicture'] . '" alt="">
+                                            <h4><a href="#">' . $row['title'] . '</a></h4>
+                                            <p>' . $row['content'] . '</p>
+                                        </div><!-- End news item-->';
+                                }
+                                echo '</div>';
+                            } else {
+                                echo 'No news found';
+                            }
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                                <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...
-                                </p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="assets/img/SJNHS-background.png" alt="">
-                                <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
-                                    eius...</p>
-                            </div>
-
+                            // Close the database connection
+                            mysqli_close($conn);
+                            ?>
                         </div><!-- End sidebar recent posts-->
 
                     </div>

@@ -234,7 +234,7 @@ include "alert.php";
                                                 echo "Unknown";
                                         }echo "</td>";
                                         echo "<td>
-                                                <button class='btn btn-primary btn-sm'>View &amp; Edit</button>
+                                        <button class='btn btn-primary btn-sm' onclick='viewEditEvent({$row['id']})' data-bs-toggle='modal' data-bs-target='#eventModal'>View &amp; Edit</button>
                                                 <button class='btn btn-danger btn-sm'>End</button>
                                             </td>";
                                         echo "</tr>";
@@ -248,6 +248,40 @@ include "alert.php";
 
                     </div>
                 </div>
+
+                <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="eventModalLabel">View & Edit Event</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Event details will be loaded here dynamically via AJAX -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+                function viewEditEvent(eventId) {
+                    // Fetch event details using AJAX
+                    $.ajax({
+                        url: 'get_details.php',
+                        type: 'POST',
+                        data: {
+                            eventid: eventId
+                        },
+                        success: function(response) {
+                            // Display event details in modal body
+                            $('.modal-body').html(response);
+                        }
+                    });
+                }
+                </script>
 
             </div>
         </div>

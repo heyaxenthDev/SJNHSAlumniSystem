@@ -8,7 +8,7 @@ if (isset($_POST['adminLogin'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $login_query = "SELECT * FROM `admin` WHERE `username` = '$username' AND `password` = '$password' LIMIT 1";
+    $login_query = "SELECT * FROM `admin` WHERE `username` = '$username' AND `password` = '$password'";
     $login_query_run = mysqli_query($conn, $login_query);
 
     if (mysqli_num_rows($login_query_run) > 0) {
