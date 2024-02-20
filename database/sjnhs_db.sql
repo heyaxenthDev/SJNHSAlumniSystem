@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 08:54 AM
+-- Generation Time: Feb 20, 2024 at 09:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -42,32 +42,64 @@ INSERT INTO `admin` (`username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alumni`
+-- Table structure for table `alumni_jhs`
 --
 
-CREATE TABLE `alumni` (
+CREATE TABLE `alumni_jhs` (
   `id` int(11) NOT NULL,
-  `alumni_id` varchar(100) NOT NULL,
+  `alumni_id` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `middlename` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `hs_type` varchar(50) NOT NULL,
-  `year_graduated` year(4) NOT NULL,
-  `section` varchar(50) NOT NULL,
-  `profession` varchar(72) NOT NULL,
-  `martital_stat` varchar(50) NOT NULL,
-  `mobile_num` varchar(50) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `address` varchar(250) NOT NULL,
-  `date_created` date NOT NULL DEFAULT current_timestamp()
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone_num` varchar(255) NOT NULL,
+  `year_graduated` varchar(255) NOT NULL,
+  `section` varchar(255) NOT NULL,
+  `profession` varchar(255) NOT NULL,
+  `marital_stat` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `profile_picture` varchar(255) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `alumni`
+-- Dumping data for table `alumni_jhs`
 --
 
-INSERT INTO `alumni` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `hs_type`, `year_graduated`, `section`, `profession`, `martital_stat`, `mobile_num`, `email`, `address`, `date_created`) VALUES
-(1, 'SHS-2018-20240218-1', 'Juan', 'Reyes', 'Dela Cruz', 'SHS', '2018', 'A', 'Teacher', 'Single', '09123456789', 'juandc@gmail.com', 'Sta. Justa, Tibiao, Antique', '2024-02-18');
+INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `profession`, `marital_stat`, `address`, `profile_picture`, `date_created`) VALUES
+(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '12345678', '091265488795', '1990', 'A', 'Doctor', 'Single', 'Tibiao, Antique', 'uploads/JHSAlumni/team-3.jpg', '2024-02-20 03:54:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alumni_shs`
+--
+
+CREATE TABLE `alumni_shs` (
+  `id` int(11) NOT NULL,
+  `alumni_id` varchar(255) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `middlename` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone_num` varchar(255) NOT NULL,
+  `year_graduated` year(4) NOT NULL,
+  `track` varchar(255) NOT NULL,
+  `profession` varchar(255) NOT NULL,
+  `marital_stat` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `profile_picture` varchar(255) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `alumni_shs`
+--
+
+INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `track`, `profession`, `marital_stat`, `address`, `profile_picture`, `date_created`) VALUES
+(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', 'Welcome123!', '09123478648', '2018', 'STEM', 'Civil Engineer', 'Married', 'Tibiao, Antique', 'uploads/SHSAlumni/team-2.jpg', '2024-02-20 07:02:30');
 
 -- --------------------------------------------------------
 
@@ -76,6 +108,7 @@ INSERT INTO `alumni` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, 
 --
 
 CREATE TABLE `batchyear` (
+  `id` int(11) NOT NULL,
   `batch_year` year(4) NOT NULL,
   `hs_type` varchar(50) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
@@ -85,13 +118,41 @@ CREATE TABLE `batchyear` (
 -- Dumping data for table `batchyear`
 --
 
-INSERT INTO `batchyear` (`batch_year`, `hs_type`, `date_created`) VALUES
-('2018', 'SHS', '2024-02-18'),
-('2019', 'SHS', '2024-02-19'),
-('2018', 'JHS', '2024-02-19'),
-('1990', 'JHS', '2024-02-19'),
-('1996', 'SHS', '2024-02-19'),
-('1999', 'JHS', '2024-02-19');
+INSERT INTO `batchyear` (`id`, `batch_year`, `hs_type`, `date_created`) VALUES
+(1, '2018', 'SHS', '2024-02-18'),
+(2, '2019', 'SHS', '2024-02-19'),
+(3, '2018', 'JHS', '2024-02-19'),
+(4, '1990', 'JHS', '2024-02-19'),
+(5, '2020', 'SHS', '2024-02-19'),
+(6, '1999', 'JHS', '2024-02-19'),
+(7, '1991', 'JHS', '2024-02-20'),
+(8, '1992', 'JHS', '2024-02-20'),
+(9, '1993', 'JHS', '2024-02-20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `eventsCode` varchar(255) NOT NULL,
+  `eventName` varchar(255) NOT NULL,
+  `eventDate` date NOT NULL,
+  `eventStatus` int(11) NOT NULL,
+  `eventLocation` varchar(255) NOT NULL,
+  `eventDescription` text NOT NULL,
+  `eventPicture` varchar(255) NOT NULL,
+  `date_created` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `eventsCode`, `eventName`, `eventDate`, `eventStatus`, `eventLocation`, `eventDescription`, `eventPicture`, `date_created`) VALUES
+(1, 'EVENT65d465059f14f', 'Alumni Socials', '2024-04-20', 2, 'School Campus', 'asdasdasd', 'uploads/events/tabs-3.jpg', '2024-02-20');
 
 -- --------------------------------------------------------
 
@@ -123,16 +184,35 @@ INSERT INTO `faculty` (`id`, `firstname`, `middlename`, `lastname`, `email`, `ph
 (2, 'Marc John', 'Alejandro', 'Martinez', 'marcjohn_martinez@gmail.com', '09234567890', 'Teacher I', 'JHS', 7, 'A', 'uploads/JHS/team-1.jpg', '2024-02-18'),
 (3, 'Phil Ernest', 'Nietes', 'Luces', 'penietes@gmail.com', '09123245565', 'Master Teacher I', 'SHS', 12, 'Mathematics', 'uploads/SHS/team-3.jpg', '2024-02-19'),
 (4, 'Jessica Marie', 'Buena', 'Robles', 'jmbuena@gmail.com', '09874563241', 'Master Teacher I', 'SHS', 11, 'A / Science', 'uploads/SHS/team-2.jpg', '2024-02-19'),
-(5, 'Louise Anne', 'Kim', 'Hernandez', 'louiseann.h@gmail.com', '09163578564', 'Master Teacher I', 'JHS', 9, 'A / Psychology', 'uploads/JHS/team-2.jpg', '2024-02-19');
+(5, 'Louise Anne', 'Kim', 'Hernandez', 'louiseann.h@gmail.com', '09163578564', 'Master Teacher I', 'JHS', 9, 'A / Psychology', 'uploads/JHS/team-2.jpg', '2024-02-19'),
+(6, 'Bryan', 'Dela Cruz', 'Manalo', 'bryanmanalo@gmail.com', '09464793342', 'Master Teacher II', 'JHS', 10, 'Programming', 'uploads/JHS/team-3.jpg', '2024-02-20');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `alumni`
+-- Indexes for table `alumni_jhs`
 --
-ALTER TABLE `alumni`
+ALTER TABLE `alumni_jhs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `alumni_shs`
+--
+ALTER TABLE `alumni_shs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `batchyear`
+--
+ALTER TABLE `batchyear`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -146,16 +226,34 @@ ALTER TABLE `faculty`
 --
 
 --
--- AUTO_INCREMENT for table `alumni`
+-- AUTO_INCREMENT for table `alumni_jhs`
 --
-ALTER TABLE `alumni`
+ALTER TABLE `alumni_jhs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `alumni_shs`
+--
+ALTER TABLE `alumni_shs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `batchyear`
+--
+ALTER TABLE `batchyear`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
