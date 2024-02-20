@@ -120,77 +120,6 @@ include "alert.php";
             <div class="col-lg-8">
                 <div class="row">
 
-                    <!-- Male Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card jhs-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Male</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-people-fill"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>145</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Sales Card -->
-
-                    <!-- Female Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card shs-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Female</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-people-fill"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Revenue Card -->
-
-                    <!-- Active Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                        <div class="card info-card active-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Active Members</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-person-check"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>44</h6>
-                                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span> -->
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div><!-- End Customers Card -->
-
                     <!-- Batch List -->
                     <div class="col-12">
                         <div class="card batch-list overflow-auto">
@@ -209,22 +138,22 @@ include "alert.php";
                                     </thead>
                                     <tbody>
                                         <?php
-// Assuming $conn is your database connection
-$sql = "SELECT * FROM batchyear WHERE `hs_type` = 'JHS'";
-$result = mysqli_query($conn, $sql);
-$count = 1;
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>";
-    echo "<th scope='row'><a href='#'>$count</a></th>";
-    echo "<td>{$row['batch_year']}</td>";
-    echo "<td>{$row['hs_type']}</td>";
-    // You need to fetch the number of members for each batch from your database
-    echo "<td>0</td>";
-    echo "<td><a href='#' class='btn btn-sm btn-success text-white'>View List</a></td>";
-    echo "</tr>";
-    $count++;
-}
-?>
+                                        // Assuming $conn is your database connection
+                                        $sql = "SELECT * FROM batchyear WHERE `hs_type` = 'JHS' ORDER BY batch_year ASC";
+                                        $result = mysqli_query($conn, $sql);
+                                        $count = 1;
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<tr>";
+                                            echo "<th scope='row'><a href='#'>$count</a></th>";
+                                            echo "<td>{$row['batch_year']}</td>";
+                                            echo "<td>{$row['hs_type']}</td>";
+                                            // You need to fetch the number of members for each batch from your database
+                                            echo "<td>0</td>";
+                                            echo "<td><a href='alumni-jhs-view.php?batch={$row['batch_year']}' class='btn btn-sm btn-success text-white'>View List</a></td>";
+                                            echo "</tr>";
+                                            $count++;
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
 

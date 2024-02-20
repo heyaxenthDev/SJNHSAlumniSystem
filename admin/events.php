@@ -1,6 +1,8 @@
 <?php
 include 'authentication.php';
 include_once 'includes/header.php';
+include_once 'includes/conn.php';
+
 // include_once 'includes/sidebar.php';
 include "alert.php";
 ?>
@@ -112,219 +114,137 @@ include "alert.php";
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
 
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Post New Event</h5>
 
-                        <!-- General Form Elements -->
-                        <form>
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">Text</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
+                        <!-- Events Form Elements -->
+                        <form class="row g-3" method="POST" action="code.php" enctype="multipart/form-data">
+
+                            <div class="row mb-4 mt-2">
+                                <div class="col-lg-12 col-md-12">
+                                    <center>
+                                        <img id="eventPicturePreview" src="assets/img/undraw_festivities_tvvj.png"
+                                            alt="Event Picture Preview" style="max-width: 100%; max-height: 300px;">
+                                    </center>
+                                    <small class="mt-2">Add Event Picture</small>
+                                    <input type="file" name="eventPicture" class="form-control" id="eventPicture"
+                                        onchange="previewEventPicture();" accept="image/*" required>
                                 </div>
+                                <script src="js/scripts.js"></script>
                             </div>
-                            <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control">
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 mb-2">
+                                    <label for="eventName" class="form-label">Event Name</label>
+                                    <input type="text" name="eventName" class="form-control" id="eventName" required>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">Number</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="formFile">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
-                                <div class="col-sm-10">
-                                    <input type="time" class="form-control">
+
+                                <div class="col-lg-6 col-md-6 mb-2">
+                                    <label for="eventDate" class="form-label">Event Date</label>
+                                    <input type="date" name="eventDate" class="form-control" id="eventDate" required>
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="inputColor" class="col-sm-2 col-form-label">Color Picker</label>
-                                <div class="col-sm-10">
-                                    <input type="color" class="form-control form-control-color" id="exampleColorInput"
-                                        value="#4154f1" title="Choose your color">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Textarea</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" style="height: 100px"></textarea>
-                                </div>
-                            </div>
-                            <fieldset class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                                            value="option1" checked>
-                                        <label class="form-check-label" for="gridRadios1">
-                                            First radio
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                                            value="option2">
-                                        <label class="form-check-label" for="gridRadios2">
-                                            Second radio
-                                        </label>
-                                    </div>
-                                    <div class="form-check disabled">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios"
-                                            value="option" disabled>
-                                        <label class="form-check-label" for="gridRadios3">
-                                            Third disabled radio
-                                        </label>
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0">Checkboxes</legend>
-                                <div class="col-sm-10">
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                        <label class="form-check-label" for="gridCheck1">
-                                            Example checkbox
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-                                        <label class="form-check-label" for="gridCheck2">
-                                            Example checkbox 2
-                                        </label>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Disabled</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" value="Read only / Disabled" disabled>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Select</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 mb-2">
+                                    <label for="eventStatus" class="form-label">Event Status</label>
+                                    <select name="eventStatus" class="form-select" id="eventStatus" required>
+                                        <option value="">Select Status</option>
+                                        <option value="1" class="text-success">On-going</option>
+                                        <option value="2" class="text-primary">Upcoming</option>
+                                        <option value="3" class="text-warning">Postponed</option>
+                                        <!-- <option value="4" class="text-danger">Ended</option> -->
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Multi Select</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" multiple aria-label="multiple select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 mb-2">
+                                    <label for="eventLocation" class="form-label">Event Location</label>
+                                    <input type="text" name="eventLocation" class="form-control" id="eventLocation"
+                                        required>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 mb-2">
+                                    <label for="eventDescription" class="form-label">Event Description</label>
+                                    <textarea name="eventDescription" class="form-control" id="eventDescription"
+                                        rows="2" required></textarea>
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Submit Button</label>
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Submit Form</button>
-                                </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                <button class="btn rounded-5 text-white" type="submit"
+                                    style="background-color: #013220;" name="addNewEvent"><i
+                                        class="bi bi-plus-circle"></i> Add New Event</button>
                             </div>
-
-                        </form><!-- End General Form Elements -->
+                        </form>
+                        <!-- End Events Form Elements -->
 
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-8">
 
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Event currently posted</h5>
                         <p>add modal view for the details of the news and update.</p>
 
-                        <!-- Table with stripped rows -->
+                        <!-- Table for events posted rows -->
                         <table class="table datatable">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Position</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Event Code</th>
+                                    <th scope="col">Event Name</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bridie Kessler</td>
-                                    <td>Developer</td>
-                                    <td>35</td>
-                                    <td>2014-12-05</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td>Finance</td>
-                                    <td>45</td>
-                                    <td>2011-08-12</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Angus Grady</td>
-                                    <td>HR</td>
-                                    <td>34</td>
-                                    <td>2012-06-11</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Raheem Lehner</td>
-                                    <td>Dynamic Division Officer</td>
-                                    <td>47</td>
-                                    <td>2011-04-19</td>
-                                </tr>
+                                <?php
+                                $sql = "SELECT * FROM events";
+                                $result = mysqli_query($conn, $sql);
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<tr>";
+                                        echo "<td>{$row['eventsCode']}</td>";
+                                        echo "<td>{$row['eventName']}</td>";
+                                        echo "<td>{$row['eventDate']}</td>";
+                                        echo "<td>";
+                                        switch ($row['eventStatus']) {
+                                            case "1":
+                                                echo '<span class="badge bg-success">On-going</span>';
+                                                break;
+                                            case "2":
+                                                echo '<span class="badge bg-primary">Upcoming</span>';
+                                                break;
+                                            case "3":
+                                                echo '<span class="badge bg-warning">Postponed</span>';
+                                                break;
+                                            case "4":
+                                                echo '<span class="badge bg-danger">Ended</span>';
+                                                break;
+                                            default:
+                                                echo "Unknown";
+                                        }echo "</td>";
+                                        echo "<td>
+                                                <button class='btn btn-primary btn-sm'>View &amp; Edit</button>
+                                                <button class='btn btn-danger btn-sm'>End</button>
+                                            </td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='5'>No events found</td></tr>";
+                                }
+                                ?>
                             </tbody>
-                        </table>
-                        <!-- End Table with stripped rows -->
+                        </table><!-- End Table for events posted rows -->
 
                     </div>
                 </div>

@@ -21,7 +21,7 @@ include "alert.php";
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#faculty-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-person-badge"></i><span>Alumni Directory</span><i
+                <i class="bi bi-person-badge"></i><span>Faculty Directory</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="faculty-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
@@ -36,7 +36,7 @@ include "alert.php";
                     </a>
                 </li>
             </ul>
-        </li><!-- End Alumni Nav -->
+        </li><!-- End Faculty Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="events.php">
@@ -60,12 +60,12 @@ include "alert.php";
             </a>
             <ul id="alumni-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="juniorhs-alumni.php" class="active">
+                    <a href="juniorhs-alumni.php">
                         <i class="bi bi-circle"></i><span>Junior High</span>
                     </a>
                 </li>
                 <li>
-                    <a href="seniorhs-alumni.php">
+                    <a href="seniorhs-alumni.php" class="active">
                         <i class="bi bi-circle"></i><span>Senior High</span>
                     </a>
                 </li>
@@ -108,7 +108,7 @@ include "alert.php";
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
                 <li class="breadcrumb-item">Alumni Yearbook</li>
-                <li class="breadcrumb-item"><a href="juniorhs-alumni.php">Junior High</a></li>
+                <li class="breadcrumb-item"><a href="juniorhs-alumni.php">Senior High</a></li>
                 <li class="breadcrumb-item active">Batch <?php echo isset($_GET['batch']) ? $_GET['batch'] : ''; ?></li>
             </ol>
         </nav>
@@ -158,7 +158,7 @@ include "alert.php";
                                                     });
                                                 },
                                                 300
-                                                ); // Wait for 300ms before sending the request (debouncing)
+                                            ); // Wait for 300ms before sending the request (debouncing)
                                         });
                                     });
                                     </script>
@@ -205,6 +205,7 @@ include "alert.php";
                                                         <input type="file" name="profilePicture" class="form-control"
                                                             id="profilePicture" onchange="previewProfilePicture();"
                                                             accept="image/*" required>
+                                                        <script src="js/scripts.js"></script>
                                                     </div>
 
                                                     <div class="col-lg-7 col-md-7">
@@ -240,10 +241,23 @@ include "alert.php";
                                                     </div>
 
                                                     <div class="col-lg-3 col-md-3">
-                                                        <label for="section" class="form-label">Section</label>
-                                                        <input type="text" name="section" class="form-control"
-                                                            id="section" required>
+                                                        <label for="track" class="form-label">Track</label>
+                                                        <select name="track" class="form-select" id="track" required>
+                                                            <option value="">Select Track</option>
+                                                            <option value="ABM">Accountancy, Business, and Management
+                                                                (ABM)</option>
+                                                            <option value="STEM">Science, Technology, Engineering, and
+                                                                Mathematics (STEM)</option>
+                                                            <option value="HUMSS">Humanities and Social Sciences (HUMSS)
+                                                            </option>
+                                                            <option value="GAS">General Academic Strand (GAS)</option>
+                                                            <option value="TVL">Technical-Vocational-Livelihood (TVL)
+                                                            </option>
+                                                            <option value="SPORTS">Sports Track</option>
+                                                            <option value="ARTS">Arts and Design Track</option>
+                                                        </select>
                                                     </div>
+
 
                                                     <div class="col-lg-3 col-md-3">
                                                         <label for="profession" class="form-label">Profession</label>
@@ -341,12 +355,12 @@ include "alert.php";
 
                                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                                     <button class="btn rounded-5 text-white" type="submit"
-                                                        style="background-color: #013220;" name="addNewJHSAlumni"><i
+                                                        style="background-color: #013220;" name="addNewSHSAlumni"><i
                                                             class="bi bi-plus-circle"></i> Add New Alumni</button>
                                                 </div>
                                             </form>
 
-                                            <script src="js/scripts.js"></script>
+
 
                                         </div>
                                     </div>
@@ -362,7 +376,7 @@ include "alert.php";
                         <div class="row">
                             <?php
                                 // Query to select alumni members from the database
-                                $sql = "SELECT * FROM alumni_jhs WHERE `year_graduated` = '$_GET[batch]'";
+                                $sql = "SELECT * FROM alumni_shs WHERE `year_graduated` = '$_GET[batch]'";
                                 $result = mysqli_query($conn, $sql);
 
                                 // Check if there are any alumni members
@@ -387,7 +401,7 @@ include "alert.php";
                                     <div class="member-info">
                                         <h4><?php echo $row['firstname'] . " " . $middlenameInitial . ". " . $row['lastname']; ?>
                                         </h4>
-                                        <span><?php echo "Section: " . $row['section']; ?></span>
+                                        <span><?php echo "Track: " . $row['track']; ?></span>
                                         <span><?php echo "Profession: " . $row['profession']; ?></span>
                                         <span><?php echo "Address: " . $row['address']; ?></span>
                                     </div>

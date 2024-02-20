@@ -3,6 +3,10 @@ session_start();
 
 include "includes/conn.php";
 
+/*--------------------------------------------------------------
+# Add People to the database
+--------------------------------------------------------------*/
+
 //JHS Faculty INSERT Code
 if (isset($_POST['addNewJHSFaculty'])) {
 
@@ -306,6 +310,177 @@ if (isset($_POST['addNewJHSAlumni'])) {
                 if (mysqli_stmt_execute($stmt)) {
                 $_SESSION['status'] = "Success";
                 $_SESSION['status_text'] = "New alumni added!";
+                $_SESSION['status_code'] = "success";
+                $_SESSION['status_btn'] = "Done";
+                header("Location: {$_SERVER['HTTP_REFERER']}");
+            } else {
+                $_SESSION['status'] = "Error";
+                $_SESSION['status_text'] = mysqli_error($conn);
+                $_SESSION['status_code'] = "error";
+                $_SESSION['status_btn'] = "Back";
+                header("Location: {$_SERVER['HTTP_REFERER']}");
+            }
+        } else {
+            $_SESSION['status'] = "Error";
+            $_SESSION['status_text'] = "Sorry, there was an error uploading your file.";
+            $_SESSION['status_code'] = "error";
+            $_SESSION['status_btn'] = "Back";
+            header("Location: {$_SERVER['HTTP_REFERER']}");
+        }
+    }
+
+    // Close the statement and database connection
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+}
+
+if (isset($_POST['addNewSHSAlumni'])) {
+    // Generate a unique alumni_id
+    $prefix = "ALUM"; // You can use any prefix you prefer
+    $alumni_id = $prefix . uniqid();
+
+    // Sanitize and retrieve form data
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $middlename = mysqli_real_escape_string($conn, $_POST['middlename']);
+    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
+    $year_graduated = mysqli_real_escape_string($conn, $_POST['year_graduated']);
+    $track = mysqli_real_escape_string($conn, $_POST['track']);
+    $profession = mysqli_real_escape_string($conn, $_POST['profession']);
+    $marital_stat = mysqli_real_escape_string($conn, $_POST['marital_stat']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+
+    // File upload
+    $targetDir = "uploads/SHSAlumni/";
+    $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Check if image file is a actual image or fake image
+    if (isset($_POST["addNewSHSAlumni"])) {
+        $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
+        if ($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+    }
+
+    // Check file size
+    if ($_FILES["profilePicture"]["size"] > 500000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+
+    // Allow certain file formats
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    } else {
+        if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
+            echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
+            // Insert into database
+            $sql = "INSERT INTO alumni_shs (alumni_id, firstname, middlename, lastname, email, password, phone_num, year_graduated, track, profession, marital_stat, address, profile_picture)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "sssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $track, $profession, $marital_stat, $address, $targetFile);
+            if (mysqli_stmt_execute($stmt)) {
+                $_SESSION['status'] = "Success";
+                $_SESSION['status_text'] = "New alumni added!";
+                $_SESSION['status_code'] = "success";
+                $_SESSION['status_btn'] = "Done";
+                header("Location: {$_SERVER['HTTP_REFERER']}");
+            } else {
+                $_SESSION['status'] = "Error";
+                $_SESSION['status_text'] = mysqli_error($conn);
+                $_SESSION['status_code'] = "error";
+                $_SESSION['status_btn'] = "Back";
+                header("Location: {$_SERVER['HTTP_REFERER']}");
+            }
+        } else {
+            $_SESSION['status'] = "Error";
+            $_SESSION['status_text'] = "Sorry, there was an error uploading your file.";
+            $_SESSION['status_code'] = "error";
+            $_SESSION['status_btn'] = "Back";
+            header("Location: {$_SERVER['HTTP_REFERER']}");
+        }
+    }
+
+    // Close the statement and database connection
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+}
+
+
+/*--------------------------------------------------------------
+# Add Events and News to the database
+--------------------------------------------------------------*/
+
+if (isset($_POST['addNewEvent'])) {
+    // Generate a unique event id
+    $prefix = "EVENT"; // You can use any prefix you prefer
+    $event_id = $prefix . uniqid();
+
+    // Sanitize and retrieve form data
+    $eventName = mysqli_real_escape_string($conn, $_POST['eventName']);
+    $eventDate = mysqli_real_escape_string($conn, $_POST['eventDate']);
+    $eventStatus = mysqli_real_escape_string($conn, $_POST['eventStatus']); // New field
+    $eventLocation = mysqli_real_escape_string($conn, $_POST['eventLocation']);
+    $eventDescription = mysqli_real_escape_string($conn, $_POST['eventDescription']);
+
+    // File upload
+    $targetDir = "uploads/events/";
+    $targetFile = $targetDir . basename($_FILES["eventPicture"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Check if image file is an actual image or fake image
+    if (isset($_POST["addNewEvent"])) {
+        $check = getimagesize($_FILES["eventPicture"]["tmp_name"]);
+        if ($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+    }
+
+    // Check file size
+    if ($_FILES["eventPicture"]["size"] > 500000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+
+    // Allow certain file formats
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    } else {
+        if (move_uploaded_file($_FILES["eventPicture"]["tmp_name"], $targetFile)) {
+            echo "The file " . htmlspecialchars(basename($_FILES["eventPicture"]["name"])) . " has been uploaded.";
+            // Insert into database
+            $sql = "INSERT INTO events (eventsCode, eventName, eventDate, eventStatus, eventLocation, eventDescription, eventPicture)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "sssssss", $event_id, $eventName, $eventDate, $eventStatus, $eventLocation, $eventDescription, $targetFile);
+            if (mysqli_stmt_execute($stmt)) {
+                $_SESSION['status'] = "Success";
+                $_SESSION['status_text'] = "New event added!";
                 $_SESSION['status_code'] = "success";
                 $_SESSION['status_btn'] = "Done";
                 header("Location: {$_SERVER['HTTP_REFERER']}");
