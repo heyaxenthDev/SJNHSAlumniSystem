@@ -1,0 +1,337 @@
+<?php
+include 'authentication.php';
+include_once 'includes/header.php';
+include_once 'includes/conn.php';
+
+// include_once 'includes/sidebar.php';
+include "alert.php";
+?>
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="dashboard.php">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#faculty-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person-badge"></i><span>Alumni Directory</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="faculty-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="juniorhs-faculty.php">
+                        <i class="bi bi-circle"></i><span>Junior High</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="seniorhs-faculty.php">
+                        <i class="bi bi-circle"></i><span>Senior High</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Alumni Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="events.php">
+                <i class="bi bi-calendar-week"></i>
+                <span>Events</span>
+            </a>
+        </li><!-- End Events Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="news-and-updates.php">
+                <i class="bi bi-newspaper"></i>
+                <span>News &amp; Updates</span>
+            </a>
+        </li><!-- End News & Updates Page Nav -->
+
+        <li class="nav-heading">Alumni</li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-target="#alumni-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-gem"></i><span>Alumni Yearbook</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="alumni-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="juniorhs-alumni.php" class="active">
+                        <i class="bi bi-circle"></i><span>Junior High</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="seniorhs-alumni.php">
+                        <i class="bi bi-circle"></i><span>Senior High</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Alumni Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#comms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-envelope"></i><span>Communications</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="comms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Email</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Message</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Communications Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-error-404.html">
+                <i class="bi bi-gift"></i>
+                <span>Donation</span>
+            </a>
+        </li><!-- End Doantion Page Nav -->
+    </ul>
+
+</aside><!-- End Sidebar-->
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Batch [Year]</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                <li class="breadcrumb-item">Alumni Yearbook</li>
+                <li class="breadcrumb-item">Junior High</li>
+                <li class="breadcrumb-item active">Batch [Year]</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="user" class="user">
+                    <div class="container" data-aos="fade-up">
+
+                        <div class="section-title">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+
+                                <div class="search-bar">
+                                    <form class="search-form d-flex align-items-center" method="POST" action="#">
+                                        <input type="text" name="query" placeholder="Search"
+                                            title="Enter search keyword">
+                                        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                                    </form>
+                                </div>
+
+                                <button class="btn text-white" style="background-color:#013220" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#addfaculty"><i
+                                        class="bi bi-person-plus-fill"></i> Add Alumni
+                                </button>
+                            </div>
+
+
+                            <!-- Start Add Alumni Modal-->
+                            <div class="modal fade" id="addfaculty" tabindex="-1" data-bs-backdrop="static"
+                                data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fw-semibold" style="color: #013220;">Alumni Form -
+                                                General Information
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body m-2">
+                                            <form class="row g-3" method="POST" action="code.php"
+                                                enctype="multipart/form-data">
+
+                                                <!-- <h5 style="color: #013220;" class="fst-italic fw-semibold">General
+                                                    Information</h5> -->
+
+                                                <div class="row mb-4 mt-2">
+                                                    <div class="col-lg-5 col-md-5">
+                                                        <!-- Profile Picture Preview -->
+                                                        <center>
+                                                            <img id="profilePicturePreview" src="assets/img/user.png"
+                                                                alt="Profile Picture Preview"
+                                                                style="max-width: 100%; max-height: 165px;">
+                                                        </center>
+                                                        <!-- Profile Picture Input -->
+                                                        <small class="mt-2">Add Profile Picture</small>
+                                                        <input type="file" name="profilePicture" class="form-control"
+                                                            id="profilePicture" onchange="previewProfilePicture();"
+                                                            accept="image/*" required>
+                                                    </div>
+
+                                                    <div class="col-lg-7 col-md-7">
+                                                        <div class="col-lg-12 col-md-12 mb-2">
+                                                            <label for="firstname" class="form-label">First Name</label>
+                                                            <input type="text" name="firstname" class="form-control"
+                                                                id="firstname" required>
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 mb-2">
+                                                            <label for="middlename" class="form-label">Middle
+                                                                Name</label>
+                                                            <input type="text" name="middlename" class="form-control"
+                                                                id="middlename" required>
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 mb-2">
+                                                            <label for="lastname" class="form-label">Last Name</label>
+                                                            <input type="text" name="lastname" class="form-control"
+                                                                id="lastname" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-2">
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <label for="year_graduated" class="form-label">Year
+                                                            Graduated</label>
+                                                        <input type="text" name="year_graduated" class="form-control"
+                                                            id="year_graduated" required>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <label for="section" class="form-label">Section</label>
+                                                        <input type="text" name="section" class="form-control"
+                                                            id="section" required>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <label for="profession" class="form-label">Profession</label>
+                                                        <input type="text" name="profession" class="form-control"
+                                                            id="profession" required>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <label for="marital_stat" class="form-label">Marital
+                                                            Status</label>
+                                                        <select name="marital_stat" class="form-select"
+                                                            id="marital_stat" required>
+                                                            <option value=" ">--Select--</option>
+                                                            <option value="Single">Single</option>
+                                                            <option value="Married">Married</option>
+                                                            <option value="Widowed">Widowed</option>
+                                                            <option value="Divorced">Divorced</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <h5 style="color: #013220;" class="fst-italic fw-semibold">Contact
+                                                    Details</h5> -->
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="email" name="email" class="form-control" id="email"
+                                                            required>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4">
+                                                        <label for="password" class="form-label">Set Default
+                                                            Password</label>
+                                                        <input type="text" name="password" class="form-control"
+                                                            id="password" required>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4">
+                                                        <label for="phone_num" class="form-label">Phone Number</label>
+                                                        <input type="tel" name="phone_num" class="form-control"
+                                                            id="phone_num" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 mb-2">
+                                                    <label for="address" class="form-label">Address</label>
+                                                    <textarea name="address" class="form-control" id="address" rows="2"
+                                                        required></textarea>
+                                                </div>
+
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <button class="btn rounded-5 text-white" type="submit"
+                                                        style="background-color: #013220;" name="addNewJHSAlumni"><i
+                                                            class="bi bi-plus-circle"></i> Add New Alumni</button>
+                                                </div>
+                                            </form>
+
+                                            <script src="js/scripts.js"></script>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- End Add Alumni Modal-->
+
+                            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum
+                                quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui
+                                impedit suscipit alias ea.</p>
+                            <hr>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="row">
+
+                                <?php
+// Query to select alumni members from the database
+$sql = "SELECT * FROM alumni_jhs";
+$result = mysqli_query($conn, $sql);
+
+// Check if there are any alumni members
+if (mysqli_num_rows($result) > 0) {
+    // Loop through each alumni member and display their information
+    while ($row = mysqli_fetch_assoc($result)) {
+        $middlenameInitial = substr($row['middlename'], 0, 1);
+        ?>
+                                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                                    <div class="member" data-aos="fade-up" data-aos-delay="100">
+                                        <div class="member-img">
+                                            <img src="<?php echo $row['profile_picture']; ?>" class="img-fluid" alt="">
+                                            <div class="social">
+                                                <a href="mailto:<?php echo $row['email']; ?>"><i
+                                                        class="bi bi-envelope-fill"></i></a>
+                                                <a href="tel:<?php echo $row['phone_num']; ?>"><i
+                                                        class="bi bi-telephone-fill"></i></a>
+                                                <a href=""><i class="bi bi-facebook"></i></a>
+                                                <a href=""><i class="bi bi-pencil-square"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="member-info">
+                                            <h4><?php echo $row['firstname'] . " " . $middlenameInitial . ". " . $row['lastname']; ?>
+                                            </h4>
+                                            <span><?php echo "Year Graduated: " . $row['year_graduated'] . " - " . $row['section']; ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+    }
+} else {
+    echo "No alumni members found.";
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- End Left side columns -->
+
+    </section>
+</main><!-- End #main -->
+<?php
+include_once 'includes/footer.php';
+?>
