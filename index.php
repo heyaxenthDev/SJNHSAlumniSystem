@@ -31,6 +31,9 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -84,17 +87,15 @@ include "alert.php";
                             <input type="text" name="username" class="form-control" id="yourUsername" required>
                         </div>
 
-                        <div class="col-12 mb-2">
+                        <div class="col-12 mb-2 position-relative">
                             <label for="yourPassword" class="form-label"><i class="bx bxs-lock-alt"></i>
                                 Password</label>
-                            <div class="input-group">
-                                <input type="password" name="password" class="form-control" id="yourPassword" required>
-                                <button type="button" class="btn btn-outline-secondary" id="togglePassword">
-                                    <i class="bx bxs-show"></i>
-                                </button>
-                            </div>
-                            <script src="js/show-password.js"></script>
+                            <input type="password" name="password" class="form-control" id="yourPassword" required>
+                            <span hidden="hidden" class="field-icon toggle-password bi bi-eye-fill" id="icon"
+                                style="position: absolute; right: 17px; transform: translate(0, -50%); top: 72%; cursor: pointer;"></span>
                         </div>
+                        <script src="js/show-password.js"></script>
+
 
 
                         <!-- <div class="col-12">
@@ -643,7 +644,6 @@ include "alert.php";
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-    <script src="js/pass-show-hide.js"></script>
 </body>
 
 </html>
