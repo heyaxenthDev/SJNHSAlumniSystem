@@ -69,12 +69,12 @@
             </a>
             <ul id="comms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="#">
+                    <a href="email.php">
                         <i class="bi bi-circle"></i><span>Email</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="message.php">
                         <i class="bi bi-circle"></i><span>Message</span>
                     </a>
                 </li>

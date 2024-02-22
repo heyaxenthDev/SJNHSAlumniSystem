@@ -45,6 +45,8 @@ if (isset($_POST['editNews'])) {
         header("Location: {$_SERVER['HTTP_REFERER']}");
         exit();
     }
+    // Close the database connection
+    mysqli_close($conn);
 }
 
 

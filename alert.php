@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <script src="js/sweetalert.min.js"></script>
 <?php
 if (isset($_SESSION['status'])) {

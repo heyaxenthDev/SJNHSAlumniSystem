@@ -168,7 +168,7 @@ unset($_SESSION['logged']);
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Batch Year</th>
-                                            <th scope="col">Type</th>
+                                            <th scope="col">School Type</th>
                                             <th scope="col"># of Members</th>
                                             <th scope="col">Action</th>
                                         </tr>

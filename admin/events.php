@@ -78,12 +78,12 @@ include "alert.php";
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="components-alerts.html">
+                    <a href="email.php">
                         <i class="bi bi-circle"></i><span>Email</span>
                     </a>
                 </li>
                 <li>
-                    <a href="components-accordion.html">
+                    <a href="message.php">
                         <i class="bi bi-circle"></i><span>Message</span>
                     </a>
                 </li>

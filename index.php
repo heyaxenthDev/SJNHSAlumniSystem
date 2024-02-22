@@ -75,7 +75,7 @@ include "alert.php";
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body m-5">
-                    <form class="row g-3" method="POST" action="login-code.php">
+                    <form class="row g-3" method="POST" action="login-code.php" autocomplete="off">
                         <h5 class=" card-title text-center pb-3 fs-4 fw-semibold" style="color: #013220;">
                             Administrative Log in
                         </h5>
@@ -87,8 +87,15 @@ include "alert.php";
                         <div class="col-12 mb-2">
                             <label for="yourPassword" class="form-label"><i class="bx bxs-lock-alt"></i>
                                 Password</label>
-                            <input type="password" name="password" class="form-control" id="yourPassword" required>
+                            <div class="input-group">
+                                <input type="password" name="password" class="form-control" id="yourPassword" required>
+                                <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                                    <i class="bx bxs-show"></i>
+                                </button>
+                            </div>
+                            <script src="js/show-password.js"></script>
                         </div>
+
 
                         <!-- <div class="col-12">
                             <div class="form-check">
@@ -636,7 +643,7 @@ include "alert.php";
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
+    <script src="js/pass-show-hide.js"></script>
 </body>
 
 </html>
