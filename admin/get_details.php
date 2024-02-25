@@ -11,7 +11,7 @@ if (isset($_POST['id'])) {
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         echo "
-            <form method='POST' action='update.php' enctype='multipart/form-data'>
+            <form method='POST' action='code.php' enctype='multipart/form-data'>
                 <input type='hidden' name='id' value='{$row['id']}'>
                 
                 <div class='row mb-4 mt-2'>
@@ -64,7 +64,7 @@ if (isset($_POST['eventid'])) {
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         echo "
-        <form class='row g-3' method='POST' action='update.php' enctype='multipart/form-data'>
+        <form class='row g-3' method='POST' action='code.php' enctype='multipart/form-data'>
             <input type='hidden' name='eventid' value='{$row['id']}'>
             
             <div class='row mb-4 mt-2'>
