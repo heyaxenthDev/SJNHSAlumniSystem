@@ -45,21 +45,31 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
+        <div class="d-flex align-items-center justify-content-center">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item">
+                    <a class="nav-link nav-icon" href="#">
+                        <i class="bi bi-house"></i>
+                    </a>
+                </li><!-- End Feed Icon -->
+
+                <li class="nav-item">
+                    <a class="nav-link nav-icon" href="#">
+                        <i class="bi bi-calendar-event"></i>
+                    </a>
+                </li><!-- End Events Icon -->
+
+                <li class="nav-item">
+                    <a class="nav-link nav-icon" href="#">
+                        <i class="bi bi-people"></i>
+                    </a>
+                </li><!-- End Community Icon -->
+            </ul>
         </div><!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
 
                 <li class="nav-item dropdown">
 
@@ -157,7 +167,8 @@
                                 <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
                                 <div>
                                     <h4>Maria Hudson</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...
+                                    </p>
                                     <p>4 hrs. ago</p>
                                 </div>
                             </a>
@@ -171,7 +182,8 @@
                                 <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                 <div>
                                     <h4>Anna Nelson</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...
+                                    </p>
                                     <p>6 hrs. ago</p>
                                 </div>
                             </a>
@@ -185,7 +197,8 @@
                                 <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
                                 <div>
                                     <h4>David Muldon</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...
+                                    </p>
                                     <p>8 hrs. ago</p>
                                 </div>
                             </a>
