@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,10 +41,6 @@
 
 </head>
 
-<?php
-session_start();
-include "alert.php";
-?>
 
 <body>
 
@@ -67,6 +67,9 @@ include "alert.php";
         </div>
     </header><!-- End Header -->
 
+    <?php
+    include "alert.php";
+    ?>
     <!-- Start Admin Login Modal-->
     <div class="modal fade" id="adminlogin" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">

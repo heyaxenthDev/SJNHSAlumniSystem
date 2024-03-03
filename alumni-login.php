@@ -1,5 +1,5 @@
 <?php
-include 'inlcudes/conn.php';
+include 'includes/conn.php';
 include 'alert.php';
 ?>
 
