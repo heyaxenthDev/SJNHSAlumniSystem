@@ -99,16 +99,6 @@ session_start();
                         </div>
                         <script src="js/show-password.js"></script>
 
-
-
-                        <!-- <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" value="true"
-                                    id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Remember me</label>
-                            </div>
-                        </div> -->
-
                         <div class="col-12">
                             <button class="btn rounded-5 w-100 text-white btn-lg" type="submit"
                                 style="background-color: #013220;" name="adminLogin">Login</button>
