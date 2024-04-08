@@ -10,7 +10,7 @@ if (!isset($_SESSION['admin_auth'])) {
     $_SESSION['status_btn'] = "Back";
     
     // Redirect to login page
-    header("Location: /SJNHSAlumniSystem/index.php");
+    header("Location: {$_SERVER['HTTP_REFERER']}");
     exit; // Exit script to prevent further execution
 }
 

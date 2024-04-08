@@ -263,6 +263,42 @@ h6 {
   box-shadow: none;
 }
 
+/* Message */
+.message i{
+  font-size: 35px;
+  padding: 0;
+}
+
+.message-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #013220;
+  font-family: "Poppins", sans-serif;
+}
+
+   /* Custom styles for chat box */
+    .chat-box .card-body{
+      max-height: 400px;
+      overflow-y: scroll;
+    }
+    .message-bubble {
+      display: inline-block;
+      max-width: 80%;
+      padding: 8px 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .my-message {
+      background-color: #014421;
+      align-self: flex-end;
+    }
+    .other-message {
+      background-color: #F1F1F1;
+    }
+    .message-input {
+      resize: none;
+    }
+
 /* Accordion */
 .accordion-item {
   border: 1px solid #ebeef4;
