@@ -265,7 +265,7 @@ h6 {
 
 /* Message */
 .message i{
-  font-size: 35px;
+  font-size: 30px;
   padding: 0;
 }
 
@@ -275,29 +275,6 @@ h6 {
   color: #013220;
   font-family: "Poppins", sans-serif;
 }
-
-   /* Custom styles for chat box */
-    .chat-box .card-body{
-      max-height: 400px;
-      overflow-y: scroll;
-    }
-    .message-bubble {
-      display: inline-block;
-      max-width: 80%;
-      padding: 8px 12px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-    .my-message {
-      background-color: #014421;
-      align-self: flex-end;
-    }
-    .other-message {
-      background-color: #F1F1F1;
-    }
-    .message-input {
-      resize: none;
-    }
 
 /* Accordion */
 .accordion-item {
@@ -970,42 +947,6 @@ h6 {
 .dashboard .top-selling img {
   border-radius: 5px;
   max-width: 60px;
-}
-
-/*--------------------------------------------------------------
-# Icons list page
---------------------------------------------------------------*/
-.iconslist {
-  display: grid;
-  max-width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.25rem;
-  padding-top: 15px;
-}
-
-.iconslist .icon {
-  background-color: #fff;
-  border-radius: 0.25rem;
-  text-align: center;
-  color: #013220;
-  padding: 15px 0;
-}
-
-.iconslist i {
-  margin: 0.25rem;
-  font-size: 2.5rem;
-}
-
-.iconslist .label {
-  font-family: var(--bs-font-monospace);
-  display: inline-block;
-  width: 100%;
-  overflow: hidden;
-  padding: 0.25rem;
-  font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #666;
 }
 
 /*--------------------------------------------------------------

@@ -125,7 +125,7 @@ include "alert.php";
                         </div>
                         <hr>
 
-                        <form class=" d-flex mb-3 mt-2">
+                        <form class="d-flex mb-3 mt-2">
                             <div class="input-group">
                                 <input type="search" class="form-control" placeholder="Search messages"
                                     aria-label="Search" id="searchInput">

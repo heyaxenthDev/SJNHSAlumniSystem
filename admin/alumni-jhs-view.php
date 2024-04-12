@@ -315,15 +315,14 @@ include "alert.php";
                                                     </div>
 
                                                     <div class="col-lg-4 col-md-4">
-                                                        <label for="password" class="form-label">Set Default
+                                                        <label for="password" class="form-label">Default
                                                             Password</label>
                                                         <?php
                                                         $defaultPassword = "Welcome123!";
                                                         // $hashedPassword = password_hash($defaultPassword, PASSWORD_DEFAULT);
                                                         ?>
                                                         <input type="text" name="password" class="form-control"
-                                                            id="password" value="<?php echo $defaultPassword; ?>"
-                                                            required>
+                                                            id="password" value="<?php echo $defaultPassword; ?>" readonly>
                                                     </div>
 
                                                     <div class="col-lg-4 col-md-4">
