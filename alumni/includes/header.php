@@ -39,34 +39,13 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="feed.php" class="logo d-flex align-items-center">
-                <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">NiceAdmin</span>
+                <img src="assets/img/SJNHS-logo.png" alt="">
+                <span class="d-none d-lg-block">SJNHS Alumni</span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
+            <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
         </div><!-- End Logo -->
 
-        <div class="d-flex align-items-center justify-content-center">
-            <ul class="d-flex align-items-center">
 
-                <li class="nav-item">
-                    <a class="nav-link nav-icon" href="#">
-                        <i class="bi bi-house"></i>
-                    </a>
-                </li><!-- End Feed Icon -->
-
-                <li class="nav-item">
-                    <a class="nav-link nav-icon" href="#">
-                        <i class="bi bi-calendar-event"></i>
-                    </a>
-                </li><!-- End Events Icon -->
-
-                <li class="nav-item">
-                    <a class="nav-link nav-icon" href="#">
-                        <i class="bi bi-people"></i>
-                    </a>
-                </li><!-- End Community Icon -->
-            </ul>
-        </div><!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">

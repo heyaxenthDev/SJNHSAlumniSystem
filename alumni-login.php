@@ -98,10 +98,8 @@ include 'alert.php';
                                         style="background-color: #013220;">Login</button>
                                 </div>
                                 <div class="col-12 mt-5 mb-5 text-center">
-                                    <p class="small mb-0">Don't have account? <a href="pages-register.html"
-                                            class="text-success">Create
-                                            an
-                                            account</a></p>
+                                    <p class="small mb-0">Don't have account? <a href="#" class="text-success">Click
+                                            here</a></p>
                                 </div>
                             </form>
 
