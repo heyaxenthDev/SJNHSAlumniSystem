@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>SJNHS</title>
+    <title>SJNHS - Alumni &amp; Yearbook System</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -42,7 +42,7 @@
                 <img src="assets/img/SJNHS-logo.png" alt="">
                 <span class="d-none d-lg-block">SJNHS Alumni</span>
             </a>
-            <!-- <i class="bi bi-list toggle-sidebar-btn"></i> -->
+            <i class="bi bi-list toggle-sidebar-btn d-md-none"></i>
         </div><!-- End Logo -->
 
 
