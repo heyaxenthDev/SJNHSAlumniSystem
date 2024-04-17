@@ -871,26 +871,24 @@ h6 {
 .dashboard .donate-card {
   background: linear-gradient(
       45deg,
-      rgba(1, 68, 33, 0.9) 0%,
-      rgba(1, 68, 33, 0.9) 100%
-
+      rgba(255, 229, 180, 0.9) 0%,
+      rgba(152, 193, 171, 0.9) 100%
     ),
     url("../img/hero-bg.jpg") center center no-repeat;
   background-size: cover;
-  color: #fff; /* Set text color to white for better readability */
+  color: #013220; /* Set text color to white for better readability */
 }
 
-.dashboard .donate-card a{
-  background-color: #DFE6DA;
+.dashboard .donate-card a {
+  background-color: #dfe6da;
   color: #013220;
 }
 
 .dashboard .donate-card a:hover {
-    background-color: #8A9A5B;
-    color: #DFE6DA;
-    text-decoration: none; /* Remove underline on hover */
+  background-color: #013220;
+  color: #dfe6da;
+  text-decoration: none; /* Remove underline on hover */
 }
-
 
 /* Recent Sales */
 .dashboard .batch-list {
@@ -951,7 +949,40 @@ h6 {
   font-weight: bold;
 }
 
+.dashboard .event{
+  scrollbar-width: thin;
+  scrollbar-color: #aab7cf transparent;
+}
 
+.dashboard .event::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #fff;
+}
+
+.dashboard .event::-webkit-scrollbar-thumb {
+  background-color: #aab7cf;
+}
+
+.dashboard .event-card {
+  box-shadow: none;
+  border: 1px solid #a6a6a6; /* Use solid border with the desired color */
+}
+
+
+.dashboard .event-card .w-100:hover {
+  background-color: #013220;
+  color: #fff;
+}
+
+.dashboard .event-card .w-100 {
+  background-color: #CBD5C0;
+  color: #013220;
+}
+
+.dashboard .event-card .card-title {
+  padding: 0px;
+}
 
 /*--------------------------------------------------------------
 # Profie Page
