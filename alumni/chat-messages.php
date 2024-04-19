@@ -41,7 +41,7 @@
         <div class="container-fluid">
             <a href="feed.php" class="logo d-flex align-items-center">
                 <img src="assets/img/favicon.png" alt="">
-                <span class="d-none d-lg-block">SJNHS</span>
+                <span class="d-none d-lg-block">SJNHS Alumni</span>
             </a>
         </div>
     </nav>
