@@ -949,7 +949,7 @@ h6 {
   font-weight: bold;
 }
 
-.dashboard .event{
+.dashboard .event {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
 }
@@ -969,19 +969,27 @@ h6 {
   border: 1px solid #a6a6a6; /* Use solid border with the desired color */
 }
 
-
 .dashboard .event-card .w-100:hover {
   background-color: #013220;
   color: #fff;
 }
 
 .dashboard .event-card .w-100 {
-  background-color: #CBD5C0;
+  background-color: #cbd5c0;
   color: #013220;
 }
 
 .dashboard .event-card .card-title {
   padding: 0px;
+}
+
+.extra-button > button {
+  color: #013220;
+}
+
+.extra-button > button:hover {
+  color: #013220;
+  background-color: #e3e4e1;
 }
 
 /*--------------------------------------------------------------
@@ -1036,6 +1044,94 @@ h6 {
 
 .profile .profile-edit img {
   max-width: 120px;
+}
+/*--------------------------------------------------------------
+# Chat
+--------------------------------------------------------------*/
+.chat-box {
+  position: relative;
+  min-height: 500px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 10px 30px 20px 30px;
+  background: #f7f7f7;
+  box-shadow: inset 0 32px 32px -32px rgb(0 0 0 / 5%),
+    inset 0 -32px 32px -32px rgb(0 0 0 / 5%);
+  scrollbar-width: thin;
+  scrollbar-color: #aab7cf transparent;
+}
+
+.chat-box::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #fff;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background-color: #aab7cf;
+}
+
+.chat-box .text {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: calc(100% - 50px);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.chat-box .chat {
+  margin: 15px 0;
+}
+
+.chat-box .chat p {
+  word-wrap: break-word;
+  padding: 8px 16px;
+  box-shadow: 0 0 32px rgb(0 0 0 / 8%), 0rem 16px 16px -16px rgb(0 0 0 / 10%);
+}
+
+.chat-box .outgoing {
+  display: flex;
+}
+
+.chat-box .outgoing .details {
+  margin-left: auto;
+  max-width: calc(100% - 130px);
+}
+
+.outgoing .details p {
+  background: #013220;
+  color: #fff;
+  border-radius: 18px 18px 0 18px;
+}
+
+.chat-box .incoming {
+  display: flex;
+  align-items: flex-end;
+}
+
+.chat-box .incoming img {
+  height: 35px;
+  width: 35px;
+}
+
+.chat-box .incoming .details {
+  margin-right: auto;
+  margin-left: 10px;
+  max-width: calc(100% - 130px);
+}
+
+.incoming .details p {
+  background: #fff;
+  color: #013220;
+  border-radius: 18px 18px 18px 0;
+}
+.chat .card-title {
+  padding: 5px 0 0px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #013220;
+  font-family: "Poppins", sans-serif;
 }
 
 /*--------------------------------------------------------------
