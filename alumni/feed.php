@@ -42,9 +42,9 @@ include "alert.php";
                     </li><!-- End Batch Members Nav -->
 
                     <li class="nav-item">
-                        <a class="nav-link" href="chat-messages.php">
+                        <a class="nav-link" href="chat.php">
                             <i class="bi bi-chat-left-text-fill"></i>
-                            <span>Chat-Messages</span>
+                            <span>Chat</span>
                         </a>
                     </li><!-- End Messages Nav -->
 
