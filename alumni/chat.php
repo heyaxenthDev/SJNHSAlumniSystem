@@ -6,7 +6,7 @@ include 'includes/header.php'
     <section class="section">
         <div class="row dashboard">
             <!-- Left side columns -->
-            <div class="col-lg-2">
+            <div class="col-lg-3">
 
                 <ul class="sidebar-nav " id="sidebar-nav">
                     <!-- Profile Info -->
@@ -71,7 +71,7 @@ include 'includes/header.php'
             </div><!-- End Left side columns -->
 
 
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <!-- Default Card -->
                 <div class="card">
                     <div class="card-body">
