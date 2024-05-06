@@ -67,7 +67,7 @@ include 'alert.php';
                                 <p class="text-center small">Enter your email & password to login</p>
                             </div>
 
-                            <form class="row g-3 needs-validation" novalidate>
+                            <form class="row g-3 needs-validation" action="login-code.php" method="POST" novalidate>
 
                                 <div class="col-12">
                                     <label for="yourEmail" class="form-label">Email Address</label>
@@ -95,7 +95,7 @@ include 'alert.php';
                                 </div> -->
                                 <div class="col-12">
                                     <button class="btn rounded-5 w-100 text-white btn-lg" type="submit"
-                                        style="background-color: #013220;">Login</button>
+                                        style="background-color: #013220;" name="alumniLogin">Login</button>
                                 </div>
                                 <div class="col-12 mt-5 mb-5 text-center">
                                     <p class="small mb-0">Don't have account? <a href="#" class="text-success">Click

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2024 at 03:32 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: May 06, 2024 at 10:33 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
@@ -62,7 +62,7 @@ CREATE TABLE `alumni_jhs` (
   `profile_picture` varchar(255) NOT NULL,
   `user_status` varchar(255) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `alumni_jhs`
@@ -95,15 +95,15 @@ CREATE TABLE `alumni_shs` (
   `profile_picture` varchar(255) NOT NULL,
   `user_status` varchar(255) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `alumni_shs`
 --
 
 INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `track`, `profession`, `marital_stat`, `address`, `profile_picture`, `user_status`, `date_created`) VALUES
-(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', 'Welcome123!', '09123478648', 2018, 'STEM', 'Civil Engineer', 'Married', 'Tibiao, Antique', 'uploads/SHSAlumni/team-2.jpg', '0', '2024-02-20 07:02:30'),
-(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', 'Welcome123!', '097638173642', 2018, 'GAS', 'Professor', 'Widowed', 'Barbaza, Antique', 'uploads/SHSAlumni/team-1.jpg', '0', '2024-02-20 13:31:34');
+(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', 'Welcome123!', '09123478648', '2018', 'STEM', 'Civil Engineer', 'Married', 'Tibiao, Antique', 'uploads/SHSAlumni/team-2.jpg', '0', '2024-02-20 07:02:30'),
+(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', 'Welcome123!', '097638173642', '2018', 'GAS', 'Professor', 'Widowed', 'Barbaza, Antique', 'uploads/SHSAlumni/team-1.jpg', '0', '2024-02-20 13:31:34');
 
 -- --------------------------------------------------------
 
@@ -116,22 +116,36 @@ CREATE TABLE `batchyear` (
   `batch_year` year(4) NOT NULL,
   `hs_type` varchar(50) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `batchyear`
 --
 
 INSERT INTO `batchyear` (`id`, `batch_year`, `hs_type`, `date_created`) VALUES
-(1, 2018, 'SHS', '2024-02-18'),
-(2, 2019, 'SHS', '2024-02-19'),
-(3, 2018, 'JHS', '2024-02-19'),
-(4, 1990, 'JHS', '2024-02-19'),
-(5, 2020, 'SHS', '2024-02-19'),
-(6, 1999, 'JHS', '2024-02-19'),
-(7, 1991, 'JHS', '2024-02-20'),
-(8, 1992, 'JHS', '2024-02-20'),
-(9, 1993, 'JHS', '2024-02-20');
+(1, '2018', 'SHS', '2024-02-18'),
+(2, '2019', 'SHS', '2024-02-19'),
+(3, '2018', 'JHS', '2024-02-19'),
+(4, '1990', 'JHS', '2024-02-19'),
+(5, '2020', 'SHS', '2024-02-19'),
+(6, '1999', 'JHS', '2024-02-19'),
+(7, '1991', 'JHS', '2024-02-20'),
+(8, '1992', 'JHS', '2024-02-20'),
+(9, '1993', 'JHS', '2024-02-20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `msg_id` int(11) NOT NULL,
+  `conversationID` varchar(255) NOT NULL,
+  `outgoing_msg_id` varchar(255) NOT NULL,
+  `msg_content` varchar(1000) NOT NULL,
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -149,7 +163,7 @@ CREATE TABLE `events` (
   `eventDescription` text NOT NULL,
   `eventPicture` varchar(255) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `events`
@@ -179,7 +193,7 @@ CREATE TABLE `faculty` (
   `sect_subj` varchar(50) NOT NULL,
   `profile_picture` varchar(255) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `faculty`
@@ -208,7 +222,7 @@ CREATE TABLE `news` (
   `newsStatus` int(11) NOT NULL,
   `newsPicture` varchar(255) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `news`
@@ -240,6 +254,12 @@ ALTER TABLE `alumni_shs`
 --
 ALTER TABLE `batchyear`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`msg_id`);
 
 --
 -- Indexes for table `events`
@@ -280,6 +300,12 @@ ALTER TABLE `alumni_shs`
 --
 ALTER TABLE `batchyear`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `events`

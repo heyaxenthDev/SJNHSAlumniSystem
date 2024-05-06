@@ -18,9 +18,7 @@ include 'includes/conn.php';
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -333,18 +331,15 @@ include 'includes/conn.php';
                         <div class="card-body">
                             <!-- <h5 class="card-title">Default Card</h5> -->
                             <div class="input-group mb-3 mt-4">
-                                <input type="text" class="form-control" placeholder="Search by name" aria-label="Search"
-                                    aria-describedby="button-addon2">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-                                        class="bi bi-search"></i></button>
+                                <input type="text" class="form-control" placeholder="Search by name" aria-label="Search" aria-describedby="button-addon2">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
                             </div>
                             <!-- List group with Advanced Contents -->
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action">
+                            <div class="list-group chat-list">
+                                <a href="#" class="list-group-item list-group-item-action chat-message">
                                     <div class="d-flex w-100 justify-content-between">
                                         <div class="d-flex align-items-center">
-                                            <img src="assets/img/user.png" class="rounded-circle me-3"
-                                                alt="Profile Picture" style="width: 50px; height: 50px;">
+                                            <img src="assets/img/user.png" class="rounded-circle me-3" alt="Profile Picture" style="width: 50px; height: 50px;">
                                             <div>
                                                 <h5 class="mb-1">Juan Dela Cruz</h5>
                                                 <small class="text-muted">And some muted small print.</small>
@@ -356,8 +351,7 @@ include 'includes/conn.php';
                                 <a href="#" class="list-group-item list-group-item-action">
                                     <div class="d-flex w-100 justify-content-between">
                                         <div class="d-flex align-items-center">
-                                            <img src="assets/img/user.png" class="rounded-circle me-3"
-                                                alt="Profile Picture" style="width: 50px; height: 50px;">
+                                            <img src="assets/img/user.png" class="rounded-circle me-3" alt="Profile Picture" style="width: 50px; height: 50px;">
                                             <div>
                                                 <h5 class="mb-1">Juan Dela Cruz</h5>
                                                 <small class="text-muted">And some muted small print.</small>
@@ -369,8 +363,7 @@ include 'includes/conn.php';
                                 <a href="#" class="list-group-item list-group-item-action">
                                     <div class="d-flex w-100 justify-content-between">
                                         <div class="d-flex align-items-center">
-                                            <img src="assets/img/user.png" class="rounded-circle me-3"
-                                                alt="Profile Picture" style="width: 50px; height: 50px;">
+                                            <img src="assets/img/user.png" class="rounded-circle me-3" alt="Profile Picture" style="width: 50px; height: 50px;">
                                             <div>
                                                 <h5 class="mb-1">Juan Dela Cruz</h5>
                                                 <small class="text-muted">And some muted small print.</small>
@@ -390,14 +383,13 @@ include 'includes/conn.php';
                         <div class="card-header chat">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
-                                    <img src="assets/img/user.png" class="rounded-circle me-2" alt="Profile Picture"
-                                        style="width: 40px; height: 40px;">
+                                    <img src="assets/img/user.png" class="rounded-circle me-2" alt="Profile Picture" style="width: 40px; height: 40px;">
                                     <div>
                                         <h5 class="card-title mb-0">Juan Dela Cruz</h5>
                                         <small>Online</small>
                                     </div>
                                 </div>
-                                <div class="text-end m-2">
+                                <div class="text-end m-2 icon">
                                     <a href=""><i class="bx bxs-user-account"></i></a>
                                 </div>
                             </div>
@@ -459,8 +451,7 @@ include 'includes/conn.php';
                                     <button class="btn"><i class="bi bi-image"></i></button>
                                     <button class="btn"><i class="bi bi-paperclip"></i></button>
                                 </div>
-                                <button class="btn btn-sm text-white" style="background-color: #013220;">Send <i
-                                        class="bi bi-send"></i></button>
+                                <button class="btn btn-sm text-white" style="background-color: #013220;">Send <i class="bi bi-send"></i></button>
                             </div>
 
                         </div>
