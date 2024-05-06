@@ -1,6 +1,6 @@
 <?php
+session_start();
 include 'includes/conn.php';
-include 'alert.php';
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +38,9 @@ include 'alert.php';
 </head>
 
 <body>
+    <?php
+    include 'alert.php';
+    ?>
 
     <main>
         <div class="container">
@@ -67,13 +70,18 @@ include 'alert.php';
                                 <p class="text-center small">Enter your email & password to login</p>
                             </div>
 
-                            <form class="row g-3 needs-validation" action="login-code.php" method="POST" novalidate>
+                            <form class="row g-3" method="POST" action="login-code.php">
+
+                                <input type="hidden" name="typeGrad" id="typeGrad" value="<?php echo $_GET['Type']; ?>">
 
                                 <div class="col-12">
                                     <label for="yourEmail" class="form-label">Email Address</label>
                                     <div class="input-group input-group-lg has-validation">
-                                        <input type="text" name="email" class="form-control" id="yourEmail" required>
-                                        <div class="invalid-feedback">Please enter your email.</div>
+                                        <input type="text" name="email" class="form-control" id="yourEmail" value="<?php if (isset($_SESSION['entered_email'])) {
+                                                echo $_SESSION['entered_email'];
+                                            }
+                                            unset($_SESSION['entered_email']);?>" required>
+                                        <!-- <div class="invalid-feedback">Please enter your email.</div> -->
                                     </div>
                                 </div>
 
@@ -82,7 +90,7 @@ include 'alert.php';
                                     <div class="input-group input-group-lg has-validation">
                                         <input type="password" name="password" class="form-control" id="yourPassword"
                                             required>
-                                        <div class="invalid-feedback">Please enter your password!</div>
+                                        <!-- <div class="invalid-feedback">Please enter your password!</div> -->
                                     </div>
                                 </div>
 

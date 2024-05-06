@@ -82,7 +82,7 @@ session_start();
                 </div>
                 <div class="modal-body m-5">
                     <form class="row g-3" method="POST" action="login-code.php" autocomplete="off">
-                        <h5 class=" card-title text-center pb-3 fs-4 fw-semibold" style="color: #013220;">
+                        <h5 class=" card-title te xt-center pb-3 fs-4 fw-semibold" style="color: #013220;">
                             Administrative Log in
                         </h5>
                         <div class="col-12">
@@ -118,7 +118,7 @@ session_start();
                 <div class="col-xl-6">
                     <h1>STA. JUSTA NATIONAL HIGH SCHOOL</h1>
                     <h2>Alumni Yearbook and Directory Website</h2>
-                    <a href="alumni-login.php" class="btn-get-started scrollto">Alumni Log in</a>
+                    <a href="select-user.html" class="btn-get-started scrollto">Alumni Log in</a>
                 </div>
             </div>
         </div>
@@ -352,7 +352,7 @@ session_start();
                 </div>
 
             </div>
-        </section><!-- End Services Section -->
+        </section><!-- End Alumni Directory Section -->
 
         <!-- ======= Tabs Section ======= -->
         <section id="tabs" class="tabs">

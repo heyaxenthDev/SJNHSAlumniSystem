@@ -5,10 +5,29 @@
   scroll-behavior: smooth;
 }
 
+/* body {
+  font-family: "Open Sans", sans-serif;
+  background: #f6f9ff;
+  color: #444444;
+  overflow: hidden;
+} */
+
 body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
   color: #444444;
+  overflow: hidden;
+  height: 100vh; /* Set the body height to the viewport height */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+/* Add a wrapper div for content */
+.content-wrapper {
+  overflow-y: auto; /* Add vertical scroll if content overflows */
+  height: calc(100vh - 16px); /* Adjust for scrollbar width */
+  padding: 16px; /* Add padding to prevent content from touching edges */
+  box-sizing: border-box; /* Include padding in height calculation */
 }
 
 a {
@@ -595,14 +614,14 @@ h6 {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #013220;
-}
+  background-color: #f6f9ff;
+} */
 
 @media (max-width: 1199px) {
   .sidebar {
     left: -300px;
   }
-} */
+}
 
 .sidebar::-webkit-scrollbar {
   width: 5px;
@@ -1134,7 +1153,7 @@ h6 {
   font-family: "Poppins", sans-serif;
 }
 
-.chat .icon i{
+.chat .icon i {
   font-size: 20px;
   line-height: 0;
 }
