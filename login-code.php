@@ -53,16 +53,19 @@ function loginAlumni($conn, $type, $email, $password, $table)
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        if (password_verify($password, $row['password'])) {
+        if ($password == $row['password']) {
+            
             $_SESSION['user_auth'] = true;
             $_SESSION['user_cred'] = [
                 'alumni_id' => $row['alumni_id'],
                 'id' => $row['id'],
                 'type' => $type,
+                'table' => $table,
             ];
             $_SESSION['logged'] = "Logged in successfully";
             $_SESSION['logged_icon'] = "success";
             header("Location: alumni/feed.php");
+            
         } else {
             $_SESSION['entered_email'] = $email;
             $_SESSION['status'] = "Error";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2024 at 10:33 AM
+-- Generation Time: May 07, 2024 at 10:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -57,6 +57,7 @@ CREATE TABLE `alumni_jhs` (
   `year_graduated` varchar(255) NOT NULL,
   `section` varchar(255) NOT NULL,
   `profession` varchar(255) NOT NULL,
+  `current_company_bus` varchar(255) NOT NULL,
   `marital_stat` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `profile_picture` varchar(255) NOT NULL,
@@ -68,9 +69,9 @@ CREATE TABLE `alumni_jhs` (
 -- Dumping data for table `alumni_jhs`
 --
 
-INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `profession`, `marital_stat`, `address`, `profile_picture`, `user_status`, `date_created`) VALUES
-(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '12345678', '091265488795', '1990', 'A', 'Doctor', 'Single', 'Tibiao, Antique', 'uploads/JHSAlumni/team-3.jpg', '0', '2024-02-20 03:54:16'),
-(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', 'Welcome123!', '09786378127', '1990', 'A', 'Business Analyst', 'Married', 'Alegre Road, Tibiao, Antique', 'uploads/JHSAlumni/team-4.jpg', '0', '2024-02-20 13:28:03');
+INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `date_created`) VALUES
+(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '12345678', '091265488795', '1990', 'A', 'Doctor', '', 'Single', 'Tibiao, Antique', 'uploads/JHSAlumni/team-3.jpg', '0', '2024-02-20 03:54:16'),
+(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', 'Welcome123!', '09786378127', '1990', 'A', 'Business Analyst', '', 'Married', 'Alegre Road, Tibiao, Antique', 'uploads/JHSAlumni/team-4.jpg', '0', '2024-02-20 13:28:03');
 
 -- --------------------------------------------------------
 
@@ -88,8 +89,10 @@ CREATE TABLE `alumni_shs` (
   `password` varchar(255) NOT NULL,
   `phone_num` varchar(255) NOT NULL,
   `year_graduated` year(4) NOT NULL,
+  `section` varchar(100) NOT NULL,
   `track` varchar(255) NOT NULL,
   `profession` varchar(255) NOT NULL,
+  `current_company_bus` varchar(255) NOT NULL,
   `marital_stat` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `profile_picture` varchar(255) NOT NULL,
@@ -101,9 +104,9 @@ CREATE TABLE `alumni_shs` (
 -- Dumping data for table `alumni_shs`
 --
 
-INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `track`, `profession`, `marital_stat`, `address`, `profile_picture`, `user_status`, `date_created`) VALUES
-(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', 'Welcome123!', '09123478648', '2018', 'STEM', 'Civil Engineer', 'Married', 'Tibiao, Antique', 'uploads/SHSAlumni/team-2.jpg', '0', '2024-02-20 07:02:30'),
-(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', 'Welcome123!', '097638173642', '2018', 'GAS', 'Professor', 'Widowed', 'Barbaza, Antique', 'uploads/SHSAlumni/team-1.jpg', '0', '2024-02-20 13:31:34');
+INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `date_created`) VALUES
+(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', '$2y$10$SgD2AY58hGMh2zo096IAB..LHx30j88Hxn6mdWoefCXyobqSRvX.G', '9798642852', '2018', 'A', 'STEM', 'Mechanical Engineer', 'ABC Robotech Inc.', 'Married', 'Tibao, Antique', 'uploads/SHS/ALUM65d44e8664057_team-4.jpg', '1', '2024-02-20 07:02:30'),
+(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$CquYqaV4IhVYNjUCjYMjn.F/0312CC0.ECCQ2tVo4n366soEIwpHW', '548747324324', '2018', 'A', 'GAS', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', '2024-02-20 13:31:34');
 
 -- --------------------------------------------------------
 
@@ -131,7 +134,8 @@ INSERT INTO `batchyear` (`id`, `batch_year`, `hs_type`, `date_created`) VALUES
 (6, '1999', 'JHS', '2024-02-19'),
 (7, '1991', 'JHS', '2024-02-20'),
 (8, '1992', 'JHS', '2024-02-20'),
-(9, '1993', 'JHS', '2024-02-20');
+(9, '1993', 'JHS', '2024-02-20'),
+(10, '2021', 'SHS', '2024-05-07');
 
 -- --------------------------------------------------------
 
@@ -170,9 +174,9 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `eventsCode`, `eventName`, `eventDate`, `eventStatus`, `eventLocation`, `eventDescription`, `eventPicture`, `date_created`) VALUES
-(1, 'EVENT65d465059f14f', 'Alumni Socials', '2024-04-20', 2, 'School Campus', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-3.jpg', '2024-02-20'),
-(2, 'EVENT65d4a67f85d2d', 'Araw ng Parangal', '2024-03-23', 1, 'School Campus', 'It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', 'uploads/events/tabs-4.jpg', '2024-02-20'),
-(3, 'EVENT65d4a6c8e573d', 'Friendly Sports Game', '2024-06-19', 2, 'School Grounds', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.', 'uploads/events/tabs-2.jpg', '2024-02-20');
+(1, 'EVENT65d465059f14f', 'Alumni Socials', '2024-10-05', 2, 'School Campus', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-3.jpg', '2024-02-20'),
+(2, 'EVENT65d4a67f85d2d', 'Araw ng Parangal', '2024-06-29', 1, 'School Campus', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-4.jpg', '2024-02-20'),
+(3, 'EVENT65d4a6c8e573d', 'Friendly Sports Game', '2024-06-19', 2, 'School Grounds', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-2.jpg', '2024-02-20');
 
 -- --------------------------------------------------------
 
@@ -231,7 +235,8 @@ CREATE TABLE `news` (
 INSERT INTO `news` (`id`, `newsCode`, `title`, `content`, `publication_date`, `newsStatus`, `newsPicture`, `date_created`) VALUES
 (1, 'NEWS65d48cb4a1f52', 'New School Website is Coming!!!', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2024-02-20', 1, 'uploads/news/tabs-1.jpg', '2024-02-20 11:27:48'),
 (2, 'NEWS65d4a7109812d', 'School Library to be Renovated', 'Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.', '2024-02-08', 1, 'uploads/news/blog-recent-4.jpg', '2024-02-20 13:20:16'),
-(3, 'NEWS65d4a73ae3da1', 'Artist ng Eskwelahan!', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '2024-02-14', 1, 'uploads/news/blog-recent-3.jpg', '2024-02-20 13:20:58');
+(3, 'NEWS65d4a73ae3da1', 'Artist ng Eskwelahan!', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '2024-02-14', 1, 'uploads/news/blog-recent-3.jpg', '2024-02-20 13:20:58'),
+(4, 'NEWS6639b51f77010', 'Lorem Ipsum', 'Lorem Ipsum', '2024-05-07', 2, 'uploads/news/undraw_special_event_4aj8.png', '2024-05-07 04:59:11');
 
 --
 -- Indexes for dumped tables
@@ -299,7 +304,7 @@ ALTER TABLE `alumni_shs`
 -- AUTO_INCREMENT for table `batchyear`
 --
 ALTER TABLE `batchyear`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `chat`
@@ -323,7 +328,7 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,5 +1,7 @@
 <?php
 include 'includes/conn.php';
+include 'authentication.php';
+include 'alert.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +38,40 @@ include 'includes/conn.php';
 </head>
 
 <body>
+    <?php
+    $alumni_id = $_SESSION['user_cred']['alumni_id'];
+    $id = $_SESSION['user_cred']['id'];
+    $table = $_SESSION['user_cred']['table'];
+    $type = ($_SESSION['user_cred']['type'] == "SHS") ? "SHS" : "JHS";
 
+    $query = "SELECT *, upper(left(firstname,1)) AS initialF, upper(left(middlename,1)) AS initialM FROM `$table` WHERE alumni_id = '$alumni_id' AND id = '$id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Output data of each row
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Access data from the row
+            $user = $row['initialF'] . ". " . $row['lastname'];
+            $idNum = $row['id'];
+            $picture = $row['profile_picture'];
+            $name = $row['firstname'] . " " . $row['initialM'] . ". " . $row['lastname'];
+            $fname = $row['firstname'];
+            $lname = $row['lastname'];
+            $mname = $row['middlename'];
+            $email = $row['email'];
+            $profession = $row['profession'];
+            $company = $row['current_company_bus'];
+            $contact = $row['phone_num'];
+            $year = $row['year_graduated'];
+            $sec_track = $row['track'] . " " . $row['section'];
+            $address = $row['address'];
+            $hs = $type;
+            // Add more assignments as needed for other columns
+        }
+    } else {
+        echo "0 results";
+    }
+    ?>
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -52,6 +87,14 @@ include 'includes/conn.php';
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="feed.php">
+                        <i class="bi bi-newspaper"></i>
+                    </a><!-- End Feed Icon -->
+
+                </li><!-- End Feed Nav -->
 
                 <li class="nav-item dropdown">
 
@@ -270,8 +313,8 @@ include 'includes/conn.php';
                             <a class="nav-link collapsed" href="user-profile.php">
                                 <div class="row">
                                     <div class="col-auto user-picture">
-                                        <img src="assets/img/user.png" alt="User Picture" class="img-fluid">
-                                        <div class="user-name">John Doe</div>
+                                        <img src="<?= $picture ?>" alt="User Picture" class="img-fluid">
+                                        <div class="user-name"><?= $name ?></div>
                                     </div>
                                 </div>
                             </a>

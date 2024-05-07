@@ -2,7 +2,7 @@
 include 'authentication.php';
 include 'includes/header.php';
 include 'includes/conn.php';
-
+include 'includes/account-setup.php';
 include "alert.php";
 ?>
 
@@ -20,8 +20,8 @@ include "alert.php";
                         <a class="nav-link collapsed" href="user-profile.php">
                             <div class="row">
                                 <div class="col-auto user-picture">
-                                    <img src="assets/img/user.png" alt="User Picture" class="img-fluid">
-                                    <div class="user-name">John Doe</div>
+                                    <img src="<?= $picture ?>" alt="User Picture" class="img-fluid">
+                                    <div class="user-name"><?= $name ?></div>
                                 </div>
                             </div>
                         </a>
@@ -87,15 +87,27 @@ include "alert.php";
 
                             <!-- Events Card -->
                             <div class="d-flex overflow-x-auto gap-2">
+                                <?php
+                                // Fetch events from the database
+                                $sql = "SELECT * FROM `events` WHERE eventDate > CURDATE() ORDER BY eventDate";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($event = $result->fetch_assoc()) {
+                                ?>
                                 <div class="col-12 col-md-6">
                                     <!-- Events -->
-                                    <div class="card event-card">
-                                        <img src="assets/img/undraw_Partying_re_at7f.png" class="card-img-top"
+                                    <div class="card event-card position-relative">
+                                        <img src="<?php echo $src_dir . $event['eventPicture']; ?>" class="card-img-top"
                                             alt="...">
                                         <div class="card-body">
-                                            <h5 class="card-title">Alumni Homecoming</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and
-                                                make up the bulk of the card's content.</p>
+                                            <h4><span class="badge position-absolute top-0 end-0"
+                                                    style="background-color: #8a9a5b;"><?php echo date('M d', strtotime($event['eventDate'])); ?></span>
+                                            </h4>
+
+                                            <h5 class="card-title mt-3">
+                                                <?php echo $event['eventName']; ?></h5>
+                                            <p class="card-text"><?php echo $event['eventDescription']; ?></p>
                                             <div class="d-flex justify-content-between gap-2">
                                                 <button class="btn w-100"><i class="bi bi-bookmark-star"></i> Join
                                                     Event</button>
@@ -105,56 +117,25 @@ include "alert.php";
                                         </div>
                                     </div><!-- End Events -->
                                 </div>
+                                <?php
+                                    }
+                                } else {
+                                    echo "0 results";
+                                }
+                                ?>
 
-
-                                <div class="col-12 col-md-6">
-                                    <!-- Events -->
-                                    <div class="card event-card">
-                                        <img src="assets/img/undraw_Events_re_98ue.png" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Environment Give Back</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and
-                                                make up the bulk of the card's content.</p>
-                                            <div class="d-flex justify-content-between gap-2">
-                                                <button class="btn w-100"><i class="bi bi-bookmark-star"></i> Join
-                                                    Event</button>
-                                                <button class="btn btn-secondary"><i
-                                                        class="bi bi-eye-fill"></i></button>
-                                            </div>
-                                        </div>
-                                    </div><!-- End Events -->
-                                </div>
-
-
-                                <div class="col-12 col-md-6">
-                                    <!-- Events -->
-                                    <div class="card event-card">
-                                        <img src="assets/img/undraw_special_event_4aj8.png" class="card-img-top"
-                                            alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Socializing Event</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and
-                                                make up the bulk of the card's content.</p>
-                                            <div class="d-flex justify-content-between gap-2">
-                                                <button class="btn w-100"><i class="bi bi-bookmark-star"></i> Join
-                                                    Event</button>
-                                                <button class="btn btn-secondary"><i
-                                                        class="bi bi-eye-fill"></i></button>
-                                            </div>
-                                        </div>
-                                    </div><!-- End Events -->
-                                </div><!-- End Events Card -->
                             </div>
-
-                        </div>
-                    </div><!-- End Events outer Card -->
+                        </div><!-- End Events outer Card -->
+                    </div>
 
                     <!-- Donation Card -->
                     <div class="card donate-card text-center">
                         <div class="card-body m-3">
                             <h5 class="card-title">Help the Alma Mater</h5>
                             <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                            <p class="card-text">Support your alma mater: every donation helps create a brighter future
+                            <p class="card-text">Support your alma mater: every donation helps create a
+                                brighter
+                                future
                                 for
                                 our school
                                 and its students. Give back today and make a lasting impact!</p>

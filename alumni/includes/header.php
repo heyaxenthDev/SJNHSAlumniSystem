@@ -1,3 +1,6 @@
+<?php
+include 'includes/conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,10 +33,46 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
+    <?php
+    $src_dir = "\SJNHSAlumniSystem/admin/";
+    $alumni_id = $_SESSION['user_cred']['alumni_id'];
+    $id = $_SESSION['user_cred']['id'];
+    $table = $_SESSION['user_cred']['table'];
+    $type = ($_SESSION['user_cred']['type'] == "SHS") ? "SHS" : "JHS";
 
+    $query = "SELECT *, upper(left(firstname,1)) AS initialF, upper(left(middlename,1)) AS initialM FROM `$table` WHERE alumni_id = '$alumni_id' AND id = '$id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Output data of each row
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Access data from the row
+            $user = $row['initialF'] . ". " . $row['lastname'];
+            $idNum = $row['id'];
+            $picture = $row['profile_picture'];
+            $name = $row['firstname'] . " " . $row['initialM'] . ". " . $row['lastname'];
+            $fname = $row['firstname'];
+            $lname = $row['lastname'];
+            $mname = $row['middlename'];
+            $email = $row['email'];
+            $profession = $row['profession'];
+            $company = $row['current_company_bus'];
+            $contact = $row['phone_num'];
+            $year = $row['year_graduated'];
+            $sec_track = $row['track'] . " " . $row['section'];
+            $address = $row['address'];
+            $hs = $type;
+            // Add more assignments as needed for other columns
+        }
+    } else {
+        echo "0 results";
+    }
+    ?>
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -49,6 +88,14 @@
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="feed.php">
+                        <i class="bi bi-newspaper"></i>
+                    </a><!-- End Feed Icon -->
+
+                </li><!-- End Feed Nav -->
 
                 <li class="nav-item dropdown">
 
@@ -143,7 +190,7 @@
 
                         <li class="message-item">
                             <a href="#">
-                                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                 <div>
                                     <h4>Maria Hudson</h4>
                                     <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...
@@ -197,21 +244,22 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/img/user.png" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                        <img src="<?= $picture ?>" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">
+                            <?= $user ?></span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
+                            <h6><?= $name ?></h6>
+                            <span><?= $profession ?></span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <a class="dropdown-item d-flex align-items-center" href="user-profile.php">
                                 <i class="bi bi-person"></i>
                                 <span>My Profile</span>
                             </a>
@@ -221,7 +269,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <a class="dropdown-item d-flex align-items-center" href="user-profile.php">
                                 <i class="bi bi-gear"></i>
                                 <span>Account Settings</span>
                             </a>
@@ -241,7 +289,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="/SJNHSAlumniSystem/logout.php">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
