@@ -63,7 +63,7 @@ include 'alert.php';
             $company = $row['current_company_bus'];
             $contact = $row['phone_num'];
             $year = $row['year_graduated'];
-            $sec_track = $row['track'] . " " . $row['section'];
+            $sec_track = ($type == "SHS") ? $row['track'] . " " . $row['section'] : $row['section'];
             $address = $row['address'];
             $hs = $type;
             // Add more assignments as needed for other columns
@@ -451,6 +451,28 @@ include 'alert.php';
 
 
                                 <div class="card-body chat-box">
+                                    <div class="chat outgoing">
+                                        <div class="details">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                    </div>
+                                    <div class="chat incoming">
+                                        <img src="assets/img/user.png" alt="Profile Picture">
+                                        <div class="details">
+                                            <p>Nulla vitae elit libero, a pharetra augue.</p>
+                                        </div>
+                                    </div>
+                                    <div class="chat outgoing">
+                                        <div class="details">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                    </div>
+                                    <div class="chat incoming">
+                                        <img src="assets/img/user.png" alt="Profile Picture">
+                                        <div class="details">
+                                            <p>Nulla vitae elit libero, a pharetra augue.</p>
+                                        </div>
+                                    </div>
                                     <div class="chat outgoing">
                                         <div class="details">
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

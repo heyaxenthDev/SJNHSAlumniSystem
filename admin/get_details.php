@@ -15,37 +15,41 @@ if (isset($_POST['id'])) {
                 <input type='hidden' name='id' value='{$row['id']}'>
                 
                 <div class='row mb-4 mt-2'>
-                    <div class='col-lg-12 col-md-12'>
+                    <div class='col-lg-6 col-md-6'>
                         <center>
                             <img src='{$row['newsPicture']}' id='newsPicturePreview'  alt='News Picture' style='max-width: 100%; max-height: 300px;'><br>
                         </center>
                             <input type='file' name='editPicture' id='editPicture' class='form-control mt-2' onchange='previewEditNewsPicture();' accept='image/*'>
-                        </div>
+                    </div>
                     <script src='js/scripts.js'></script>
-                </div>
-            
-                <div class='mb-3'>
-                    <label for='editTitle' class='form-label'>Title</label>
-                    <input type='text' class='form-control' id='editTitle' name='editTitle' value='{$row['title']}'>
-                </div>
-                <div class='mb-3'>
-                    <label for='editContent' class='form-label'>Content</label>
-                    <textarea class='form-control' id='editContent' name='editContent' rows='3'>{$row['content']}</textarea>
-                </div>
-                <div class='mb-3'>
-                    <label for='editPublicationDate' class='form-label'>Publication Date</label>
-                    <input type='date' class='form-control' id='editPublicationDate' name='editPublicationDate' value='{$row['publication_date']}'>
-                </div>
-                <div class='mb-3'>
-                    <label for='editStatus' class='form-label'>Status</label>
-                    <select class='form-select' id='editStatus' name='editStatus'>
-                        <option value='1' " . ($row['newsStatus'] == '1' ? 'selected' : '') . ">Published</option>
-                        <option value='2' " . ($row['newsStatus'] == '2' ? 'selected' : '') . ">Draft</option>
-                    </select>
-                </div>
                 
-                <div class='d-grid gap-2 d-md-flex justify-content-md-center'>
-                    <button class='btn rounded-5 text-white' type='submit' style='background-color: #013220;' name='editNews'><i class='bi bi-pencil'></i> Save Changes</button>
+            
+                <div class='col-lg-6 col-md-6'>
+                    <div class='mb-3'>
+                        <label for='editTitle' class='form-label'>Title</label>
+                        <input type='text' class='form-control' id='editTitle' name='editTitle' value='{$row['title']}'>
+                    </div>
+                    <div class='mb-3'>
+                        <label for='editContent' class='form-label'>Content</label>
+                        <textarea class='form-control' id='editContent' name='editContent' rows='8'>{$row['content']}</textarea>
+                    </div>
+                    <div class='mb-3'>
+                        <label for='editPublicationDate' class='form-label'>Publication Date</label>
+                        <input type='date' class='form-control' id='editPublicationDate' name='editPublicationDate' value='{$row['publication_date']}'>
+                    </div>
+                    <div class='mb-3'>
+                        <label for='editStatus' class='form-label'>Status</label>
+                        <select class='form-select' id='editStatus' name='editStatus'>
+                            <option value='1' " . ($row['newsStatus'] == '1' ? 'selected' : '') . ">Published</option>
+                            <option value='2' " . ($row['newsStatus'] == '2' ? 'selected' : '') . ">Draft</option>
+                        </select>
+                    </div>
+                    
+                    <div class='d-grid gap-2 d-md-flex justify-content-md-center'>
+                        <button class='btn rounded-5 text-white' type='submit' style='background-color: #013220;' name='editNews'><i class='bi bi-pencil'></i> Save Changes</button>
+                    </div>
+                </div>
+
                 </div>
             </form>";
 

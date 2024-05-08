@@ -202,35 +202,36 @@ include "alert.php";
                             </thead>
                             <tbody>
                                 <?php
-                            $sql = "SELECT * FROM news";
-                            $result = mysqli_query($conn, $sql);
-                            $count = 1;
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>";
-                                    echo "<th scope='row'><a href='#'>$count</a></th>";
-                                    echo "<td>{$row['title']}</td>";
-                                    echo "<td>" . date("M d, Y", strtotime($row['publication_date'])) . "</td>";                                    echo "<td>";
-                                    switch ($row['newsStatus']) {
-                                        case "1":
-                                            echo '<span class="badge bg-success">Published</span>';
-                                            break;
-                                        case "2":
-                                            echo '<span class="badge bg-primary">Draft</span>';
-                                            break;
-                                        default:
-                                            echo "Unknown";
-                                    }echo "</td>";
-                                    echo "<td>
+                                $sql = "SELECT *, ROW_NUMBER() OVER (ORDER BY id) as counts FROM news";
+                                $result = mysqli_query($conn, $sql);
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<tr>";
+                                        echo "<th scope='row'><a href='#'>" . $row['counts'] . "</a></th>";
+                                        echo "<td>{$row['title']}</td>";
+                                        echo "<td>" . date("M d, Y", strtotime($row['publication_date'])) . "</td>";
+                                        echo "<td>";
+                                        switch ($row['newsStatus']) {
+                                            case "1":
+                                                echo '<span class="badge bg-success">Published</span>';
+                                                break;
+                                            case "2":
+                                                echo '<span class="badge bg-primary">Draft</span>';
+                                                break;
+                                            default:
+                                                echo "Unknown";
+                                        }
+                                        echo "</td>";
+                                        echo "<td>
                                             <button class='btn btn-primary btn-sm' onclick='viewEditNews({$row['id']})' data-bs-toggle='modal' data-bs-target='#newsModal'>View &amp; Edit</button>
                                             <button class='btn btn-danger btn-sm'>End</button>
                                         </td>";
-                                    echo "</tr>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='5'>No news found</td></tr>";
                                 }
-                            } else {
-                                echo "<tr><td colspan='5'>No news found</td></tr>";
-                            }
-                            ?>
+                                ?>
                             </tbody>
                         </table><!-- End Table for news posted rows -->
 
@@ -239,7 +240,7 @@ include "alert.php";
 
                 <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="newsModalLabel">View & Edit News</h5>

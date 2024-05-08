@@ -278,7 +278,7 @@ if (isset($_POST['addNewJHSBatch'])) {
 }
 
 if (isset($_POST['addNewJHSAlumni'])) {
- 
+
     // Generate a unique alumni_id
     $prefix = "ALUM"; // You can use any prefix you prefer
     $alumni_id = $prefix . uniqid();
@@ -296,88 +296,133 @@ if (isset($_POST['addNewJHSAlumni'])) {
     $marital_stat = mysqli_real_escape_string($conn, $_POST['marital_stat']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
 
-    // File upload
-    $targetDir = "uploads/JHSAlumni/";
-    $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    // Insert into database
+    $sql = "INSERT INTO alumni_jhs (alumni_id, firstname, middlename, lastname, email, password, phone_num, year_graduated, section, profession, marital_stat, address)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $section, $profession, $marital_stat, $address);
 
-    // Check if image file is a actual image or fake image
-    if (isset($_POST["addNewAlumniJHS"])) {
-        $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
-        if ($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            $_SESSION['status'] = "Error";
-            $_SESSION['status_text'] = "File is not an image.";
-            $_SESSION['status_code'] = "error";
-            $_SESSION['status_btn'] = "Back";
-            header("Location: {$_SERVER['HTTP_REFERER']}");
-            // echo "File is not an image.";
-            $uploadOk = 0;
-        }
-    }
-
-    // Check file size
-    if ($_FILES["profilePicture"]["size"] > 500000) {
-        $_SESSION['status'] = "Error";
-        $_SESSION['status_text'] = "Sorry, your file is too large.";
-        $_SESSION['status_code'] = "error";
-        $_SESSION['status_btn'] = "Back";
+    if (mysqli_stmt_execute($stmt)) {
+        $_SESSION['status'] = "Success";
+        $_SESSION['status_text'] = "New alumni added!";
+        $_SESSION['status_code'] = "success";
+        $_SESSION['status_btn'] = "Done";
         header("Location: {$_SERVER['HTTP_REFERER']}");
-        // echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-        $_SESSION['status'] = "Error";
-        $_SESSION['status_text'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $_SESSION['status_code'] = "error";
-        $_SESSION['status_btn'] = "Back";
-        header("Location: {$_SERVER['HTTP_REFERER']}");
-        // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
     } else {
-        if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
-            echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
-            // Insert into database
-            $sql = "INSERT INTO alumni_jhs (alumni_id, firstname, middlename, lastname, email, password, phone_num, year_graduated, section, profession, marital_stat, address, profile_picture)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "sssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $section, $profession, $marital_stat, $address, $targetFile);
-                if (mysqli_stmt_execute($stmt)) {
-                $_SESSION['status'] = "Success";
-                $_SESSION['status_text'] = "New alumni added!";
-                $_SESSION['status_code'] = "success";
-                $_SESSION['status_btn'] = "Done";
-                header("Location: {$_SERVER['HTTP_REFERER']}");
-            } else {
-                $_SESSION['status'] = "Error";
-                $_SESSION['status_text'] = mysqli_error($conn);
-                $_SESSION['status_code'] = "error";
-                $_SESSION['status_btn'] = "Back";
-                header("Location: {$_SERVER['HTTP_REFERER']}");
-            }
-        } else {
-            $_SESSION['status'] = "Error";
-            $_SESSION['status_text'] = "Sorry, there was an error uploading your file.";
-            $_SESSION['status_code'] = "error";
-            $_SESSION['status_btn'] = "Back";
-            header("Location: {$_SERVER['HTTP_REFERER']}");
-        }
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = mysqli_error($conn);
+        $_SESSION['status_code'] = "error";
+        $_SESSION['status_btn'] = "Back";
+        header("Location: {$_SERVER['HTTP_REFERER']}");
     }
 
     // Close the statement and database connection
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }
+
+
+// if (isset($_POST['addNewJHSAlumni'])) {
+
+//     // Generate a unique alumni_id
+//     $prefix = "ALUM"; // You can use any prefix you prefer
+//     $alumni_id = $prefix . uniqid();
+
+//     // Sanitize and retrieve form data
+//     $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+//     $middlename = mysqli_real_escape_string($conn, $_POST['middlename']);
+//     $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+//     $email = mysqli_real_escape_string($conn, $_POST['email']);
+//     $password = mysqli_real_escape_string($conn, $_POST['password']);
+//     $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
+//     $year_graduated = mysqli_real_escape_string($conn, $_POST['year_graduated']);
+//     $section = mysqli_real_escape_string($conn, $_POST['section']);
+//     $profession = mysqli_real_escape_string($conn, $_POST['profession']);
+//     $marital_stat = mysqli_real_escape_string($conn, $_POST['marital_stat']);
+//     $address = mysqli_real_escape_string($conn, $_POST['address']);
+
+//     // File upload
+//     $targetDir = "uploads/JHSAlumni/";
+//     $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
+//     $uploadOk = 1;
+//     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+//     // Check if image file is a actual image or fake image
+//     if (isset($_POST["addNewAlumniJHS"])) {
+//         $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
+//         if ($check !== false) {
+//             echo "File is an image - " . $check["mime"] . ".";
+//             $uploadOk = 1;
+//         } else {
+//             $_SESSION['status'] = "Error";
+//             $_SESSION['status_text'] = "File is not an image.";
+//             $_SESSION['status_code'] = "error";
+//             $_SESSION['status_btn'] = "Back";
+//             header("Location: {$_SERVER['HTTP_REFERER']}");
+//             // echo "File is not an image.";
+//             $uploadOk = 0;
+//         }
+//     }
+
+//     // Check file size
+//     if ($_FILES["profilePicture"]["size"] > 500000) {
+//         $_SESSION['status'] = "Error";
+//         $_SESSION['status_text'] = "Sorry, your file is too large.";
+//         $_SESSION['status_code'] = "error";
+//         $_SESSION['status_btn'] = "Back";
+//         header("Location: {$_SERVER['HTTP_REFERER']}");
+//         // echo "Sorry, your file is too large.";
+//         $uploadOk = 0;
+//     }
+
+//     // Allow certain file formats
+//     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+//         $_SESSION['status'] = "Error";
+//         $_SESSION['status_text'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+//         $_SESSION['status_code'] = "error";
+//         $_SESSION['status_btn'] = "Back";
+//         header("Location: {$_SERVER['HTTP_REFERER']}");
+//         // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+//         $uploadOk = 0;
+//     }
+
+//     // Check if $uploadOk is set to 0 by an error
+//     if ($uploadOk == 0) {
+//         echo "Sorry, your file was not uploaded.";
+//     } else {
+//         if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
+//             echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
+//             // Insert into database
+//             $sql = "INSERT INTO alumni_jhs (alumni_id, firstname, middlename, lastname, email, password, phone_num, year_graduated, section, profession, marital_stat, address, profile_picture)
+//             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//             $stmt = mysqli_prepare($conn, $sql);
+//             mysqli_stmt_bind_param($stmt, "sssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $section, $profession, $marital_stat, $address, $targetFile);
+//                 if (mysqli_stmt_execute($stmt)) {
+//                 $_SESSION['status'] = "Success";
+//                 $_SESSION['status_text'] = "New alumni added!";
+//                 $_SESSION['status_code'] = "success";
+//                 $_SESSION['status_btn'] = "Done";
+//                 header("Location: {$_SERVER['HTTP_REFERER']}");
+//             } else {
+//                 $_SESSION['status'] = "Error";
+//                 $_SESSION['status_text'] = mysqli_error($conn);
+//                 $_SESSION['status_code'] = "error";
+//                 $_SESSION['status_btn'] = "Back";
+//                 header("Location: {$_SERVER['HTTP_REFERER']}");
+//             }
+//         } else {
+//             $_SESSION['status'] = "Error";
+//             $_SESSION['status_text'] = "Sorry, there was an error uploading your file.";
+//             $_SESSION['status_code'] = "error";
+//             $_SESSION['status_btn'] = "Back";
+//             header("Location: {$_SERVER['HTTP_REFERER']}");
+//         }
+//     }
+
+//     // Close the statement and database connection
+//     mysqli_stmt_close($stmt);
+//     mysqli_close($conn);
+// }
 
 if (isset($_POST['addNewSHSAlumni'])) {
     // Generate a unique alumni_id
@@ -397,88 +442,132 @@ if (isset($_POST['addNewSHSAlumni'])) {
     $marital_stat = mysqli_real_escape_string($conn, $_POST['marital_stat']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
 
-    // File upload
-    $targetDir = "uploads/SHSAlumni/";
-    $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    // Insert into database
+    $sql = "INSERT INTO alumni_shs (alumni_id, firstname, middlename, lastname, email, password, phone_num, year_graduated, track, profession, marital_stat, address)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "ssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $track, $profession, $marital_stat, $address);
 
-    // Check if image file is a actual image or fake image
-    if (isset($_POST["addNewSHSAlumni"])) {
-        $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
-        if ($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            $_SESSION['status'] = "Error";
-            $_SESSION['status_text'] = "File is not an image.";
-            $_SESSION['status_code'] = "error";
-            $_SESSION['status_btn'] = "Back";
-            header("Location: {$_SERVER['HTTP_REFERER']}");
-            // echo "File is not an image.";
-            $uploadOk = 0;
-        }
-    }
-
-    // Check file size
-    if ($_FILES["profilePicture"]["size"] > 500000) {
-        $_SESSION['status'] = "Error";
-        $_SESSION['status_text'] = "Sorry, your file is too large.";
-        $_SESSION['status_code'] = "error";
-        $_SESSION['status_btn'] = "Back";
+    if (mysqli_stmt_execute($stmt)) {
+        $_SESSION['status'] = "Success";
+        $_SESSION['status_text'] = "New alumni added!";
+        $_SESSION['status_code'] = "success";
+        $_SESSION['status_btn'] = "Done";
         header("Location: {$_SERVER['HTTP_REFERER']}");
-        // echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-
-    // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-        $_SESSION['status'] = "Error";
-        $_SESSION['status_text'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $_SESSION['status_code'] = "error";
-        $_SESSION['status_btn'] = "Back";
-        header("Location: {$_SERVER['HTTP_REFERER']}");
-        // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
     } else {
-        if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
-            echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
-            // Insert into database
-            $sql = "INSERT INTO alumni_shs (alumni_id, firstname, middlename, lastname, email, password, phone_num, year_graduated, track, profession, marital_stat, address, profile_picture)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "sssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $track, $profession, $marital_stat, $address, $targetFile);
-            if (mysqli_stmt_execute($stmt)) {
-                $_SESSION['status'] = "Success";
-                $_SESSION['status_text'] = "New alumni added!";
-                $_SESSION['status_code'] = "success";
-                $_SESSION['status_btn'] = "Done";
-                header("Location: {$_SERVER['HTTP_REFERER']}");
-            } else {
-                $_SESSION['status'] = "Error";
-                $_SESSION['status_text'] = mysqli_error($conn);
-                $_SESSION['status_code'] = "error";
-                $_SESSION['status_btn'] = "Back";
-                header("Location: {$_SERVER['HTTP_REFERER']}");
-            }
-        } else {
-            $_SESSION['status'] = "Error";
-            $_SESSION['status_text'] = "Sorry, there was an error uploading your file.";
-            $_SESSION['status_code'] = "error";
-            $_SESSION['status_btn'] = "Back";
-            header("Location: {$_SERVER['HTTP_REFERER']}");
-        }
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = mysqli_error($conn);
+        $_SESSION['status_code'] = "error";
+        $_SESSION['status_btn'] = "Back";
+        header("Location: {$_SERVER['HTTP_REFERER']}");
     }
 
     // Close the statement and database connection
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }
+
+
+// if (isset($_POST['addNewSHSAlumni'])) {
+//     // Generate a unique alumni_id
+//     $prefix = "ALUM"; // You can use any prefix you prefer
+//     $alumni_id = $prefix . uniqid();
+
+//     // Sanitize and retrieve form data
+//     $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+//     $middlename = mysqli_real_escape_string($conn, $_POST['middlename']);
+//     $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+//     $email = mysqli_real_escape_string($conn, $_POST['email']);
+//     $password = mysqli_real_escape_string($conn, $_POST['password']);
+//     $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
+//     $year_graduated = mysqli_real_escape_string($conn, $_POST['year_graduated']);
+//     $track = mysqli_real_escape_string($conn, $_POST['track']);
+//     $profession = mysqli_real_escape_string($conn, $_POST['profession']);
+//     $marital_stat = mysqli_real_escape_string($conn, $_POST['marital_stat']);
+//     $address = mysqli_real_escape_string($conn, $_POST['address']);
+
+//     // File upload
+//     $targetDir = "uploads/SHSAlumni/";
+//     $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
+//     $uploadOk = 1;
+//     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+//     // Check if image file is a actual image or fake image
+//     if (isset($_POST["addNewSHSAlumni"])) {
+//         $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
+//         if ($check !== false) {
+//             echo "File is an image - " . $check["mime"] . ".";
+//             $uploadOk = 1;
+//         } else {
+//             $_SESSION['status'] = "Error";
+//             $_SESSION['status_text'] = "File is not an image.";
+//             $_SESSION['status_code'] = "error";
+//             $_SESSION['status_btn'] = "Back";
+//             header("Location: {$_SERVER['HTTP_REFERER']}");
+//             // echo "File is not an image.";
+//             $uploadOk = 0;
+//         }
+//     }
+
+//     // Check file size
+//     if ($_FILES["profilePicture"]["size"] > 500000) {
+//         $_SESSION['status'] = "Error";
+//         $_SESSION['status_text'] = "Sorry, your file is too large.";
+//         $_SESSION['status_code'] = "error";
+//         $_SESSION['status_btn'] = "Back";
+//         header("Location: {$_SERVER['HTTP_REFERER']}");
+//         // echo "Sorry, your file is too large.";
+//         $uploadOk = 0;
+//     }
+
+//     // Allow certain file formats
+//     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+//         $_SESSION['status'] = "Error";
+//         $_SESSION['status_text'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+//         $_SESSION['status_code'] = "error";
+//         $_SESSION['status_btn'] = "Back";
+//         header("Location: {$_SERVER['HTTP_REFERER']}");
+//         // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+//         $uploadOk = 0;
+//     }
+
+//     // Check if $uploadOk is set to 0 by an error
+//     if ($uploadOk == 0) {
+//         echo "Sorry, your file was not uploaded.";
+//     } else {
+//         if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
+//             echo "The file " . htmlspecialchars(basename($_FILES["profilePicture"]["name"])) . " has been uploaded.";
+//             // Insert into database
+//             $sql = "INSERT INTO alumni_shs (alumni_id, firstname, middlename, lastname, email, password, phone_num, year_graduated, track, profession, marital_stat, address, profile_picture)
+//             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//             $stmt = mysqli_prepare($conn, $sql);
+//             mysqli_stmt_bind_param($stmt, "sssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $track, $profession, $marital_stat, $address, $targetFile);
+//             if (mysqli_stmt_execute($stmt)) {
+//                 $_SESSION['status'] = "Success";
+//                 $_SESSION['status_text'] = "New alumni added!";
+//                 $_SESSION['status_code'] = "success";
+//                 $_SESSION['status_btn'] = "Done";
+//                 header("Location: {$_SERVER['HTTP_REFERER']}");
+//             } else {
+//                 $_SESSION['status'] = "Error";
+//                 $_SESSION['status_text'] = mysqli_error($conn);
+//                 $_SESSION['status_code'] = "error";
+//                 $_SESSION['status_btn'] = "Back";
+//                 header("Location: {$_SERVER['HTTP_REFERER']}");
+//             }
+//         } else {
+//             $_SESSION['status'] = "Error";
+//             $_SESSION['status_text'] = "Sorry, there was an error uploading your file.";
+//             $_SESSION['status_code'] = "error";
+//             $_SESSION['status_btn'] = "Back";
+//             header("Location: {$_SERVER['HTTP_REFERER']}");
+//         }
+//     }
+
+//     // Close the statement and database connection
+//     mysqli_stmt_close($stmt);
+//     mysqli_close($conn);
+// }
 
 
 /*--------------------------------------------------------------

@@ -201,10 +201,10 @@ include "alert.php";
                                                                 style="max-width: 100%; max-height: 165px;">
                                                         </center>
                                                         <!-- Profile Picture Input -->
-                                                        <small class="mt-2">Add Profile Picture</small>
-                                                        <input type="file" name="profilePicture" class="form-control"
+                                                        <small class="mt-2">Default Profile Picture</small>
+                                                        <!-- <input type="file" name="profilePicture" class="form-control"
                                                             id="profilePicture" onchange="previewProfilePicture();"
-                                                            accept="image/*" required>
+                                                            accept="image/*" required> -->
                                                     </div>
 
                                                     <div class="col-lg-7 col-md-7">
@@ -322,7 +322,8 @@ include "alert.php";
                                                         // $hashedPassword = password_hash($defaultPassword, PASSWORD_DEFAULT);
                                                         ?>
                                                         <input type="text" name="password" class="form-control"
-                                                            id="password" value="<?php echo $defaultPassword; ?>" readonly>
+                                                            id="password" value="<?php echo $defaultPassword; ?>"
+                                                            readonly>
                                                     </div>
 
                                                     <div class="col-lg-4 col-md-4">
@@ -360,20 +361,21 @@ include "alert.php";
 
                         <div class="row">
                             <?php
-                                // Query to select alumni members from the database
-                                $sql = "SELECT * FROM alumni_jhs WHERE `year_graduated` = '$_GET[batch]'";
-                                $result = mysqli_query($conn, $sql);
+                            // Query to select alumni members from the database
+                            $sql = "SELECT * FROM alumni_jhs WHERE `year_graduated` = '$_GET[batch]'";
+                            $result = mysqli_query($conn, $sql);
 
-                                // Check if there are any alumni members
-                                if (mysqli_num_rows($result) > 0) {
-                                    // Loop through each alumni member and display their information
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        $middlenameInitial = substr($row['middlename'], 0, 1);
-                                        ?>
-                            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                            // Check if there are any alumni members
+                            if (mysqli_num_rows($result) > 0) {
+                                // Loop through each alumni member and display their information
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $middlenameInitial = substr($row['middlename'], 0, 1);
+                            ?>
+                            <div class="col-lg-3 col-md-6 col-6 d-flex align-items-stretch">
                                 <div class="member" data-aos="fade-up" data-aos-delay="100">
                                     <div class="member-img">
-                                        <img src="<?php echo $row['profile_picture']; ?>" class="img-fluid" alt="">
+                                        <img src="<?php echo ($row['profile_picture'] == null) ? "assets/img/user.png" :  $src . $row['profile_picture'];  ?>"
+                                            class="img-fluid" alt="">
                                         <div class="social">
                                             <a href="mailto:<?php echo $row['email']; ?>"><i
                                                     class="bi bi-envelope-fill"></i></a>
@@ -395,7 +397,7 @@ include "alert.php";
                             <?php
                                 }
                             } else {
-                            echo "No alumni members found.";
+                                echo "No alumni members found.";
                             }
 
                             // Close the database connection

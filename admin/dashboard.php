@@ -82,7 +82,7 @@ unset($_SESSION['logged']);
                                         <i class="bi bi-people-fill"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6><?php echo $newAlumni; ?></h6>
+                                        <h6><?php echo $totalAlumni; ?></h6>
                                         <span
                                             class="text-success small pt-1 fw-bold"><?php echo number_format($increasePercentage, 2); ?>%</span>
                                         <span class="text-muted small pt-2 ps-1">increase</span>
@@ -121,7 +121,7 @@ unset($_SESSION['logged']);
                                         <i class="bi bi-people-fill"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6><?php echo $newAlumni; ?></h6>
+                                        <h6><?php echo $totalAlumni; ?></h6>
                                         <span
                                             class="text-success small pt-1 fw-bold"><?php echo number_format($increasePercentage, 2); ?>%</span>
                                         <span class="text-muted small pt-2 ps-1">increase</span>
