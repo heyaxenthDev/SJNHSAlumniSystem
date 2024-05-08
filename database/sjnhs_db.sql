@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2024 at 10:40 AM
+-- Generation Time: May 08, 2024 at 10:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -60,7 +60,7 @@ CREATE TABLE `alumni_jhs` (
   `current_company_bus` varchar(255) NOT NULL,
   `marital_stat` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `profile_picture` varchar(255) NOT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
   `user_status` varchar(255) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -70,8 +70,8 @@ CREATE TABLE `alumni_jhs` (
 --
 
 INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `date_created`) VALUES
-(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '12345678', '091265488795', '1990', 'A', 'Doctor', '', 'Single', 'Tibiao, Antique', 'uploads/JHSAlumni/team-3.jpg', '0', '2024-02-20 03:54:16'),
-(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', 'Welcome123!', '09786378127', '1990', 'A', 'Business Analyst', '', 'Married', 'Alegre Road, Tibiao, Antique', 'uploads/JHSAlumni/team-4.jpg', '0', '2024-02-20 13:28:03');
+(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '1990', 'A', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', '2024-02-20 03:54:16'),
+(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '1990', 'C', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', '2024-02-20 13:28:03');
 
 -- --------------------------------------------------------
 
@@ -233,10 +233,10 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `newsCode`, `title`, `content`, `publication_date`, `newsStatus`, `newsPicture`, `date_created`) VALUES
-(1, 'NEWS65d48cb4a1f52', 'New School Website is Coming!!!', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', '2024-02-20', 1, 'uploads/news/tabs-1.jpg', '2024-02-20 11:27:48'),
+(1, 'NEWS65d48cb4a1f52', 'New School Website is Coming!!!', 'We are thrilled to announce the upcoming launch of our new school website dedicated to our esteemed alumni! This platform has been meticulously crafted to serve as a vibrant hub for our alumni community, fostering connections, and celebrating achievements.\r\n\r\nFeaturing a modern design and user-friendly interface, the website will offer a range of exciting features, including:\r\n\r\n-Alumni Directory: Easily connect with fellow alumni and expand your professional network.\r\n-Events and News: Stay updated with the latest news, events, and happenings within the school and alumni community.\r\n-Alumni Stories: Share your success stories and stay inspired by the accomplishments of your peers.\r\n-Exclusive Benefits: Access special alumni benefits, discounts, and services.\r\n\r\nWe invite you to join us for the official launch event, where you can explore the website, reconnect with old friends, and embark on a journey down memory lane. Stay tuned for more details on the launch date and how you can be a part of this exciting new chapter in our alumni community!', '2024-02-20', 1, 'uploads/news/tabs-1.jpg', '2024-02-20 11:27:48'),
 (2, 'NEWS65d4a7109812d', 'School Library to be Renovated', 'Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \\\"Lorem ipsum dolor sit amet..\\\", comes from a line in section 1.10.32.', '2024-02-08', 1, 'uploads/news/blog-recent-4.jpg', '2024-02-20 13:20:16'),
 (3, 'NEWS65d4a73ae3da1', 'Artist ng Eskwelahan!', 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '2024-02-14', 1, 'uploads/news/blog-recent-3.jpg', '2024-02-20 13:20:58'),
-(4, 'NEWS6639b51f77010', 'Lorem Ipsum', 'Lorem Ipsum', '2024-05-07', 2, 'uploads/news/undraw_special_event_4aj8.png', '2024-05-07 04:59:11');
+(4, 'NEWS6639b51f77010', 'Lorem Ipsum', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', '2024-05-07', 1, 'uploads/news/undraw_special_event_4aj8.png', '2024-05-07 04:59:11');
 
 --
 -- Indexes for dumped tables
