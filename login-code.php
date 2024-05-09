@@ -53,7 +53,7 @@ function loginAlumni($conn, $type, $email, $password, $table)
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        if ($password == $row['password']) {
+        if (password_verify($password, $row['password'])) {
             
             $_SESSION['user_auth'] = true;
             $_SESSION['user_cred'] = [
