@@ -55,17 +55,30 @@ function loginAlumni($conn, $type, $email, $password, $table)
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
             
-            $_SESSION['user_auth'] = true;
-            $_SESSION['user_cred'] = [
-                'alumni_id' => $row['alumni_id'],
-                'id' => $row['id'],
-                'type' => $type,
-                'table' => $table,
-            ];
-            $_SESSION['logged'] = "Logged in successfully";
-            $_SESSION['logged_icon'] = "success";
-            header("Location: alumni/feed.php");
+            $alumni_id = $row['alumni_id'];
             
+            $update_status = "UPDATE `$table` SET `is_online`='1' WHERE `alumni_id` = '$alumni_id'";
+            $run = mysqli_query($conn, $update_status);
+            if ($run) {
+                $_SESSION['user_auth'] = true;
+                $_SESSION['user_cred'] = [
+                    'alumni_id' => $row['alumni_id'],
+                    'id' => $row['id'],
+                    'type' => $type,
+                    'table' => $table,
+                ];
+                $_SESSION['logged'] = "Logged in successfully";
+                $_SESSION['logged_icon'] = "success";
+                header("Location: alumni/feed.php");
+            }else {
+
+                $_SESSION['entered_email'] = $email;
+                $_SESSION['status'] = "Error";
+                $_SESSION['status_text'] = "Cannot update your status. Try Again";
+                $_SESSION['status_code'] = "error";
+                $_SESSION['status_btn'] = "ok";
+                header("Location: alumni-login.php?Type=$type");
+            }            
         } else {
             $_SESSION['entered_email'] = $email;
             $_SESSION['status'] = "Error";

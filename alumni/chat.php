@@ -243,21 +243,23 @@ include 'alert.php';
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/img/user.png" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                        <img src="<?= $picture ?>" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">
+                            <?= $user ?>
+                        </span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
+                            <h6><?= $name ?></h6>
+                            <span><?= $profession ?></span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <a class="dropdown-item d-flex align-items-center" href="user-profile.php">
                                 <i class="bi bi-person"></i>
                                 <span>My Profile</span>
                             </a>
@@ -267,7 +269,7 @@ include 'alert.php';
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <a class="dropdown-item d-flex align-items-center" href="user-profile.php">
                                 <i class="bi bi-gear"></i>
                                 <span>Account Settings</span>
                             </a>
@@ -323,16 +325,16 @@ include 'alert.php';
                         <li class="nav-item">
                             <a class="nav-link collapsed" href="#">
                                 <i class="bi bi-people-fill"></i>
-                                <span>Batch Members</span>
+                                <span>Classmates</span>
                             </a>
-                        </li><!-- End Batch Members Nav -->
+                        </li><!-- End Classmates Nav -->
 
                         <li class="nav-item">
                             <a class="nav-link collapsed" href="#">
                                 <i class="bi bi-book-fill"></i>
                                 <span>Year Book</span>
                             </a>
-                        </li><!-- End Batch Members Nav -->
+                        </li><!-- End Year Book Nav -->
 
                         <li class="nav-item">
                             <a class="nav-link" href="chat.php">
@@ -475,7 +477,10 @@ include 'alert.php';
                                     </div>
                                     <div class="chat outgoing">
                                         <div class="details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="chat incoming">

@@ -46,30 +46,35 @@ include "alert.php";
                         <h5 class="card-title">Batch Members <small>(online)</small></h5>
 
                         <div class="members">
-                            <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                            </div>
+                            <?php
+                            // Fetch members from the database
+                            $my_id = $_SESSION['user_cred']['alumni_id'];
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">Quidem autem et impedit</a></h4>
-                            </div>
+                            // Escape the alumni_id value
+                            $my_id_escaped = mysqli_real_escape_string($conn, $my_id);
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                            </div>
+                            $sql = "SELECT *, UPPER(LEFT(middlename, 1)) AS initialM FROM `$table` WHERE `is_online` = 1 AND `alumni_id` != '$my_id_escaped'";
+                            $result = $conn->query($sql);
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                            </div>
+                            if (!$result) {
+                                die("Query failed: " . mysqli_error($conn));
+                            }
 
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                            ?>
                             <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
+                                <img src="<?php echo $row['profile_picture']; ?>" alt="Member profile">
+                                <h4><a
+                                        href="#"><?php echo $row['firstname'] . " " . $row['initialM'] . ". " . $row['lastname']; ?></a>
+                                </h4>
                             </div>
+                            <?php
+                                }
+                            } else {
+                                echo "No Active Members";
+                            }
+                            ?>
 
                         </div><!-- End sidebar recent posts-->
 

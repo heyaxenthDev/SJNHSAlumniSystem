@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2024 at 10:17 AM
+-- Generation Time: May 10, 2024 at 09:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -62,6 +62,7 @@ CREATE TABLE `alumni_jhs` (
   `address` varchar(255) NOT NULL,
   `profile_picture` varchar(255) DEFAULT NULL,
   `user_status` varchar(255) NOT NULL,
+  `is_online` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'o=false, 1=true',
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -69,9 +70,9 @@ CREATE TABLE `alumni_jhs` (
 -- Dumping data for table `alumni_jhs`
 --
 
-INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `date_created`) VALUES
-(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '1990', 'A', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', '2024-02-20 03:54:16'),
-(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '1990', 'C', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', '2024-02-20 13:28:03');
+INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
+(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '1990', 'A', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', 0, '2024-02-20 03:54:16'),
+(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '1990', 'C', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', 0, '2024-02-20 13:28:03');
 
 -- --------------------------------------------------------
 
@@ -97,6 +98,7 @@ CREATE TABLE `alumni_shs` (
   `address` varchar(255) NOT NULL,
   `profile_picture` varchar(255) NOT NULL,
   `user_status` varchar(255) NOT NULL,
+  `is_online` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=false, 1=true',
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -104,9 +106,9 @@ CREATE TABLE `alumni_shs` (
 -- Dumping data for table `alumni_shs`
 --
 
-INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `date_created`) VALUES
-(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', '$2y$10$SgD2AY58hGMh2zo096IAB..LHx30j88Hxn6mdWoefCXyobqSRvX.G', '9798642852', '2018', 'A', 'STEM', 'Mechanical Engineer', 'ABC Robotech Inc.', 'Married', 'Tibao, Antique', 'uploads/SHS/ALUM65d44e8664057_team-4.jpg', '1', '2024-02-20 07:02:30'),
-(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$CquYqaV4IhVYNjUCjYMjn.F/0312CC0.ECCQ2tVo4n366soEIwpHW', '548747324324', '2018', 'A', 'GAS', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', '2024-02-20 13:31:34');
+INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
+(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', '$2y$10$SgD2AY58hGMh2zo096IAB..LHx30j88Hxn6mdWoefCXyobqSRvX.G', '9798642852', '2018', 'A', 'STEM', 'Mechanical Engineer', 'ABC Robotech Inc.', 'Married', 'Tibao, Antique', 'uploads/SHS/ALUM65d44e8664057_team-4.jpg', '1', 0, '2024-02-20 07:02:30'),
+(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$CquYqaV4IhVYNjUCjYMjn.F/0312CC0.ECCQ2tVo4n366soEIwpHW', '548747324324', '2018', 'A', 'GAS', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', 0, '2024-02-20 13:31:34');
 
 -- --------------------------------------------------------
 

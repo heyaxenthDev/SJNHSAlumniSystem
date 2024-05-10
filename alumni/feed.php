@@ -30,16 +30,16 @@ include "alert.php";
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#">
                             <i class="bi bi-people-fill"></i>
-                            <span>Batch Members</span>
+                            <span>Classmates</span>
                         </a>
-                    </li><!-- End Batch Members Nav -->
+                    </li><!-- End Classmates Nav -->
 
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#">
                             <i class="bi bi-book-fill"></i>
                             <span>Year Book</span>
                         </a>
-                    </li><!-- End Batch Members Nav -->
+                    </li><!-- End Year Book Nav -->
 
                     <li class="nav-item">
                         <a class="nav-link" href="chat.php">
@@ -170,30 +170,36 @@ include "alert.php";
                         <h5 class="card-title">Batch Members <small>(online)</small></h5>
 
                         <div class="members">
-                            <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">Nihil blanditiis</a></h4>
-                            </div>
+                            <?php
+                            // Fetch members from the database
+                            $my_id = $_SESSION['user_cred']['alumni_id'];
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">Quidem autem </a></h4>
-                            </div>
+                            // Escape the alumni_id value
+                            $my_id_escaped = mysqli_real_escape_string($conn, $my_id);
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">maxime similique</a></h4>
-                            </div>
+                            $sql = "SELECT *, UPPER(LEFT(middlename, 1)) AS initialM FROM `$table` WHERE `is_online` = 1 AND `alumni_id` != '$my_id_escaped'";
+                            $result = $conn->query($sql);
 
-                            <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">Laborum corporis</a></h4>
-                            </div>
+                            if (!$result) {
+                                die("Query failed: " . mysqli_error($conn));
+                            }
 
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                            ?>
                             <div class="post-item clearfix">
-                                <img src="assets/img/image.png" alt="Member profile">
-                                <h4><a href="#">dolores corrupti</a></h4>
+                                <img src="<?php echo $row['profile_picture']; ?>" alt="Member profile">
+                                <h4><a
+                                        href="#"><?php echo $row['firstname'] . " " . $row['initialM'] . ". " . $row['lastname']; ?></a>
+                                </h4>
                             </div>
+                            <?php
+                                }
+                            } else {
+                                echo "No Active Members";
+                            }
+                            ?>
+
 
                         </div><!-- End sidebar recent posts-->
 
