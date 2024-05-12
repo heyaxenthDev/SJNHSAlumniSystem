@@ -139,7 +139,10 @@ include "alert.php";
                                     <tbody>
                                         <?php
                                         // Assuming $conn is your database connection
-                                        $sql = "SELECT * FROM batchyear WHERE `hs_type` = 'JHS' ORDER BY batch_year ASC";
+                                        $sql = "SELECT b.batch_year, b.hs_type, COUNT(a.id) AS batch_size
+                                                FROM batchyear b
+                                                LEFT JOIN alumni_jhs a ON b.batch_year = a.year_graduated WHERE b.hs_type = 'JHS'
+                                                GROUP BY b.batch_year ASC";
                                         $result = mysqli_query($conn, $sql);
                                         $count = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
@@ -148,7 +151,7 @@ include "alert.php";
                                             echo "<td>{$row['batch_year']}</td>";
                                             echo "<td>{$row['hs_type']}</td>";
                                             // You need to fetch the number of members for each batch from your database
-                                            echo "<td>0</td>";
+                                            echo "<td>{$row['batch_size']}</td>";
                                             echo "<td><a href='alumni-jhs-view.php?batch={$row['batch_year']}' class='btn btn-sm btn-success text-white'>View List</a></td>";
                                             echo "</tr>";
                                             $count++;

@@ -388,8 +388,8 @@ include "alert.php";
                             <div class="col-lg-3 col-md-6 col-6 d-flex align-items-stretch">
                                 <div class="member" data-aos="fade-up" data-aos-delay="100">
                                     <div class="member-img">
-                                        <img src="<?php echo $src . $row['profile_picture']; ?>" class="img-fluid"
-                                            alt="">
+                                        <img src="<?php echo ($row['profile_picture'] == null) ? "assets/img/user.png" :  $src . $row['profile_picture'];  ?>"
+                                            class="img-fluid" alt="">
                                         <div class="social">
                                             <a href="mailto:<?php echo $row['email']; ?>"><i
                                                     class="bi bi-envelope-fill"></i></a>
@@ -423,7 +423,7 @@ include "alert.php";
 
                 </div>
             </div><!-- End Left side columns -->
-
+        </div>
     </section>
 </main><!-- End #main -->
 <?php

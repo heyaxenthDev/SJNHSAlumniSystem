@@ -66,6 +66,8 @@ include 'includes/conn.php';
             $contact = $row['phone_num'];
             $year = $row['year_graduated'];
             $sec_track = ($type == "SHS") ? $row['track'] . " " . $row['section'] : $row['section'];
+            $track = $row['track'];
+            $section = $row['section'];
             $address = $row['address'];
             $hs = $type;
             // Add more assignments as needed for other columns

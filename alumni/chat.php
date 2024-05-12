@@ -289,7 +289,7 @@ include 'alert.php';
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="/SJNHSAlumniSystem/logout.php">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
@@ -330,7 +330,7 @@ include 'alert.php';
                         </li><!-- End Classmates Nav -->
 
                         <li class="nav-item">
-                            <a class="nav-link collapsed" href="#">
+                            <a class="nav-link collapsed" href="yearbook.php">
                                 <i class="bi bi-book-fill"></i>
                                 <span>Year Book</span>
                             </a>

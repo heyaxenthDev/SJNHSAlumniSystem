@@ -35,7 +35,7 @@ include "alert.php";
                     </li><!-- End Classmates Nav -->
 
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#">
+                        <a class="nav-link collapsed" href="yearbook.php">
                             <i class="bi bi-book-fill"></i>
                             <span>Year Book</span>
                         </a>
@@ -95,28 +95,25 @@ include "alert.php";
                                 if ($result->num_rows > 0) {
                                     while ($event = $result->fetch_assoc()) {
                                 ?>
-                                <div class="col-12 col-md-6">
-                                    <!-- Events -->
-                                    <div class="card event-card position-relative">
-                                        <img src="<?php echo $src_dir . $event['eventPicture']; ?>" class="card-img-top"
-                                            alt="...">
-                                        <div class="card-body">
-                                            <h4><span class="badge position-absolute top-0 end-0"
-                                                    style="background-color: #8a9a5b;"><?php echo date('M d', strtotime($event['eventDate'])); ?></span>
-                                            </h4>
+                                        <div class="col-12 col-md-6">
+                                            <!-- Events -->
+                                            <div class="card event-card position-relative">
+                                                <img src="<?php echo $src_dir . $event['eventPicture']; ?>" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h4><span class="badge position-absolute top-0 end-0" style="background-color: #8a9a5b;"><?php echo date('M d', strtotime($event['eventDate'])); ?></span>
+                                                    </h4>
 
-                                            <h5 class="card-title mt-3">
-                                                <?php echo $event['eventName']; ?></h5>
-                                            <p class="card-text"><?php echo $event['eventDescription']; ?></p>
-                                            <div class="d-flex justify-content-between gap-2">
-                                                <button class="btn w-100"><i class="bi bi-bookmark-star"></i> Join
-                                                    Event</button>
-                                                <button class="btn btn-secondary"><i
-                                                        class="bi bi-eye-fill"></i></button>
-                                            </div>
+                                                    <h5 class="card-title mt-3">
+                                                        <?php echo $event['eventName']; ?></h5>
+                                                    <p class="card-text"><?php echo $event['eventDescription']; ?></p>
+                                                    <div class="d-flex justify-content-between gap-2">
+                                                        <button class="btn w-100"><i class="bi bi-bookmark-star"></i> Join
+                                                            Event</button>
+                                                        <button class="btn btn-secondary"><i class="bi bi-eye-fill"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div><!-- End Events -->
                                         </div>
-                                    </div><!-- End Events -->
-                                </div>
                                 <?php
                                     }
                                 } else {
@@ -187,12 +184,11 @@ include "alert.php";
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                             ?>
-                            <div class="post-item clearfix">
-                                <img src="<?php echo $row['profile_picture']; ?>" alt="Member profile">
-                                <h4><a
-                                        href="#"><?php echo $row['firstname'] . " " . $row['initialM'] . ". " . $row['lastname']; ?></a>
-                                </h4>
-                            </div>
+                                    <div class="post-item clearfix">
+                                        <img src="<?php echo $row['profile_picture']; ?>" alt="Member profile">
+                                        <h4><a href="#"><?php echo $row['firstname'] . " " . $row['initialM'] . ". " . $row['lastname']; ?></a>
+                                        </h4>
+                                    </div>
                             <?php
                                 }
                             } else {

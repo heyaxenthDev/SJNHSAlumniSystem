@@ -17,7 +17,7 @@ a {
 }
 
 a:hover {
-  color: #355E3B;
+  color: #355e3b;
   text-decoration: none;
 }
 
@@ -83,7 +83,7 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #355E3B;
+  background: #355e3b;
   color: #fff;
 }
 
@@ -264,7 +264,7 @@ h6 {
 }
 
 /* Message */
-.message i{
+.message i {
   font-size: 30px;
   padding: 0;
 }
@@ -466,7 +466,7 @@ h6 {
   list-style: none;
 }
 
-.header-nav>ul {
+.header-nav > ul {
   margin: 0;
   padding: 0;
 }
@@ -598,6 +598,14 @@ h6 {
 .header-nav .profile .dropdown-item:hover {
   background-color: #f6f9ff;
 }
+.online-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #00ff00; /* green color */
+  color: #ffffff; /* white text color */
+  font-weight: bold;
+  border-radius: 5px;
+}
 
 /*--------------------------------------------------------------
 # Sidebar
@@ -635,7 +643,6 @@ h6 {
 }
 
 @media (min-width: 1200px) {
-
   #main,
   #footer {
     margin-left: 300px;
@@ -649,7 +656,6 @@ h6 {
 }
 
 @media (min-width: 1200px) {
-
   .toggle-sidebar #main,
   .toggle-sidebar #footer {
     margin-left: 0;
@@ -679,7 +685,7 @@ h6 {
 .sidebar-nav .nav-heading {
   font-size: 11px;
   text-transform: uppercase;
-  color: #9CAF88;
+  color: #9caf88;
   font-weight: 600;
   margin: 10px 0 5px 15px;
 }
@@ -755,11 +761,11 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #8A9A5B;
+  color: #8a9a5b;
 }
 
 .sidebar-nav .nav-content a.active i {
-  background-color: #8A9A5B;
+  background-color: #8a9a5b;
 }
 
 /*--------------------------------------------------------------
@@ -831,17 +837,17 @@ h6 {
 }
 
 .dashboard .shs-card .card-icon {
-  color: #8A9A5B;
+  color: #8a9a5b;
   background: #f6f6fe;
 }
 
 .dashboard .active-card .card-icon {
-  color: #6EC531;
+  color: #6ec531;
   background: #f6f6fe;
 }
 
 /* Upcoming Events */
-.dashboard .events .post-item+.post-item {
+.dashboard .events .post-item + .post-item {
   margin-top: 15px;
 }
 
@@ -874,7 +880,7 @@ h6 {
 }
 
 /* News & Updates */
-.dashboard .news .post-item+.post-item {
+.dashboard .news .post-item + .post-item {
   margin-top: 15px;
 }
 
@@ -1104,7 +1110,7 @@ h6 {
   padding: 12px 15px;
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .php-email-form button[type="submit"] {
   background: #013220;
   border: 0;
   padding: 10px 30px;
@@ -1113,7 +1119,7 @@ h6 {
   border-radius: 4px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .php-email-form button[type="submit"]:hover {
   background: #5969f3;
 }
 
@@ -1157,7 +1163,7 @@ h6 {
 
 .user .member .social a {
   transition: color 0.3s;
-  color: #8A9A5B;
+  color: #8a9a5b;
   margin: 0 3px;
   border-radius: 50px;
   width: 36px;
@@ -1171,7 +1177,7 @@ h6 {
 }
 
 .user .member .social a:hover {
-  background: #8A9A5B;
+  background: #8a9a5b;
 }
 
 .user .member .social i {

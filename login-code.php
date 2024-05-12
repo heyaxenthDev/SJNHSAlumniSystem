@@ -64,6 +64,7 @@ function loginAlumni($conn, $type, $email, $password, $table)
                 $_SESSION['user_cred'] = [
                     'alumni_id' => $row['alumni_id'],
                     'id' => $row['id'],
+                    'batch' => $row['year_graduated'],
                     'type' => $type,
                     'table' => $table,
                 ];

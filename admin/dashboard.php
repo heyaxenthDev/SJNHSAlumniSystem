@@ -10,7 +10,7 @@ include "alert.php";
 <script src="js/sweetalert2.all.min.js"></script>
 <?php
 if (isset($_SESSION['logged'])) {
-    ?>
+?>
 <script type="text/javascript">
 const Toast = Swal.mixin({
     toast: true,
@@ -32,7 +32,7 @@ Toast.fire({
 });
 </script>
 <?php
-unset($_SESSION['logged']);
+    unset($_SESSION['logged']);
 }
 ?>
 
@@ -59,7 +59,7 @@ unset($_SESSION['logged']);
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
                     $totalAlumni = $row['total_alumni'];
-                    
+
                     $sql = "SELECT COUNT(`id`) AS new_alumni FROM `alumni_jhs` WHERE `date_created` >= DATE_SUB(NOW(), INTERVAL 1 WEEK)";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
@@ -138,24 +138,103 @@ unset($_SESSION['logged']);
                         <div class="card info-card active-card">
                             <div class="card-body">
                                 <h5 class="card-title">Active Members</h5>
+                                <?php
+                                // Assuming you have a database connection established and stored in $conn
 
+                                // Query to count online alumni from both tables
+                                $sql = "SELECT COUNT(*) AS total_online FROM (
+                                            SELECT * FROM alumni_jhs WHERE is_online = 1
+                                            UNION
+                                            SELECT * FROM alumni_shs WHERE is_online = 1
+                                        ) AS online_alumni";
+                                $result = mysqli_query($conn, $sql);
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    // Fetch total online alumni count
+                                    $row = mysqli_fetch_assoc($result);
+                                    $total_online = $row['total_online'];
+                                ?>
                                 <div class="d-flex align-items-center">
                                     <div
                                         class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-person-check"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>44</h6>
+                                        <h6><?php echo $total_online ?></h6>
                                         <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
                                             class="text-muted small pt-2 ps-1">decrease</span> -->
 
                                     </div>
                                 </div>
+                                <?php
+                                } else {
+                                    echo "0 results";
+                                }
+
+                                // Close the database connection
+                                // mysqli_close($conn);
+                                ?>
 
                             </div>
                         </div>
 
                     </div><!-- End Active Card -->
+
+                    <!-- Current Online Members -->
+                    <div class="col-12">
+                        <div class="card batch-list overflow-auto">
+                            <div class="card-body">
+                                <h5 class="card-title"><span class="badge bg-success text-white">Online</span>
+                                    Members
+                                </h5>
+
+                                <table class="table table-borderless datatable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Member Name</th>
+                                            <th scope="col">Batch Year</th>
+                                            <th scope="col">School Type</th>
+                                            <th scope="col">Section/Track</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // Assuming you have already connected to your database
+
+                                        // SQL query to fetch online alumni from both tables
+                                        $sql = "SELECT * FROM alumni_jhs WHERE is_online = 1
+                                                UNION
+                                                SELECT * FROM alumni_shs WHERE is_online = 1";
+
+                                        $result = mysqli_query($conn, $sql);
+
+                                        if (mysqli_num_rows($result) > 0) {
+                                            // Output data of each row
+                                            while ($row = mysqli_fetch_assoc($result)) {
+
+                                                echo "<tr>";
+                                                echo "<th scope='row'><span class='badge bg-success text-success rounded-5'>.</span></th>";
+                                                echo "<td>" . $row['firstname'] . " " . $row['middlename'] . " " . $row['lastname'] . "</td>";
+                                                echo "<td>" . $row['year_graduated'] . "</td>";
+                                                echo "<td>". ($row['track'] == "JHS" ? "JHS" : "SHS") ."</td>"; // Replace 'School Name' with the actual school name field from your database
+                                                echo "<td>" . ($row['track'] == "JHS" ? $row['section'] : $row['track']) . "</td>";
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            echo "<tr><td colspan='5'>No alumni are currently online</td></tr>";
+                                        }
+
+                                        // Close the database connection
+                                        // mysqli_close($conn);
+                                        ?>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div><!-- End Current Online Members -->
 
                     <!-- Batch List -->
                     <div class="col-12">
@@ -249,7 +328,7 @@ unset($_SESSION['logged']);
                                     echo '
                                         <div class="post-item clearfix">
                                             <img src="' . $row['eventPicture'] . '" alt="">
-                                            <h4>'. $row['eventName'] . '</h4>
+                                            <h4>' . $row['eventName'] . '</h4>
                                             <p>' . $row['eventDescription'] . '</p>
                                         </div><!-- End events item-->';
                                 }
