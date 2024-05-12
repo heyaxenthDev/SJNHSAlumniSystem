@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2024 at 09:54 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: May 12, 2024 at 01:55 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
@@ -56,6 +56,7 @@ CREATE TABLE `alumni_jhs` (
   `phone_num` varchar(255) NOT NULL,
   `year_graduated` varchar(255) NOT NULL,
   `section` varchar(255) NOT NULL,
+  `track` varchar(255) NOT NULL,
   `profession` varchar(255) NOT NULL,
   `current_company_bus` varchar(255) NOT NULL,
   `marital_stat` varchar(255) NOT NULL,
@@ -64,15 +65,17 @@ CREATE TABLE `alumni_jhs` (
   `user_status` varchar(255) NOT NULL,
   `is_online` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'o=false, 1=true',
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `alumni_jhs`
 --
 
-INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
-(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '1990', 'A', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', 0, '2024-02-20 03:54:16'),
-(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '1990', 'C', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', 0, '2024-02-20 13:28:03');
+INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
+(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '1990', 'A', 'JHS', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', 0, '2024-02-20 03:54:16'),
+(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '1990', 'C', 'JHS', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', 0, '2024-02-20 13:28:03'),
+(3, 'ALUM663e1624a07e7', 'Lucas Marvin', 'Quinto', 'Angel', 'lm.angel@gmail.com', '$2y$10$IZdGUrLAoI8Dt2bAwO2TsOGURE7Iky3wmzd9dl6Wg.YEk/k5eMhHa', 'N/A', '1991', '', 'JHS', 'Nurse', '', 'Single', 'Tibiao, Antique', NULL, '', 0, '2024-05-10 12:42:12'),
+(4, 'ALUM663fb429b3579', 'Herman John', 'Wentar', 'Polio', 'hjpolio@gmail.com', '$2y$10$2aDRnkN5wGuN4GLa17/MZevZpkfrj1UfTKDwkAYgGboP62Ey/jntS', 'N/A', '1992', '', 'JHS', 'Pharmacist', '', 'Divorced', 'Tibiao, Antique', NULL, '', 0, '2024-05-11 18:08:41');
 
 -- --------------------------------------------------------
 
@@ -100,15 +103,17 @@ CREATE TABLE `alumni_shs` (
   `user_status` varchar(255) NOT NULL,
   `is_online` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=false, 1=true',
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `alumni_shs`
 --
 
 INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
-(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', '$2y$10$SgD2AY58hGMh2zo096IAB..LHx30j88Hxn6mdWoefCXyobqSRvX.G', '9798642852', '2018', 'A', 'STEM', 'Mechanical Engineer', 'ABC Robotech Inc.', 'Married', 'Tibao, Antique', 'uploads/SHS/ALUM65d44e8664057_team-4.jpg', '1', 0, '2024-02-20 07:02:30'),
-(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$CquYqaV4IhVYNjUCjYMjn.F/0312CC0.ECCQ2tVo4n366soEIwpHW', '548747324324', '2018', 'A', 'GAS', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', 0, '2024-02-20 13:31:34');
+(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', '$2y$10$SgD2AY58hGMh2zo096IAB..LHx30j88Hxn6mdWoefCXyobqSRvX.G', '9798642852', 2018, 'A', 'STEM', 'Mechanical Engineer', 'ABC Robotech Inc.', 'Married', 'Tibao, Antique', 'uploads/SHS/ALUM65d44e8664057_team-4.jpg', '1', 0, '2024-02-20 07:02:30'),
+(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$CquYqaV4IhVYNjUCjYMjn.F/0312CC0.ECCQ2tVo4n366soEIwpHW', '548747324324', 2018, 'A', 'GAS', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', 0, '2024-02-20 13:31:34'),
+(3, 'ALUM663e1691703db', 'Jenny Anne', 'Rosario', 'Moscoso', 'jennyanne.r@gmail.com', '$2y$10$PZ5otLf.78PMtMTf2OG6f.p6AJowR6xdJMTHacD1.JCRIWXoQxpZ6', 'N/A', 2020, '', 'STEM', 'Civil Engineer', '', 'Married', 'Tibiao, Antique', '', '', 0, '2024-05-10 12:44:01'),
+(4, 'ALUM663e19dd87119', 'Marcus Jey', 'Kalanin', 'Ongsa', 'mjongsa@gmail.com', '$2y$10$85pUGx5HG0mlFrubth2pquJQqUlluORbz/2izFxKYn56MUQPtRdAW', 'N/A', 2021, '', 'SPORTS', 'Teacher', '', 'Single', 'Tibiao, Antique', '', '', 0, '2024-05-10 12:58:05');
 
 -- --------------------------------------------------------
 
@@ -121,23 +126,23 @@ CREATE TABLE `batchyear` (
   `batch_year` year(4) NOT NULL,
   `hs_type` varchar(50) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `batchyear`
 --
 
 INSERT INTO `batchyear` (`id`, `batch_year`, `hs_type`, `date_created`) VALUES
-(1, '2018', 'SHS', '2024-02-18'),
-(2, '2019', 'SHS', '2024-02-19'),
-(3, '2018', 'JHS', '2024-02-19'),
-(4, '1990', 'JHS', '2024-02-19'),
-(5, '2020', 'SHS', '2024-02-19'),
-(6, '1999', 'JHS', '2024-02-19'),
-(7, '1991', 'JHS', '2024-02-20'),
-(8, '1992', 'JHS', '2024-02-20'),
-(9, '1993', 'JHS', '2024-02-20'),
-(10, '2021', 'SHS', '2024-05-07');
+(1, 2018, 'SHS', '2024-02-18'),
+(2, 2019, 'SHS', '2024-02-19'),
+(3, 2018, 'JHS', '2024-02-19'),
+(4, 1990, 'JHS', '2024-02-19'),
+(5, 2020, 'SHS', '2024-02-19'),
+(6, 1999, 'JHS', '2024-02-19'),
+(7, 1991, 'JHS', '2024-02-20'),
+(8, 1992, 'JHS', '2024-02-20'),
+(9, 1993, 'JHS', '2024-02-20'),
+(10, 2021, 'SHS', '2024-05-07');
 
 -- --------------------------------------------------------
 
@@ -151,7 +156,7 @@ CREATE TABLE `chat` (
   `outgoing_msg_id` varchar(255) NOT NULL,
   `msg_content` varchar(1000) NOT NULL,
   `timestamp` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -169,7 +174,7 @@ CREATE TABLE `events` (
   `eventDescription` text NOT NULL,
   `eventPicture` varchar(255) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `events`
@@ -199,7 +204,7 @@ CREATE TABLE `faculty` (
   `sect_subj` varchar(50) NOT NULL,
   `profile_picture` varchar(255) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `faculty`
@@ -228,7 +233,7 @@ CREATE TABLE `news` (
   `newsStatus` int(11) NOT NULL,
   `newsPicture` varchar(255) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `news`
@@ -294,13 +299,13 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `alumni_jhs`
 --
 ALTER TABLE `alumni_jhs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `alumni_shs`
 --
 ALTER TABLE `alumni_shs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `batchyear`
