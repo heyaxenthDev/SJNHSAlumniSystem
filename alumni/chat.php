@@ -323,11 +323,11 @@ include 'alert.php';
                         </li><!-- End Profile Info -->
 
                         <li class="nav-item">
-                            <a class="nav-link collapsed" href="#">
-                                <i class="bi bi-people-fill"></i>
-                                <span>Classmates</span>
+                            <a class="nav-link collapsed" href="feed.php">
+                                <i class="bi bi-newspaper"></i>
+                                <span>Feed</span>
                             </a>
-                        </li><!-- End Classmates Nav -->
+                        </li><!-- End Feed Nav -->
 
                         <li class="nav-item">
                             <a class="nav-link collapsed" href="yearbook.php">

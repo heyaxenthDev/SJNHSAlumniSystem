@@ -26,13 +26,12 @@ include "alert.php";
                             </div>
                         </a>
                     </li><!-- End Profile Info -->
-
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#">
-                            <i class="bi bi-people-fill"></i>
-                            <span>Classmates</span>
+                        <a class="nav-link collapsed" href="feed.php">
+                            <i class="bi bi-newspaper"></i>
+                            <span>Feed</span>
                         </a>
-                    </li><!-- End Classmates Nav -->
+                    </li><!-- End Feed Nav -->
 
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="yearbook.php">
@@ -97,17 +96,13 @@ include "alert.php";
                                     $first = true;
                                     while ($row = $result->fetch_assoc()) {
                                         $middlenameInitial = substr($row['middlename'], 0, 1);
-                                        $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : "Section ".$row['section'];
+                                        $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : "Section " . $row['section'];
                                 ?>
 
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link <?php echo $first ? 'active' : ''; ?>"
-                                        id="<?php echo $track_or_sec . "-tab" ?>" data-bs-toggle="tab"
-                                        data-bs-target="#<?php echo $track_or_sec ?>" type="button" role="tab"
-                                        aria-controls="<?php echo $track_or_sec ?>"
-                                        aria-selected="<?php echo $first ? 'true' : 'false'; ?>"><?php echo $track_or_sec ?>
-                                    </button>
-                                </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link <?php echo $first ? 'active' : ''; ?>" id="<?php echo $track_or_sec . "-tab" ?>" data-bs-toggle="tab" data-bs-target="#<?php echo $track_or_sec ?>" type="button" role="tab" aria-controls="<?php echo $track_or_sec ?>" aria-selected="<?php echo $first ? 'true' : 'false'; ?>"><?php echo $track_or_sec ?>
+                                            </button>
+                                        </li>
 
                                 <?php
                                         $first = false;
@@ -128,34 +123,29 @@ include "alert.php";
                                     $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : $row['section'];
                                 ?>
 
-                                <div class="tab-pane fade <?php echo $first ? 'show active' : ''; ?>"
-                                    id="<?php echo $track_or_sec ?>" role="tabpanel"
-                                    aria-labelledby="<?php echo $track_or_sec . "-tab" ?>">
+                                    <div class="tab-pane fade <?php echo $first ? 'show active' : ''; ?>" id="<?php echo $track_or_sec ?>" role="tabpanel" aria-labelledby="<?php echo $track_or_sec . "-tab" ?>">
 
-                                    <div class="col-lg-3 col-md-6 col-6 d-flex align-items-stretch">
-                                        <div class="member" data-aos="fade-up" data-aos-delay="100">
-                                            <div class="member-img">
-                                                <img src="<?php echo ($row['profile_picture'] == null) ? "assets/img/user.png" :  $row['profile_picture'];  ?>"
-                                                    class="img-fluid" alt="">
-                                                <div class="social">
-                                                    <a href="mailto:<?php echo $row['email']; ?>"><i
-                                                            class="bi bi-envelope-fill"></i></a>
-                                                    <a href="tel:<?php echo $row['phone_num']; ?>"><i
-                                                            class="bi bi-telephone-fill"></i></a>
-                                                    <a href=""><i class="bi bi-chat-dots-fill"></i></a>
-                                                    <!-- <a href=""><i class="bi bi-pencil-square"></i></a> -->
+                                        <div class="col-lg-3 col-md-6 col-6 d-flex align-items-stretch">
+                                            <div class="member" data-aos="fade-up" data-aos-delay="100">
+                                                <div class="member-img">
+                                                    <img src="<?php echo ($row['profile_picture'] == null) ? "assets/img/user.png" :  $row['profile_picture'];  ?>" class="img-fluid" alt="">
+                                                    <div class="social">
+                                                        <a href="mailto:<?php echo $row['email']; ?>"><i class="bi bi-envelope-fill"></i></a>
+                                                        <a href="tel:<?php echo $row['phone_num']; ?>"><i class="bi bi-telephone-fill"></i></a>
+                                                        <a href=""><i class="bi bi-chat-dots-fill"></i></a>
+                                                        <!-- <a href=""><i class="bi bi-pencil-square"></i></a> -->
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="member-info">
-                                                <h4><?php echo $row['firstname'] . " " . $middlenameInitial . ". " . $row['lastname']; ?>
-                                                </h4>
-                                                <span><?php echo "Section: " . $row['section']; ?></span>
-                                                <span><?php echo "Profession: " . $row['profession']; ?></span>
-                                                <span><?php echo "Address: " . $row['address']; ?></span>
+                                                <div class="member-info">
+                                                    <h4><?php echo $row['firstname'] . " " . $middlenameInitial . ". " . $row['lastname']; ?>
+                                                    </h4>
+                                                    <span><?php echo "Section: " . $row['section']; ?></span>
+                                                    <span><?php echo "Profession: " . $row['profession']; ?></span>
+                                                    <span><?php echo "Address: " . $row['address']; ?></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <?php
                                     $first = false;
                                 } ?>

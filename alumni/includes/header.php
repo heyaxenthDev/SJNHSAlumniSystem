@@ -92,20 +92,22 @@ include 'includes/conn.php';
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
-                <li class="nav-item dropdown">
+                <!-- Feed Icon -->
+                <!-- <li class="nav-item dropdown">
 
                     <a class="nav-link nav-icon" href="feed.php">
                         <i class="bi bi-newspaper"></i>
-                    </a><!-- End Feed Icon -->
+                    </a>
 
-                </li><!-- End Feed Nav -->
+                </li>End Feed Nav -->
 
-                <li class="nav-item dropdown">
+                <!-- Notification Icon -->
+                <!-- <li class="nav-item dropdown">
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-bell"></i>
                         <span class="badge bg-primary badge-number">4</span>
-                    </a><!-- End Notification Icon -->
+                    </a>
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                         <li class="dropdown-header">
@@ -171,16 +173,16 @@ include 'includes/conn.php';
                             <a href="#">Show all notifications</a>
                         </li>
 
-                    </ul><!-- End Notification Dropdown Items -->
+                    </ul>
 
-                </li><!-- End Notification Nav -->
+                </li>End Notification Nav -->
 
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-chat-left-text"></i>
                         <span class="badge bg-success badge-number">3</span>
-                    </a><!-- End Messages Icon -->
+                    </a>
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                         <li class="dropdown-header">
@@ -240,9 +242,10 @@ include 'includes/conn.php';
                             <a href="#">Show all messages</a>
                         </li>
 
-                    </ul><!-- End Messages Dropdown Items -->
+                    </ul>
 
-                </li><!-- End Messages Nav -->
+                </li> -->
+                <!-- End Messages Nav -->
 
                 <li class="nav-item dropdown pe-3">
 

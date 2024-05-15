@@ -1,5 +1,5 @@
 <?php
-// include 'authentication.php';
+include 'authentication.php';
 include 'includes/header.php';
 include 'includes/conn.php';
 
@@ -20,31 +20,31 @@ include "alert.php";
                         <a class="nav-link collapsed" href="user-profile.php">
                             <div class="row">
                                 <div class="col-auto user-picture">
-                                    <img src="assets/img/user.png" alt="User Picture" class="img-fluid">
-                                    <div class="user-name">John Doe</div>
+                                    <img src="<?= $picture ?>" alt="User Picture" class="img-fluid">
+                                    <div class="user-name"><?= $name ?></div>
                                 </div>
                             </div>
                         </a>
                     </li><!-- End Profile Info -->
 
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#">
-                            <i class="bi bi-people-fill"></i>
-                            <span>Batch Members</span>
+                        <a class="nav-link collapsed" href="feed.php">
+                            <i class="bi bi-newspaper"></i>
+                            <span>Feed</span>
                         </a>
-                    </li><!-- End Batch Members Nav -->
+                    </li><!-- End Feed Nav -->
 
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#">
+                        <a class="nav-link collapsed" href="yearbook.php">
                             <i class="bi bi-book-fill"></i>
                             <span>Year Book</span>
                         </a>
-                    </li><!-- End Batch Members Nav -->
+                    </li><!-- End Year Book Nav -->
 
                     <li class="nav-item">
-                        <a class="nav-link" href="chat-messages.php">
+                        <a class="nav-link" href="chat.php">
                             <i class="bi bi-chat-left-text-fill"></i>
-                            <span>Chat-Messages</span>
+                            <span>Chat</span>
                         </a>
                     </li><!-- End Messages Nav -->
 
@@ -73,7 +73,6 @@ include "alert.php";
                         </a>
                     </li><!-- End Donation Page Nav -->
                 </ul>
-
             </div><!-- End Left side columns -->
 
             <!-- Right columns -->

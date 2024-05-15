@@ -28,11 +28,11 @@ include "alert.php";
                     </li><!-- End Profile Info -->
 
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#">
-                            <i class="bi bi-people-fill"></i>
-                            <span>Classmates</span>
+                        <a class="nav-link collapsed" href="feed.php">
+                            <i class="bi bi-newspaper"></i>
+                            <span>Feed</span>
                         </a>
-                    </li><!-- End Classmates Nav -->
+                    </li><!-- End Feed Nav -->
 
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="yearbook.php">
@@ -107,9 +107,10 @@ include "alert.php";
                                                         <?php echo $event['eventName']; ?></h5>
                                                     <p class="card-text"><?php echo $event['eventDescription']; ?></p>
                                                     <div class="d-flex justify-content-between gap-2">
-                                                        <button class="btn w-100"><i class="bi bi-bookmark-star"></i> Join
+                                                        <button class="btn w-100"><i class="bi bi-bookmark-star"></i>
+                                                            Join
                                                             Event</button>
-                                                        <button class="btn btn-secondary"><i class="bi bi-eye-fill"></i></button>
+                                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ViewEventModal"><i class="bi bi-eye-fill"></i></button>
                                                     </div>
                                                 </div>
                                             </div><!-- End Events -->
@@ -123,6 +124,25 @@ include "alert.php";
 
                             </div>
                         </div><!-- End Events outer Card -->
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="ViewEventModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Understood</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Donation Card -->
