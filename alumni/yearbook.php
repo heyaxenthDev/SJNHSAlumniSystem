@@ -77,92 +77,68 @@ include "alert.php";
 
             <!-- Right side columns -->
             <div class="col-lg-9">
-
                 <!-- Batch Members -->
                 <div class="user" id="user">
                     <!-- Batch Members -->
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Batch <?= $year ?></h5>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <?php
-                                $sql = "SELECT * FROM $table WHERE `year_graduated` = ?";
-                                $stmt = $conn->prepare($sql);
-                                $stmt->bind_param("s", $year);
-                                $stmt->execute();
-                                $result = $stmt->get_result();
+                            <div class="mb-3">
+                                <label for="trackOrSectionSelect" class="form-label">Select Track/Section:</label>
+                                <select class="form-select" id="trackOrSectionSelect" aria-label="Track/Section select">
+                                    <option value="">Select a track/section</option>
+                                    <?php
+                        $sql = "SELECT DISTINCT " . ($_SESSION['user_cred']['type'] == "SHS" ? "track" : "section") . " FROM $table WHERE `year_graduated` = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("s", $year);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
 
-                                if ($result->num_rows > 0) {
-                                    $first = true;
-                                    while ($row = $result->fetch_assoc()) {
-                                        $middlenameInitial = substr($row['middlename'], 0, 1);
-                                        $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : "Section " . $row['section'];
-                                ?>
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : "Section " . $row['section'];
+                                echo "<option value=\"$track_or_sec\">$track_or_sec</option>";
+                            }
+                        } else {
+                            echo "<option>No record found.</option>";
+                        }
+                        ?>
+                                </select>
+                            </div>
 
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link <?php echo $first ? 'active' : ''; ?>" id="<?php echo $track_or_sec . "-tab" ?>" data-bs-toggle="tab" data-bs-target="#<?php echo $track_or_sec ?>" type="button" role="tab" aria-controls="<?php echo $track_or_sec ?>" aria-selected="<?php echo $first ? 'true' : 'false'; ?>"><?php echo $track_or_sec ?>
-                                            </button>
-                                        </li>
-
-                                <?php
-                                        $first = false;
-                                    }
-                                } else {
-                                    echo "No record found.";
-                                }
-                                ?>
-                            </ul>
-                            <div class="tab-content pt-2" id="myTabContent">
-                                <?php
-                                // Reset the result pointer
-                                $result->data_seek(0);
-
-                                $first = true;
-                                while ($row = $result->fetch_assoc()) {
-                                    $middlenameInitial = substr($row['middlename'], 0, 1);
-                                    $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : $row['section'];
-                                ?>
-
-                                    <div class="tab-pane fade <?php echo $first ? 'show active' : ''; ?>" id="<?php echo $track_or_sec ?>" role="tabpanel" aria-labelledby="<?php echo $track_or_sec . "-tab" ?>">
-
-                                        <div class="col-lg-3 col-md-6 col-6 d-flex align-items-stretch">
-                                            <div class="member" data-aos="fade-up" data-aos-delay="100">
-                                                <div class="member-img">
-                                                    <img src="<?php echo ($row['profile_picture'] == null) ? "assets/img/user.png" :  $row['profile_picture'];  ?>" class="img-fluid" alt="">
-                                                    <div class="social">
-                                                        <a href="mailto:<?php echo $row['email']; ?>"><i class="bi bi-envelope-fill"></i></a>
-                                                        <a href="tel:<?php echo $row['phone_num']; ?>"><i class="bi bi-telephone-fill"></i></a>
-                                                        <a href=""><i class="bi bi-chat-dots-fill"></i></a>
-                                                        <!-- <a href=""><i class="bi bi-pencil-square"></i></a> -->
-                                                    </div>
-                                                </div>
-                                                <div class="member-info">
-                                                    <h4><?php echo $row['firstname'] . " " . $middlenameInitial . ". " . $row['lastname']; ?>
-                                                    </h4>
-                                                    <span><?php echo "Section: " . $row['section']; ?></span>
-                                                    <span><?php echo "Profession: " . $row['profession']; ?></span>
-                                                    <span><?php echo "Address: " . $row['address']; ?></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php
-                                    $first = false;
-                                } ?>
-                            </div><!-- End Default Tabs -->
+                            <div class="alumni-content" id="alumniContent">
+                                <!-- Alumni information will be loaded here -->
+                            </div>
                         </div>
                     </div>
-                    <?php
-                    // Close the prepared statement and the database connection
-                    $stmt->close();
-                    $conn->close();
-                    ?>
-
-
                 </div>
-                <!-- Batch members -->
+            </div>
 
-            </div><!-- End Right side columns -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+            $(document).ready(function() {
+                $('#trackOrSectionSelect').on('change', function() {
+                    var selectedValue = $(this).val();
+                    if (selectedValue) {
+                        $.ajax({
+                            url: 'fetch_alumni.php',
+                            type: 'POST',
+                            data: {
+                                track_or_sec: selectedValue,
+                                year: '<?= $year ?>'
+                            },
+                            success: function(response) {
+                                $('#alumniContent').html(response);
+                            }
+                        });
+                    } else {
+                        $('#alumniContent').empty();
+                    }
+                });
+            });
+            </script>
+
+
 
         </div>
     </section>
