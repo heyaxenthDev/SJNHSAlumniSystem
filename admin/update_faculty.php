@@ -3,6 +3,7 @@ session_start();
 require 'includes/conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $classify = $_POST["classify"];
     $faculty_id = $_POST['faculty_id'];
     $firstname = $_POST['firstname'];
     $middlename = $_POST['middlename'];
