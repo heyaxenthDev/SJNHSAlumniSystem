@@ -4,8 +4,9 @@ require 'includes/conn.php';
 
 $track_or_sec = $_POST['track_or_sec'];
 $year = $_POST['year'];
+$table = $_SESSION['user_cred']['table'];
 
-$sql = "SELECT * FROM alumni_jhs WHERE `year_graduated` = ? AND (" . ($_SESSION['user_cred']['type'] == "SHS" ? "`track`" : "`section`") . " = ?)";
+$sql = "SELECT * FROM $table WHERE `year_graduated` = ? AND (" . ($_SESSION['user_cred']['type'] == "SHS" ? "`track`" : "`section`") . " = ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $year, $track_or_sec);
 $stmt->execute();

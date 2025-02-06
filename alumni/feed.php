@@ -47,31 +47,6 @@ include "alert.php";
                             <span>Chat</span>
                         </a>
                     </li><!-- End Messages Nav -->
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link collapsed" href="events.php">
-                            <i class="bi bi-calendar-week-fill"></i>
-                            <span>Events</span>
-                        </a>
-                    </li> -->
-                    <!-- End Events Page Nav -->
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link collapsed" href="news-and-updates.php">
-                            <i class="bi bi-newspaper"></i>
-                            <span>News &amp; Updates</span>
-                        </a>
-                    </li> -->
-                    <!-- End News & Updates Page Nav -->
-
-                    <!-- <li class="nav-heading">Alumni</li> -->
-
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="pages-error-404.html">
-                            <i class="bi bi-gift-fill"></i>
-                            <span>Donation</span>
-                        </a>
-                    </li><!-- End Donation Page Nav -->
                 </ul>
 
             </div><!-- End Left side columns -->
@@ -95,26 +70,37 @@ include "alert.php";
                                 if ($result->num_rows > 0) {
                                     while ($event = $result->fetch_assoc()) {
                                 ?>
-                                        <div class="col-12 col-md-6">
-                                            <!-- Events -->
-                                            <div class="card event-card position-relative">
-                                                <img src="<?php echo $src_dir . $event['eventPicture']; ?>" class="card-img-top" alt="...">
-                                                <div class="card-body">
-                                                    <h4><span class="badge position-absolute top-0 end-0" style="background-color: #8a9a5b;"><?php echo date('M d', strtotime($event['eventDate'])); ?></span>
-                                                    </h4>
+                                <div class="col-12 col-md-6">
+                                    <!-- Events -->
+                                    <div class="card event-card position-relative">
+                                        <img src="<?php echo $src_dir . $event['eventPicture']; ?>" class="card-img-top"
+                                            alt="...">
+                                        <div class="card-body">
+                                            <h4><span class="badge position-absolute top-0 end-0"
+                                                    style="background-color: #8a9a5b;"><?php echo date('M d', strtotime($event['eventDate'])); ?></span>
+                                            </h4>
 
-                                                    <h5 class="card-title mt-3">
-                                                        <?php echo $event['eventName']; ?></h5>
-                                                    <p class="card-text"><?php echo $event['eventDescription']; ?></p>
-                                                    <div class="d-flex justify-content-between gap-2">
-                                                        <button class="btn w-100"><i class="bi bi-bookmark-star"></i>
-                                                            Join
-                                                            Event</button>
-                                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ViewEventModal"><i class="bi bi-eye-fill"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div><!-- End Events -->
+                                            <h5 class="card-title mt-3">
+                                                <?php echo $event['eventName']; ?></h5>
+                                            <p class="card-text"><?php echo $event['eventDescription']; ?></p>
+                                            <div class="d-flex justify-content-between gap-2">
+                                                <form action="join_event.php" method="POST">
+                                                    <input type="hidden" name="event_code"
+                                                        value="<?php echo $event['eventCode']; ?>">
+                                                    <input type="hidden" name="user_id"
+                                                        value="<?php echo $alumni_id; ?>">
+                                                    <!-- Assuming user is logged in -->
+                                                    <button type="submit" class="btn w-100"><i
+                                                            class="bi bi-bookmark-star"></i> Join Event</button>
+                                                </form>
+
+                                                <button class="btn btn-secondary" data-bs-toggle="modal"
+                                                    data-bs-target="#ViewEventModal"><i
+                                                        class="bi bi-eye-fill"></i></button>
+                                            </div>
                                         </div>
+                                    </div><!-- End Events -->
+                                </div>
                                 <?php
                                     }
                                 } else {
@@ -122,23 +108,26 @@ include "alert.php";
                                 }
                                 ?>
 
-                            </div>
-                        </div><!-- End Events outer Card -->
+                            </div><!-- End Events outer Card -->
+                        </div>
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="ViewEventModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="ViewEventModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     ...
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary">Understood</button>
                                 </div>
                             </div>
@@ -146,10 +135,9 @@ include "alert.php";
                     </div>
 
                     <!-- Donation Card -->
-                    <div class="card donate-card text-center">
+                    <!-- <div class="card donate-card text-center">
                         <div class="card-body m-3">
                             <h5 class="card-title">Help the Alma Mater</h5>
-                            <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                             <p class="card-text">Support your alma mater: every donation helps create a
                                 brighter
                                 future
@@ -161,7 +149,8 @@ include "alert.php";
                                 <a href="pages-error-404.html" class="btn mt-2">Donate Now</a>
                             </div>
                         </div>
-                    </div><!-- End Donation Card -->
+                    </div> -->
+                    <!-- End Donation Card -->
 
                 </div>
             </div><!-- End Center columns -->
@@ -204,11 +193,12 @@ include "alert.php";
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                             ?>
-                                    <div class="post-item clearfix">
-                                        <img src="<?php echo $row['profile_picture']; ?>" alt="Member profile">
-                                        <h4><a href="#"><?php echo $row['firstname'] . " " . $row['initialM'] . ". " . $row['lastname']; ?></a>
-                                        </h4>
-                                    </div>
+                            <div class="post-item clearfix">
+                                <img src="<?php echo $row['profile_picture']; ?>" alt="Member profile">
+                                <h4><a
+                                        href="#"><?php echo $row['firstname'] . " " . $row['initialM'] . ". " . $row['lastname']; ?></a>
+                                </h4>
+                            </div>
                             <?php
                                 }
                             } else {

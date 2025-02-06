@@ -304,12 +304,18 @@ include 'alert.php';
 
     <?php
       $table = $_SESSION['user_cred']['table'];
-      
+
+      $select_id = "SELECT id AS selectID FROM batchyear WHERE batch_year = '$year' AND hs_type = '$type'";
+      $result = $conn->query($select_id);
+      $select = $result->fetch_assoc();
+
+
       $sql = "SELECT chat.msg_id, chat.conversationID, chat.outgoing_msg_id, chat.msg_content, chat.timestamp, $table.profile_picture 
               FROM chat 
               JOIN $table ON chat.outgoing_msg_id = $table.alumni_id 
-              WHERE chat.conversationID IN (SELECT id FROM $table WHERE year_graduated = '$year')";
+              WHERE chat.conversationID IN (SELECT id FROM batchyear WHERE batch_year = '$year' AND hs_type = '$type')";
       $result = $conn->query($sql);
+      
       
       $chatData = array();
       if ($result->num_rows > 0) {
@@ -365,30 +371,6 @@ include 'alert.php';
                             </a>
                         </li><!-- End Messages Nav -->
 
-                        <!-- <li class="nav-item">
-                        <a class="nav-link collapsed" href="events.php">
-                            <i class="bi bi-calendar-week-fill"></i>
-                            <span>Events</span>
-                        </a>
-                    </li> -->
-                        <!-- End Events Page Nav -->
-
-                        <!-- <li class="nav-item">
-                        <a class="nav-link collapsed" href="news-and-updates.php">
-                            <i class="bi bi-newspaper"></i>
-                            <span>News &amp; Updates</span>
-                        </a>
-                    </li> -->
-                        <!-- End News & Updates Page Nav -->
-
-                        <!-- <li class="nav-heading">Alumni</li> -->
-
-                        <li class="nav-item">
-                            <a class="nav-link collapsed" href="pages-error-404.html">
-                                <i class="bi bi-gift-fill"></i>
-                                <span>Donation</span>
-                            </a>
-                        </li><!-- End Donation Page Nav -->
                     </ul>
 
                 </div><!-- End Left side columns -->
@@ -418,9 +400,9 @@ include 'alert.php';
                                 </div>
                                 <div class="card-footer">
                                     <form id="sendMessageForm" method="POST" action="send_message.php">
-                                        <input type="hidden" name="conversationID" value="1">
+                                        <input type="hidden" name="conversationID" value="<?=$select['selectID']?>">
                                         <!-- Replace with the actual conversation ID -->
-                                        <input type="hidden" name="outgoing_msg_id" value="<?= $alumni_id?>">
+                                        <input type="hidden" name="outgoing_msg_id" value="<?= $alumni_id ?>">
                                         <!-- Replace with the actual alumni ID -->
                                         <textarea name="msg_content" cols="30" rows="2" class="form-control"
                                             placeholder="Type a message..."></textarea>
@@ -465,27 +447,24 @@ include 'alert.php';
                         chatDiv.appendChild(detailsDiv);
                         chatBox.appendChild(chatDiv);
                     });
+
+                    chatBox.scrollTop = chatBox.scrollHeight;
                 });
 
-                document.getElementById("sendMessageForm").addEventListener("submit", function(event) {
-                    event.preventDefault(); // Prevent form from submitting the traditional way
+                document.addEventListener('DOMContentLoaded', function() {
+                    const form = document.getElementById('sendMessageForm');
+                    const textarea = form.querySelector('textarea');
 
-                    var formData = new FormData(this);
-
-                    fetch('send_message.php', {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.text())
-                        .then(result => {
-                            console.log(result);
-                            // Optionally, refresh the chat messages without reloading the page
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
+                    textarea.addEventListener('keydown', function(event) {
+                        if (event.key === 'Enter' && !event.shiftKey) {
+                            event.preventDefault(); // Prevents new line
+                            form.submit(); // Submits the form
+                        }
+                    });
                 });
                 </script>
+
+
             </div>
         </section>
     </main>

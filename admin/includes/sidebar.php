@@ -79,14 +79,6 @@ function is_active($page, $current_page)
                 </li>
             </ul>
         </li><!-- End Alumni Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link <?= $current_page == 'pages-error-404' ? '' : 'collapsed'; ?>"
-                href="pages-error-404.html">
-                <i class="bi bi-gift"></i>
-                <span>Donation</span>
-            </a>
-        </li><!-- End Donation Page Nav -->
     </ul>
 
 </aside><!-- End Sidebar-->

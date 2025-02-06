@@ -178,24 +178,22 @@ include "alert.php";
                                 </div>
                             </div><!-- End Add Faculty Modal-->
 
-                            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum
-                                quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui
-                                impedit suscipit alias ea.</p>
+                            <p></p>
                         </div>
 
                         <div class="row">
 
                             <?php
-// Query to select faculty members from the database
-$sql = "SELECT * FROM faculty WHERE `hs_type` = 'JHS'";
-$result = mysqli_query($conn, $sql);
+                            // Query to select faculty members from the database
+                            $sql = "SELECT * FROM faculty WHERE `hs_type` = 'JHS'";
+                            $result = mysqli_query($conn, $sql);
 
-// Check if there are any faculty members
-if (mysqli_num_rows($result) > 0) {
-    // Loop through each faculty member and display their information
-    while ($row = mysqli_fetch_assoc($result)) {
-        $middlenameInitial = substr($row['middlename'], 0, 1);
-        ?>
+                            // Check if there are any faculty members
+                            if (mysqli_num_rows($result) > 0) {
+                                // Loop through each faculty member and display their information
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $middlenameInitial = substr($row['middlename'], 0, 1);
+                                    ?>
                             <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                                 <div class="member" data-aos="fade-up" data-aos-delay="100">
                                     <div class="member-img">
@@ -217,14 +215,14 @@ if (mysqli_num_rows($result) > 0) {
                                 </div>
                             </div>
                             <?php
-}
-} else {
-    echo "No team members found.";
-}
+                            }
+                            } else {
+                                echo "No team members found.";
+                            }
 
-// Close the database connection
-mysqli_close($conn);
-?>
+                            // Close the database connection
+                            mysqli_close($conn);
+                            ?>
 
                         </div>
 

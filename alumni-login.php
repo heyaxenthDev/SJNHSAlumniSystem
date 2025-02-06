@@ -20,7 +20,9 @@ include 'includes/conn.php';
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,11 +47,14 @@ include 'includes/conn.php';
     <main>
         <div class="container">
 
-            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <section
+                class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center justify-content-center">
-                            <a href="\SJNHSAlumniSystem/index.php" class="text-dark m-3 position-absolute top-0 end-0"><i class="bi bi-x-circle-fill"></i></a>
+                            <a href="\SJNHSAlumniSystem/index.php"
+                                class="text-dark m-3 position-absolute top-0 end-0"><i
+                                    class="bi bi-x-circle-fill"></i></a>
 
                             <div class="d-flex justify-content-center py-2">
                                 <a href="index.php" class="logo d-flex align-items-center w-auto">
@@ -73,7 +78,8 @@ include 'includes/conn.php';
 
                                 <div class="col-12">
                                     <label for="yourEmail" class="form-label">Email Address</label>
-                                    <input type="text" name="email" class="form-control" id="yourEmail" value="<?php if (isset($_SESSION['entered_email'])) {
+                                    <input type="text" name="email" class="form-control" id="yourEmail"
+                                        value="<?php if (isset($_SESSION['entered_email'])) {
                                                                                                                     echo $_SESSION['entered_email'];
                                                                                                                 }
                                                                                                                 unset($_SESSION['entered_email']); ?>" required>
@@ -82,8 +88,11 @@ include 'includes/conn.php';
                                 <div class="col-12 mb-3">
                                     <div style="position: relative;">
                                         <label for="yourPassword" class="form-label">Password</label>
-                                        <input type="password" name="password" class="form-control" id="yourPassword" required>
-                                        <span hidden="hidden" class="field-icon toggle-password bi bi-eye-fill" id="icon" style="position: absolute; right: 12px; transform: translate(0, -50%); top: 72%; cursor: pointer;"></span>
+                                        <input type="password" name="password" class="form-control" id="yourPassword"
+                                            required>
+                                        <span hidden="hidden" class="field-icon toggle-password bi bi-eye-fill"
+                                            id="icon"
+                                            style="position: absolute; right: 12px; transform: translate(0, -50%); top: 72%; cursor: pointer;"></span>
                                     </div>
                                 </div>
                                 <script src="js/show-password.js"></script>
@@ -96,13 +105,14 @@ include 'includes/conn.php';
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
                                     </div>
                                 </div> -->
-                                <div class="col-12">
-                                    <button class="btn rounded-5 w-100 text-white btn-lg" type="submit" style="background-color: #013220;" name="alumniLogin">Login</button>
+                                <div class="col-12 mb-5">
+                                    <button class="btn rounded-5 w-100 text-white btn-lg" type="submit"
+                                        style="background-color: #013220;" name="alumniLogin">Login</button>
                                 </div>
-                                <div class="col-12 mt-5 mb-5 text-center">
+                                <!-- <div class="col-12 mt-5 mb-5 text-center">
                                     <p class="small mb-0">Don't have account? <a href="#" class="text-success">Click
                                             here</a></p>
-                                </div>
+                                </div> -->
                             </form>
 
                             <div class="credits mt-5">
@@ -118,7 +128,8 @@ include 'includes/conn.php';
         </div>
     </main><!-- End #main -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

@@ -47,30 +47,6 @@ include "alert.php";
                         </a>
                     </li><!-- End Messages Nav -->
 
-                    <!-- <li class="nav-item">
-                        <a class="nav-link collapsed" href="events.php">
-                            <i class="bi bi-calendar-week-fill"></i>
-                            <span>Events</span>
-                        </a>
-                    </li> -->
-                    <!-- End Events Page Nav -->
-
-                    <!-- <li class="nav-item">
-                        <a class="nav-link collapsed" href="news-and-updates.php">
-                            <i class="bi bi-newspaper"></i>
-                            <span>News &amp; Updates</span>
-                        </a>
-                    </li> -->
-                    <!-- End News & Updates Page Nav -->
-
-                    <!-- <li class="nav-heading">Alumni</li> -->
-
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="pages-error-404.html">
-                            <i class="bi bi-gift-fill"></i>
-                            <span>Donation</span>
-                        </a>
-                    </li><!-- End Donation Page Nav -->
                 </ul>
 
             </div><!-- End Left side columns -->
