@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2025 at 07:08 AM
+-- Generation Time: Feb 06, 2025 at 06:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,8 +72,8 @@ CREATE TABLE `alumni_jhs` (
 --
 
 INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
-(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '2020', 'A', 'JHS', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', 1, '2024-02-20 03:54:16'),
-(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '2020', 'C', 'JHS', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', 1, '2024-02-20 13:28:03'),
+(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '2020', 'A', 'JHS', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', 0, '2024-02-20 03:54:16'),
+(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '2020', 'C', 'JHS', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', 0, '2024-02-20 13:28:03'),
 (3, 'ALUM663e1624a07e7', 'Lucas Marvin', 'Quinto', 'Angel', 'lm.angel@gmail.com', '$2y$10$IZdGUrLAoI8Dt2bAwO2TsOGURE7Iky3wmzd9dl6Wg.YEk/k5eMhHa', 'N/A', '2020', '', 'JHS', 'Nurse', '', 'Single', 'Tibiao, Antique', NULL, '', 0, '2024-05-10 12:42:12'),
 (4, 'ALUM663fb429b3579', 'Herman John', 'Wentar', 'Polio', 'hjpolio@gmail.com', '$2y$10$2aDRnkN5wGuN4GLa17/MZevZpkfrj1UfTKDwkAYgGboP62Ey/jntS', 'N/A', '2020', '', 'JHS', 'Pharmacist', '', 'Divorced', 'Tibiao, Antique', NULL, '', 0, '2024-05-11 18:08:41');
 
@@ -157,14 +157,13 @@ CREATE TABLE `chat` (
 --
 
 INSERT INTO `chat` (`msg_id`, `conversationID`, `outgoing_msg_id`, `msg_content`, `timestamp`) VALUES
-(1, '1', '', 'jkdjasd', '2025-02-06 05:14:48'),
-(2, '1', '', 'aas', '2025-02-06 05:15:53'),
-(3, '1', 'ALUM65d4226839559', 'dhjasdh', '2025-02-06 06:48:52'),
-(4, '1', 'ALUM65d4226839559', 'asd', '2025-02-06 06:48:56'),
-(5, '1', 'ALUM65d4a8e3ab34b', 'hshhd\r\n', '2025-02-06 06:49:28'),
-(6, '1', 'ALUM65d4226839559', 'sddsd', '2025-02-06 06:53:45'),
-(7, '1', 'ALUM65d4226839559', 'sdad\r\n', '2025-02-06 07:04:03'),
-(8, '1', 'ALUM65d4226839559', 'asd', '2025-02-06 07:04:07');
+(1, '3', 'ALUM65d4226839559', 'ajdjsad', '2025-02-06 15:41:44'),
+(2, '3', 'ALUM65d4226839559', 'jadjjad', '2025-02-06 15:42:11'),
+(3, '1', 'ALUM65d44e8664057', 'ahjdhad', '2025-02-06 15:42:45'),
+(4, '1', 'ALUM65d44e8664057', 'dajda', '2025-02-06 15:43:04'),
+(5, '1', 'ALUM65d4a9b6191e2', 'askdjad', '2025-02-06 15:43:53'),
+(6, '1', 'ALUM65d4a9b6191e2', 'Testing', '2025-02-06 15:44:02'),
+(7, '1', 'ALUM65d44e8664057', 'nice', '2025-02-06 15:44:17');
 
 -- --------------------------------------------------------
 
@@ -196,6 +195,19 @@ INSERT INTO `events` (`id`, `eventsCode`, `eventName`, `eventDate`, `eventStatus
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `event_participants`
+--
+
+CREATE TABLE `event_participants` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `event_code` varchar(50) NOT NULL,
+  `joined_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `faculty`
 --
 
@@ -221,9 +233,9 @@ CREATE TABLE `faculty` (
 INSERT INTO `faculty` (`id`, `firstname`, `middlename`, `lastname`, `email`, `phone_num`, `designation`, `hs_type`, `grade`, `sect_subj`, `profile_picture`, `date_created`) VALUES
 (1, 'Juana', 'Reyes', 'Dela Cruz', 'juanadc@gmail.com', '09123456789', 'Teacher III', 'SHS', 11, 'A', 'uploads/SHS/team-4.jpg', '2024-02-18'),
 (2, 'Marc John', 'Alejandro', 'Martinez', 'marcjohn_martinez@gmail.com', '09234567890', 'Teacher I', 'JHS', 7, 'A', 'uploads/JHS/team-1.jpg', '2024-02-18'),
-(3, 'Phil Ernest', 'Nietes', 'Luces', 'penietes@gmail.com', '09123245565', 'Master Teacher I', 'SHS', 12, 'Mathematics', 'uploads/SHS/team-3.jpg', '2024-02-19'),
+(3, 'Phil Ernest', 'Nietes', 'Luces', 'penietes@gmail.com', '091232455657', 'Master Teacher I', 'SHS', 12, 'Mathematics', 'uploads/SHS/team-3.jpg', '2024-02-19'),
 (4, 'Jessica Marie', 'Buena', 'Robles', 'jmbuena@gmail.com', '09874563241', 'Master Teacher I', 'SHS', 11, 'A / Science', 'uploads/SHS/team-2.jpg', '2024-02-19'),
-(5, 'Louise Anne', 'Kim', 'Hernandez', 'louiseann.h@gmail.com', '09163578564', 'Master Teacher I', 'JHS', 9, 'A / Psychology', 'uploads/JHS/team-2.jpg', '2024-02-19'),
+(5, 'Louise Anne', 'Kim', 'Hernandez', 'louiseann.h@gmail.com', '09163578566', 'Master Teacher I', 'JHS', 9, 'A / Psychology', 'uploads/JHS/team-2.jpg', '2024-02-19'),
 (6, 'Bryan', 'Dela Cruz', 'Manalo', 'bryanmanalo@gmail.com', '09464793342', 'Master Teacher II', 'JHS', 10, 'Programming', 'uploads/JHS/team-3.jpg', '2024-02-20');
 
 -- --------------------------------------------------------
@@ -288,6 +300,12 @@ ALTER TABLE `events`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `event_participants`
+--
+ALTER TABLE `event_participants`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `faculty`
 --
 ALTER TABLE `faculty`
@@ -325,13 +343,19 @@ ALTER TABLE `batchyear`
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `event_participants`
+--
+ALTER TABLE `event_participants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `faculty`
