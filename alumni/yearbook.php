@@ -58,31 +58,33 @@ include "alert.php";
                     <!-- Batch Members -->
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Batch <?= $year ?></h5>
+                            <h5 class="card-title">Batch <?= htmlspecialchars($year) ?></h5>
                             <div class="mb-3">
                                 <label for="trackOrSectionSelect" class="form-label">Select Track/Section:</label>
-                                <select class="form-select" id="trackOrSectionSelect" aria-label="Track/Section select">
+                                <select class="form-select" id="trackOrSectionSelect" name="track_or_sec"
+                                    aria-label="Track/Section select">
                                     <option value="">Select a track/section</option>
                                     <?php
-                        $sql = "SELECT DISTINCT " . ($_SESSION['user_cred']['type'] == "SHS" ? "track" : "section") . " FROM $table WHERE `year_graduated` = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("s", $year);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
+                                    $column = ($_SESSION['user_cred']['type'] == "SHS") ? "track" : "section";
+                                    $sql = "SELECT DISTINCT `$column` FROM $table WHERE `year_graduated` = ? AND `$column` IS NOT NULL";
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt->bind_param("s", $year);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
 
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : "Section " . $row['section'];
-                                echo "<option value=\"$track_or_sec\">$track_or_sec</option>";
-                            }
-                        } else {
-                            echo "<option>No record found.</option>";
-                        }
-                        ?>
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : $row['section'];
+                                            echo "<option value=\"" . htmlspecialchars($track_or_sec) . "\">" . htmlspecialchars($track_or_sec) . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option disabled>No record found.</option>";
+                                    }
+                                    ?>
                                 </select>
                             </div>
 
-                            <div class="alumni-content" id="alumniContent">
+                            <div class="alumni-content row" id="alumniContent">
                                 <!-- Alumni information will be loaded here -->
                             </div>
                         </div>
@@ -101,10 +103,15 @@ include "alert.php";
                             type: 'POST',
                             data: {
                                 track_or_sec: selectedValue,
-                                year: '<?= $year ?>'
+                                year: '<?= htmlspecialchars($year) ?>'
                             },
                             success: function(response) {
                                 $('#alumniContent').html(response);
+                            },
+                            error: function() {
+                                $('#alumniContent').html(
+                                    '<div class="alert alert-danger">Error loading data. Please try again.</div>'
+                                );
                             }
                         });
                     } else {
@@ -113,6 +120,7 @@ include "alert.php";
                 });
             });
             </script>
+
 
 
 
