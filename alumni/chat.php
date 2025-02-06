@@ -83,8 +83,6 @@ include 'alert.php';
             <i class="bi bi-list toggle-sidebar-btn d-md-none"></i>
         </div><!-- End Logo -->
 
-
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
@@ -299,9 +297,33 @@ include 'alert.php';
                 </li><!-- End Profile Nav -->
 
             </ul>
-        </nav><!-- End Icons Navigation -->
+        </nav>
+        <!-- End Icons Navigation -->
 
     </header><!-- End Header -->
+
+    <?php
+      $table = $_SESSION['user_cred']['table'];
+      
+      $sql = "SELECT chat.msg_id, chat.conversationID, chat.outgoing_msg_id, chat.msg_content, chat.timestamp, $table.profile_picture 
+              FROM chat 
+              JOIN $table ON chat.outgoing_msg_id = $table.alumni_id 
+              WHERE chat.conversationID IN (SELECT id FROM $table WHERE year_graduated = '$year')";
+      $result = $conn->query($sql);
+      
+      $chatData = array();
+      if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+              $chatData[] = $row;
+          }
+      }
+      $conn->close();
+      ?>
+
+    <script>
+    const chatData = <?php echo json_encode($chatData); ?>;
+    const currentAlumniId = <?php echo json_encode($alumni_id); ?>;
+    </script>
 
     <main class="main" id="main">
         <section class="section">
@@ -371,68 +393,9 @@ include 'alert.php';
 
                 </div><!-- End Left side columns -->
 
-
                 <div class="col-lg-9">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 d-none d-md-block">
-                            <!-- Default Card -->
-                            <div class="card">
-                                <div class="card-body">
-                                    <!-- <h5 class="card-title">Default Card</h5> -->
-                                    <div class="input-group mb-3 mt-4">
-                                        <input type="text" class="form-control" placeholder="Search by name"
-                                            aria-label="Search" aria-describedby="button-addon2">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-                                                class="bi bi-search"></i></button>
-                                    </div>
-                                    <!-- List group with Advanced Contents -->
-                                    <div class="list-group chat-list">
-                                        <a href="#" class="list-group-item list-group-item-action chat-message">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="assets/img/user.png" class="rounded-circle me-3"
-                                                        alt="Profile Picture" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <h5 class="mb-1">Juan Dela Cruz</h5>
-                                                        <small class="text-muted">And some muted small print.</small>
-                                                    </div>
-                                                </div>
-                                                <small class="text-muted">3 days ago</small>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="assets/img/user.png" class="rounded-circle me-3"
-                                                        alt="Profile Picture" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <h5 class="mb-1">Juan Dela Cruz</h5>
-                                                        <small class="text-muted">And some muted small print.</small>
-                                                    </div>
-                                                </div>
-                                                <small class="text-muted">3 days ago</small>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="assets/img/user.png" class="rounded-circle me-3"
-                                                        alt="Profile Picture" style="width: 50px; height: 50px;">
-                                                    <div>
-                                                        <h5 class="mb-1">Juan Dela Cruz</h5>
-                                                        <small class="text-muted">And some muted small print.</small>
-                                                    </div>
-                                                </div>
-                                                <small class="text-muted">3 days ago</small>
-                                            </div>
-                                        </a>
-                                    </div><!-- End List group Advanced Content -->
-
-                                </div>
-                            </div><!-- End Default Card -->
-                        </div>
-
-                        <div class="col-lg-8 col-md-8">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-md">
                             <!-- Card with header and footer -->
                             <div class="card">
                                 <div class="card-header chat">
@@ -441,7 +404,7 @@ include 'alert.php';
                                             <img src="assets/img/user.png" class="rounded-circle me-2"
                                                 alt="Profile Picture" style="width: 40px; height: 40px;">
                                             <div>
-                                                <h5 class="card-title mb-0">Juan Dela Cruz</h5>
+                                                <h5 class="card-title mb-0">Batch <?=$year?></h5>
                                                 <small>Online</small>
                                             </div>
                                         </div>
@@ -450,98 +413,79 @@ include 'alert.php';
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <div class="card-body chat-box">
-                                    <div class="chat outgoing">
-                                        <div class="details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat incoming">
-                                        <img src="assets/img/user.png" alt="Profile Picture">
-                                        <div class="details">
-                                            <p>Nulla vitae elit libero, a pharetra augue.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat outgoing">
-                                        <div class="details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat incoming">
-                                        <img src="assets/img/user.png" alt="Profile Picture">
-                                        <div class="details">
-                                            <p>Nulla vitae elit libero, a pharetra augue.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat outgoing">
-                                        <div class="details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="chat incoming">
-                                        <img src="assets/img/user.png" alt="Profile Picture">
-                                        <div class="details">
-                                            <p>Nulla vitae elit libero, a pharetra augue.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat outgoing">
-                                        <div class="details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat incoming">
-                                        <img src="assets/img/user.png" alt="Profile Picture">
-                                        <div class="details">
-                                            <p>Nulla vitae elit libero, a pharetra augue.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat outgoing">
-                                        <div class="details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat incoming">
-                                        <img src="assets/img/user.png" alt="Profile Picture">
-                                        <div class="details">
-                                            <p>Nulla vitae elit libero, a pharetra augue.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat outgoing">
-                                        <div class="details">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </div>
-                                    <div class="chat incoming">
-                                        <img src="assets/img/user.png" alt="Profile Picture">
-                                        <div class="details">
-                                            <p>Nulla vitae elit libero, a pharetra augue.</p>
-                                        </div>
-                                    </div>
-                                    <!-- Add more chat messages as needed -->
-
+                                <div class="card-body chat-box" id="chatBox">
+                                    <!-- Chat messages will be populated here -->
                                 </div>
                                 <div class="card-footer">
-                                    <textarea name="" id="" cols="30" rows="2" class="form-control"></textarea>
-                                    <div class="d-flex mt-2 align-items-center justify-content-between">
-                                        <div class="extra-button">
-                                            <button class="btn"><i class="bi bi-image"></i></button>
-                                            <button class="btn"><i class="bi bi-paperclip"></i></button>
+                                    <form id="sendMessageForm" method="POST" action="send_message.php">
+                                        <input type="hidden" name="conversationID" value="1">
+                                        <!-- Replace with the actual conversation ID -->
+                                        <input type="hidden" name="outgoing_msg_id" value="<?= $alumni_id?>">
+                                        <!-- Replace with the actual alumni ID -->
+                                        <textarea name="msg_content" cols="30" rows="2" class="form-control"
+                                            placeholder="Type a message..."></textarea>
+                                        <div class="d-flex mt-2 align-items-center justify-content-between">
+                                            <div class="extra-button">
+                                                <button class="btn" type="button"><i class="bi bi-image"></i></button>
+                                                <button class="btn" type="button"><i
+                                                        class="bi bi-paperclip"></i></button>
+                                            </div>
+                                            <button type="submit" class="btn btn-sm text-white"
+                                                style="background-color: #013220;">Send <i
+                                                    class="bi bi-send"></i></button>
                                         </div>
-                                        <button class="btn btn-sm text-white" style="background-color: #013220;">Send <i
-                                                class="bi bi-send"></i></button>
-                                    </div>
-
+                                    </form>
                                 </div>
                             </div><!-- End Card with header and footer -->
                         </div>
-
                     </div>
                 </div>
+
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const chatBox = document.getElementById('chatBox');
+
+                    chatData.forEach(chat => {
+                        let chatDiv = document.createElement('div');
+                        chatDiv.classList.add('chat', chat.outgoing_msg_id === currentAlumniId ?
+                            'outgoing' : 'incoming');
+
+                        let detailsDiv = document.createElement('div');
+                        detailsDiv.classList.add('details');
+                        detailsDiv.innerHTML = `<p>${chat.msg_content}</p>`;
+
+                        if (chat.outgoing_msg_id !== currentAlumniId) {
+                            let img = document.createElement('img');
+                            img.src = chat.profile_picture ? chat.profile_picture :
+                                'assets/img/user.png'; // Default profile picture
+                            img.alt = 'Profile Picture';
+                            chatDiv.appendChild(img);
+                        }
+
+                        chatDiv.appendChild(detailsDiv);
+                        chatBox.appendChild(chatDiv);
+                    });
+                });
+
+                document.getElementById("sendMessageForm").addEventListener("submit", function(event) {
+                    event.preventDefault(); // Prevent form from submitting the traditional way
+
+                    var formData = new FormData(this);
+
+                    fetch('send_message.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.text())
+                        .then(result => {
+                            console.log(result);
+                            // Optionally, refresh the chat messages without reloading the page
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                });
+                </script>
             </div>
         </section>
     </main>
