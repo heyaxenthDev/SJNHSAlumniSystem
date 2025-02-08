@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if user already joined
     $check_sql = "SELECT * FROM event_participants WHERE user_id = ? AND event_code = ?";
     $stmt = $conn->prepare($check_sql);
-    $stmt->bind_param("is", $user_id, $event_code);
+    $stmt->bind_param("ss", $user_id, $event_code);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert user into event
     $sql = "INSERT INTO event_participants (user_id, event_code) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("is", $user_id, $event_code);
+    $stmt->bind_param("ss", $user_id, $event_code);
 
     if ($stmt->execute()) {
         $_SESSION['status'] = "Success";

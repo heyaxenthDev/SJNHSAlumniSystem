@@ -130,9 +130,8 @@ include "alert.php";
                                         }
                                         echo "</td>";
                                         echo "<td>
-                                            <button class='btn btn-primary btn-sm' onclick='viewEditNews({$row['id']})' data-bs-toggle='modal' data-bs-target='#newsModal'>View &amp; Edit</button>
-                                            <button class='btn btn-danger btn-sm'>End</button>
-                                        </td>";
+                                            <button class='btn btn-primary btn-sm' onclick='viewEditNews({$row['id']})' data-bs-toggle='modal' data-bs-target='#newsModal'>View &amp; Edit</button>";
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 } else {

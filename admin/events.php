@@ -141,8 +141,8 @@ include "alert.php";
                                                 echo "Unknown";
                                         }echo "</td>";
                                         echo "<td>
-                                        <button class='btn btn-primary btn-sm' onclick='viewEditEvent({$row['id']})' data-bs-toggle='modal' data-bs-target='#eventModal'>View &amp; Edit</button>
-                                                                                            </td>";
+                                        <button class='btn btn-primary btn-sm' onclick='viewEditEvent({$row['id']})' data-bs-toggle='modal' data-bs-target='#eventModal'>View &amp; Edit</button>";
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 } else {

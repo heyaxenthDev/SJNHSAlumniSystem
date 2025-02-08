@@ -86,7 +86,7 @@ include "alert.php";
                                             <div class="d-flex justify-content-between gap-2">
                                                 <form action="join_event.php" method="POST">
                                                     <input type="hidden" name="event_code"
-                                                        value="<?php echo $event['eventCode']; ?>">
+                                                        value="<?php echo $event['eventsCode']; ?>">
                                                     <input type="hidden" name="user_id"
                                                         value="<?php echo $alumni_id; ?>">
                                                     <!-- Assuming user is logged in -->
