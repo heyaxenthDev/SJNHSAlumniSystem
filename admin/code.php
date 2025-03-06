@@ -549,7 +549,7 @@ if (isset($_POST['addNewEvent'])) {
     // Sanitize and retrieve form data
     $eventName = mysqli_real_escape_string($conn, $_POST['eventName']);
     $eventDate = mysqli_real_escape_string($conn, $_POST['eventDate']);
-    $eventStatus = mysqli_real_escape_string($conn, $_POST['eventStatus']); // New field
+    $eventScope = mysqli_real_escape_string($conn, $_POST['eventScope']); // New field
     $eventLocation = mysqli_real_escape_string($conn, $_POST['eventLocation']);
     $eventDescription = mysqli_real_escape_string($conn, $_POST['eventDescription']);
 
@@ -605,7 +605,7 @@ if (isset($_POST['addNewEvent'])) {
         if (move_uploaded_file($_FILES["eventPicture"]["tmp_name"], $targetFile)) {
             echo "The file " . htmlspecialchars(basename($_FILES["eventPicture"]["name"])) . " has been uploaded.";
             // Insert into database
-            $sql = "INSERT INTO events (eventsCode, eventName, eventDate, eventStatus, eventLocation, eventDescription,
+            $sql = "INSERT INTO events (eventsCode, eventName, eventDate, eventScope, eventLocation, eventDescription,
 eventPicture)
 VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($conn, $sql);
@@ -615,7 +615,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $event_id,
                 $eventName,
                 $eventDate,
-                $eventStatus,
+                $eventScope,
                 $eventLocation,
                 $eventDescription,
                 $targetFile
@@ -800,7 +800,7 @@ if (isset($_POST['editEvent'])) {
     $id = mysqli_real_escape_string($conn, $_POST['eventid']);
     $eventName = mysqli_real_escape_string($conn, $_POST['eventName']);
     $eventDate = mysqli_real_escape_string($conn, $_POST['eventDate']);
-    $eventStatus = mysqli_real_escape_string($conn, $_POST['eventStatus']);
+    $eventScope = mysqli_real_escape_string($conn, $_POST['eventScope']);
     $eventLocation = mysqli_real_escape_string($conn, $_POST['eventLocation']);
     $eventDescription = mysqli_real_escape_string($conn, $_POST['eventDescription']);
 
@@ -810,7 +810,7 @@ if (isset($_POST['editEvent'])) {
         $eventPicture = $targetDir . basename($_FILES["eventPicture"]["name"]);
         $eventPictureTemp = $_FILES['eventPicture']['tmp_name'];
         if (move_uploaded_file($eventPictureTemp, $eventPicture)) {
-            $sql = "UPDATE events SET eventName='$eventName', eventDate='$eventDate', eventStatus='$eventStatus',
+            $sql = "UPDATE events SET eventName='$eventName', eventDate='$eventDate', eventScope='$eventScope',
 eventLocation='$eventLocation', eventDescription='$eventDescription', eventPicture='$eventPicture' WHERE id='$id'";
         } else {
             $_SESSION['status'] = "Error";
@@ -821,7 +821,7 @@ eventLocation='$eventLocation', eventDescription='$eventDescription', eventPictu
             exit();
         }
     } else {
-        $sql = "UPDATE events SET eventName='$eventName', eventDate='$eventDate', eventStatus='$eventStatus',
+        $sql = "UPDATE events SET eventName='$eventName', eventDate='$eventDate', eventScope='$eventScope',
 eventLocation='$eventLocation', eventDescription='$eventDescription' WHERE id='$id'";
     }
 

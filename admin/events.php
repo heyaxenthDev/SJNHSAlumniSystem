@@ -57,12 +57,12 @@ include "alert.php";
 
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 mb-2">
-                                    <label for="eventStatus" class="form-label">Event Status</label>
-                                    <select name="eventStatus" class="form-select" id="eventStatus" required>
-                                        <option value="">Select Status</option>
-                                        <option value="1" class="text-success">On-going</option>
-                                        <option value="2" class="text-primary">Upcoming</option>
-                                        <option value="3" class="text-warning">Postponed</option>
+                                    <label for="eventScope" class="form-label">Event For</label>
+                                    <select name="eventScope" class="form-select" id="eventScope" required>
+                                        <option value="">Select Participants</option>
+                                        <option value="Junior High" class="text-primary">Junior High</option>
+                                        <option value="Senior High" class="text-success">Senior High</option>
+                                        <option value="All" class="text-warning">All</option>
                                         <!-- <option value="4" class="text-danger">Ended</option> -->
                                     </select>
                                 </div>
@@ -110,6 +110,7 @@ include "alert.php";
                                     <th scope="col">Event Name</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">For</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -122,24 +123,32 @@ include "alert.php";
                                         echo "<tr>";
                                         echo "<td>{$row['eventsCode']}</td>";
                                         echo "<td>{$row['eventName']}</td>";
+                                        $today = date('Y-m-d'); // Get the current date
+
                                         echo "<td>{$row['eventDate']}</td>";
                                         echo "<td>";
-                                        switch ($row['eventStatus']) {
-                                            case "1":
+                                        if ($row['eventDate'] < $today) {
+                                            echo '<span class="badge bg-danger">Ended</span>';
+                                        } else {
+                                            // Replace the static event status labels with dynamically generated labels based on the event date
+                                            $eventDate = strtotime($row['eventDate']);
+                                            $timeDiff = $eventDate - time();
+                                            
+                                            // Calculate the difference in days
+                                            $daysDiff = ceil($timeDiff / (60 * 60 * 24));
+                                            
+                                            if ($daysDiff == 0) {
                                                 echo '<span class="badge bg-success">On-going</span>';
-                                                break;
-                                            case "2":
+                                            } elseif ($daysDiff > 0) {
                                                 echo '<span class="badge bg-primary">Upcoming</span>';
-                                                break;
-                                            case "3":
+                                            } elseif ($daysDiff < 0) {
                                                 echo '<span class="badge bg-warning">Postponed</span>';
-                                                break;
-                                            case "4":
-                                                echo '<span class="badge bg-danger">Ended</span>';
-                                                break;
-                                            default:
+                                            } else {
                                                 echo "Unknown";
-                                        }echo "</td>";
+                                            }
+                                        }
+                                        echo "</td>";
+                                        echo "<td>{$row['eventScope']}</td>";
                                         echo "<td>
                                         <button class='btn btn-primary btn-sm' onclick='viewEditEvent({$row['id']})' data-bs-toggle='modal' data-bs-target='#eventModal'>View &amp; Edit</button>";
                                         echo "</td>";

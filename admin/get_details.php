@@ -95,12 +95,12 @@ if (isset($_POST['eventid'])) {
         
             <div class='row'>
                 <div class='col-lg-12 col-md-12 mb-2'>
-                    <label for='eventStatus' class='form-label'>Event Status</label>
-                    <select name='eventStatus' class='form-select' id='eventStatus' required>
-                        <option value=''>Select Status</option>
-                        <option value='1' class='text-success' " . ($row['eventStatus'] == '1' ? 'selected' : '') . ">On-going</option>
-                        <option value='2' class='text-primary' " . ($row['eventStatus'] == '2' ? 'selected' : '') . ">Upcoming</option>
-                        <option value='3' class='text-warning' " . ($row['eventStatus'] == '3' ? 'selected' : '') . ">Postponed</option>
+                    <label for='eventScope' class='form-label'>Event Participants</label>
+                    <select name='eventScope' class='form-select' id='eventScope' required>
+                        <option value=''>Select Participants</option>
+                        <option value='Junior High' class='text-success' " . ($row['eventScope'] == 'Junior High' ? 'selected' : '') . ">Junior High</option>
+                        <option value='Senior High' class='text-primary' " . ($row['eventScope'] == 'Senior High' ? 'selected' : '') . ">Senior High</option>
+                        <option value='All' class='text-warning' " . ($row['eventScope'] == 'All' ? 'selected' : '') . ">All</option>
                         <!-- <option value='4' class='text-danger'>Ended</option> -->
                     </select>
                 </div>

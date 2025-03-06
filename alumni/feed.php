@@ -64,11 +64,29 @@ include "alert.php";
                             <div class="d-flex overflow-x-auto gap-2">
                                 <?php
                                 // Fetch events from the database
-                                $sql = "SELECT * FROM `events` WHERE eventDate > CURDATE() ORDER BY eventDate";
-                                $result = $conn->query($sql);
+                                $alumni_group = $_SESSION['user_cred']['type'];
+
+                                switch ($alumni_group) {
+                                    case 'JHS':
+                                        $add_query = 'eventScope = "Junior High"';
+                                        break;
+                                    case 'SHS':
+                                        $add_query = 'eventScope = "Senior High"';
+                                        break;
+                                    default:
+                                        
+                                        break;
+                                }
+                                $sql = "SELECT * FROM `events` WHERE eventDate > CURDATE() AND eventScope = 'All' OR $add_query ORDER BY eventDate";
+                                $result = $conn->query($sql); 
 
                                 if ($result->num_rows > 0) {
                                     while ($event = $result->fetch_assoc()) {
+                                        // Check if the user has already joined the event
+                                        $event_code = $event['eventsCode'];
+                                        $sql_check = "SELECT * FROM `event_participants` WHERE `alumni_id` = '$alumni_id' AND `event_code` = '$event_code'";
+                                        $result_check = $conn->query($sql_check);
+                                        $already_joined = $result_check->num_rows > 0;
                                 ?>
                                 <div class="col-12 col-md-6">
                                     <!-- Events -->
@@ -76,12 +94,13 @@ include "alert.php";
                                         <img src="<?php echo $src_dir . $event['eventPicture']; ?>" class="card-img-top"
                                             alt="...">
                                         <div class="card-body">
-                                            <h4><span class="badge position-absolute top-0 end-0"
-                                                    style="background-color: #8a9a5b;"><?php echo date('M d', strtotime($event['eventDate'])); ?></span>
+                                            <h4>
+                                                <span class="badge position-absolute top-0 end-0"
+                                                    style="background-color: #8a9a5b;">
+                                                    <?php echo date('M d', strtotime($event['eventDate'])); ?>
+                                                </span>
                                             </h4>
-
-                                            <h5 class="card-title mt-3">
-                                                <?php echo $event['eventName']; ?></h5>
+                                            <h5 class="card-title mt-3"><?php echo $event['eventName']; ?></h5>
                                             <p class="card-text"><?php echo $event['eventDescription']; ?></p>
                                             <div class="d-flex justify-content-between gap-2">
                                                 <form action="join_event.php" method="POST">
@@ -90,21 +109,28 @@ include "alert.php";
                                                     <input type="hidden" name="user_id"
                                                         value="<?php echo $alumni_id; ?>">
                                                     <!-- Assuming user is logged in -->
-                                                    <button type="submit" class="btn w-100"><i
-                                                            class="bi bi-bookmark-star"></i> Join Event</button>
+                                                    <?php if ($already_joined) { ?>
+                                                    <button type="button" class="btn btn-secondary w-100" disabled>
+                                                        <i class="bi bi-check-circle"></i> Already Joined
+                                                    </button>
+                                                    <?php } else { ?>
+                                                    <button type="submit" class="btn w-100">
+                                                        <i class="bi bi-bookmark-star"></i> Join Event
+                                                    </button>
+                                                    <?php } ?>
                                                 </form>
-
                                                 <button class="btn btn-secondary" data-bs-toggle="modal"
-                                                    data-bs-target="#ViewEventModal"><i
-                                                        class="bi bi-eye-fill"></i></button>
+                                                    data-bs-target="#ViewEventModal">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div><!-- End Events -->
                                 </div>
                                 <?php
-                                    }
+                                   }
                                 } else {
-                                    echo "0 results";
+                                    echo "No Events Listed.";
                                 }
                                 ?>
 

@@ -3,7 +3,7 @@ session_start();
 require 'includes/conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!isset($_SESSION['user_id'])) {
+    if (!isset($_SESSION['user_cred']['alumni_id'])) {
         $_SESSION['status'] = "Error";
         $_SESSION['status_text'] = "You must be logged in to join an event.";
         $_SESSION['status_code'] = "error";
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $user_id = $_SESSION['user_id'];
+    $alumni_id = $_SESSION['user_cred']['alumni_id'];
     $event_code = $_POST['event_code'];
 
     if (empty($event_code)) {
@@ -24,8 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $conn = new mysqli("localhost", "root", "", "your_database_name");
-
     if ($conn->connect_error) {
         $_SESSION['status'] = "Error";
         $_SESSION['status_text'] = "Database connection failed.";
@@ -36,9 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check if user already joined
-    $check_sql = "SELECT * FROM event_participants WHERE user_id = ? AND event_code = ?";
+    $check_sql = "SELECT * FROM event_participants WHERE alumni_id = ? AND event_code = ?";
     $stmt = $conn->prepare($check_sql);
-    $stmt->bind_param("ss", $user_id, $event_code);
+    $stmt->bind_param("ss", $alumni_id, $event_code);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -52,9 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert user into event
-    $sql = "INSERT INTO event_participants (user_id, event_code) VALUES (?, ?)";
+    $sql = "INSERT INTO event_participants (alumni_id, event_code) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $user_id, $event_code);
+    $stmt->bind_param("ss", $alumni_id, $event_code);
 
     if ($stmt->execute()) {
         $_SESSION['status'] = "Success";

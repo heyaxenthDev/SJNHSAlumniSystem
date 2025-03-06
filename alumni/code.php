@@ -107,3 +107,50 @@ if (isset($_POST['complete'])) {
     $stmt->close();
     $conn->close();
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
+    $id = $_SESSION['user_cred']['id'];
+    $table = $_SESSION['user_cred']['table'];
+    $type = $_SESSION['user_cred']['type'];
+    $firstname = $_POST["firstname"];
+    $middlename = $_POST["middlename"];
+    $lastname = $_POST["lastname"];
+    $company = $_POST["company"];
+    $job = $_POST["job"];
+    // $country = $_POST["country"];
+    $address = $_POST["address"];
+    $phone = $_POST["phone"];
+    $email = $_POST["email"];
+    $picture = $_FILES['profileImage']['name'];
+
+    // Handle the file upload
+    $target_dir = "uploads/$type/";
+    $target_file = $target_dir . basename($picture);
+    if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $target_file)) {
+        echo "The file " . htmlspecialchars(basename($picture)) . " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+
+    // Update query
+    $sql = "UPDATE $table SET 
+                firstname='$firstname', 
+                middlename='$middlename', 
+                lastname='$lastname', 
+                current_company_bus='$company', 
+                profession='$job', 
+                address='$address', 
+                phone_num='$phone', 
+                email='$email', 
+                profile_picture='$picture' 
+            WHERE id='$id'";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Record updated successfully";
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
+
+    $conn->close();
+}
+?>

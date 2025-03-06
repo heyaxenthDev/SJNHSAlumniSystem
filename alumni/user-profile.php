@@ -100,10 +100,6 @@ include "alert.php";
                                     Profile</button>
                             </li>
 
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab"
-                                    data-bs-target="#profile-settings">Settings</button>
-                            </li>
 
                             <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab"
@@ -114,11 +110,6 @@ include "alert.php";
                         <div class="tab-content pt-2">
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                                <!-- <h5 class="card-title">About</h5>
-                                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores
-                                    cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure
-                                    rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at
-                                    unde.</p> -->
 
                                 <h5 class="card-title">Profile Details</h5>
 
@@ -162,15 +153,15 @@ include "alert.php";
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                 <!-- Profile Edit Form -->
-                                <form>
+                                <form action="code.php" method="POST" enctype="multipart/form-data">
                                     <div class="row mb-3">
                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
                                             Image</label>
                                         <div class="col-md-8 col-lg-9">
                                             <img src="<?= $picture ?>" alt="Profile">
                                             <div class="pt-2">
-                                                <a href="#" class="btn btn-primary btn-sm"
-                                                    title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                                                <input type="file" name="profileImage" class="form-control"
+                                                    id="profileImage">
                                                 <a href="#" class="btn btn-danger btn-sm"
                                                     title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                             </div>
@@ -186,14 +177,6 @@ include "alert.php";
                                                 value="<?= $mname ?>">
                                             <input name="lastname" type="text" class="form-control" id="lastname"
                                                 value="<?= $lname ?>">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <textarea name="about" class="form-control" id="about"
-                                                style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
                                         </div>
                                     </div>
 
@@ -245,94 +228,15 @@ include "alert.php";
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3">
-                                        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter
-                                            Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="twitter" type="text" class="form-control" id="Twitter"
-                                                value="https://twitter.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook
-                                            Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="facebook" type="text" class="form-control" id="Facebook"
-                                                value="https://facebook.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram
-                                            Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="instagram" type="text" class="form-control" id="Instagram"
-                                                value="https://instagram.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin
-                                            Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="linkedin" type="text" class="form-control" id="Linkedin"
-                                                value="https://linkedin.com/#">
-                                        </div>
-                                    </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" name="update" class="btn btn-primary">Save
+                                            Changes</button>
                                     </div>
                                 </form><!-- End Profile Edit Form -->
 
                             </div>
 
-                            <div class="tab-pane fade pt-3" id="profile-settings">
-
-                                <!-- Settings Form -->
-                                <form>
-
-                                    <div class="row mb-3">
-                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email
-                                            Notifications</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="changesMade"
-                                                    checked>
-                                                <label class="form-check-label" for="changesMade">
-                                                    Changes made to your account
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="newProducts"
-                                                    checked>
-                                                <label class="form-check-label" for="newProducts">
-                                                    Information on new products and services
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="proOffers">
-                                                <label class="form-check-label" for="proOffers">
-                                                    Marketing and promo offers
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="securityNotify"
-                                                    checked disabled>
-                                                <label class="form-check-label" for="securityNotify">
-                                                    Security alerts
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </form><!-- End settings Form -->
-
-                            </div>
 
                             <div class="tab-pane fade pt-3" id="profile-change-password">
                                 <!-- Change Password Form -->

@@ -60,28 +60,54 @@ include "alert.php";
                         <div class="card-body">
                             <h5 class="card-title">Batch <?= htmlspecialchars($year) ?></h5>
                             <div class="mb-3">
-                                <label for="trackOrSectionSelect" class="form-label">Select Track/Section:</label>
-                                <select class="form-select" id="trackOrSectionSelect" name="track_or_sec"
-                                    aria-label="Track/Section select">
-                                    <option value="">Select a track/section</option>
-                                    <?php
-                                    $column = ($_SESSION['user_cred']['type'] == "SHS") ? "track" : "section";
-                                    $sql = "SELECT DISTINCT `$column` FROM $table WHERE `year_graduated` = ? AND `$column` IS NOT NULL";
-                                    $stmt = $conn->prepare($sql);
-                                    $stmt->bind_param("s", $year);
-                                    $stmt->execute();
-                                    $result = $stmt->get_result();
+                                <!-- <label for="trackOrSectionTabs" class="form-label">Select Track/Section:</label> -->
 
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : $row['section'];
-                                            echo "<option value=\"" . htmlspecialchars($track_or_sec) . "\">" . htmlspecialchars($track_or_sec) . "</option>";
-                                        }
-                                    } else {
-                                        echo "<option disabled>No record found.</option>";
-                                    }
-                                    ?>
-                                </select>
+                                <!-- Track/Section Tabs -->
+                                <ul class="nav nav-tabs d-flex" id="trackOrSectionTabs" role="tablist">
+                                    <!-- Tabs will be dynamically inserted here -->
+                                    <?php
+                        $column = ($_SESSION['user_cred']['type'] == "SHS") ? "track" : "section";
+                        $sql = "SELECT DISTINCT `$column` FROM $table WHERE `year_graduated` = ? AND `$column` IS NOT NULL";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("s", $year);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+
+                        if ($result->num_rows > 0) {
+                            $isFirst = true;
+                            while ($row = $result->fetch_assoc()) {
+                                $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : $row['section'];
+                                $activeClass = $isFirst ? ' active' : '';
+                                echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
+                                        <button class=\"nav-link w-100$activeClass\" id=\"$track_or_sec-tab\" data-bs-toggle=\"tab\"
+                                        data-bs-target=\"#$track_or_sec\" type=\"button\" role=\"tab\" aria-controls=\"$track_or_sec\"
+                                        aria-selected=\"" . ($isFirst ? 'true' : 'false') . "\">" . htmlspecialchars($track_or_sec) . "</button>
+                                    </li>";
+                                $isFirst = false;
+                            }
+                        } else {
+                            echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
+                                    <button class=\"nav-link w-100 disabled\" type=\"button\">No record found.</button>
+                                </li>";
+                        }
+                        ?>
+                                </ul>
+
+                                <!-- Tab Content -->
+                                <div class="tab-content pt-2" id="trackOrSectionTabsContent">
+                                    <?php
+                        $result->data_seek(0); // Reset result pointer to start
+                        $isFirst = true;
+                        while ($row = $result->fetch_assoc()) {
+                            $track_or_sec = ($_SESSION['user_cred']['type'] == "SHS") ? $row['track'] : $row['section'];
+                            $activeClass = $isFirst ? ' show active' : '';
+                            echo "<div class=\"tab-pane fade$activeClass\" id=\"$track_or_sec\" role=\"tabpanel\" aria-labelledby=\"$track_or_sec-tab\">
+                                    <!-- Content for $track_or_sec will go here -->
+                                </div>";
+                            $isFirst = false;
+                        }
+                        ?>
+                                </div>
                             </div>
 
                             <div class="alumni-content row" id="alumniContent">
@@ -95,14 +121,13 @@ include "alert.php";
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
             $(document).ready(function() {
-                $('#trackOrSectionSelect').on('change', function() {
-                    var selectedValue = $(this).val();
-                    if (selectedValue) {
+                function loadAlumniContent(trackOrSec) {
+                    if (trackOrSec) {
                         $.ajax({
                             url: 'fetch_alumni.php',
                             type: 'POST',
                             data: {
-                                track_or_sec: selectedValue,
+                                track_or_sec: trackOrSec,
                                 year: '<?= htmlspecialchars($year) ?>'
                             },
                             success: function(response) {
@@ -117,12 +142,18 @@ include "alert.php";
                     } else {
                         $('#alumniContent').empty();
                     }
+                }
+
+                $('#trackOrSectionTabs button').on('shown.bs.tab', function(e) {
+                    var selectedValue = $(e.target).attr('aria-controls');
+                    loadAlumniContent(selectedValue);
                 });
+
+                // Load content for the first tab automatically
+                var firstTabContent = $('#trackOrSectionTabs button.active').attr('aria-controls');
+                loadAlumniContent(firstTabContent);
             });
             </script>
-
-
-
 
         </div>
     </section>
