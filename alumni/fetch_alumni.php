@@ -22,7 +22,7 @@ if ($result->num_rows > 0) {
                         <div class="social">
                             <a href="mailto:' . $row['email'] . '"><i class="bi bi-envelope-fill"></i></a>
                             <a href="tel:' . $row['phone_num'] . '"><i class="bi bi-telephone-fill"></i></a>
-                            <a href=""><i class="bi bi-chat-dots-fill"></i></a>
+                            <a href="chat.php"><i class="bi bi-chat-dots-fill"></i></a>
                         </div>
                     </div>
                     <div class="member-info">

@@ -274,9 +274,7 @@ include "alert.php";
                                 </div>
                             </div><!-- End Add Alumni Modal-->
 
-                            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum
-                                quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui
-                                impedit suscipit alias ea.</p>
+
                             <hr>
                         </div>
 
@@ -302,7 +300,7 @@ include "alert.php";
                                                     class="bi bi-envelope-fill"></i></a>
                                             <a href="tel:<?php echo $row['phone_num']; ?>"><i
                                                     class="bi bi-telephone-fill"></i></a>
-                                            <a href=""><i class="bi bi-chat-dots-fill"></i></a>
+                                            <!-- <a href=""><i class="bi bi-chat-dots-fill"></i></a> -->
                                             <!-- <a href=""><i class="bi bi-pencil-square"></i></a> -->
                                         </div>
                                     </div>
