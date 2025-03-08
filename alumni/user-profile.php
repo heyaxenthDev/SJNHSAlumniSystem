@@ -162,8 +162,6 @@ include "alert.php";
                                             <div class="pt-2">
                                                 <input type="file" name="profileImage" class="form-control"
                                                     id="profileImage">
-                                                <a href="#" class="btn btn-danger btn-sm"
-                                                    title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -239,14 +237,16 @@ include "alert.php";
 
 
                             <div class="tab-pane fade pt-3" id="profile-change-password">
-                                <!-- Change Password Form -->
-                                <form>
+                                <!-- Include jQuery (if not already included) -->
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+                                <!-- Change Password Form -->
+                                <form action="code.php" method="POST">
                                     <div class="row mb-3">
                                         <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
                                             Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="password" type="password" class="form-control"
+                                            <input name="password" type="password" class="form-control password-field"
                                                 id="currentPassword">
                                         </div>
                                     </div>
@@ -255,8 +255,8 @@ include "alert.php";
                                         <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New
                                             Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="newpassword" type="password" class="form-control"
-                                                id="newPassword">
+                                            <input name="newpassword" type="password"
+                                                class="form-control password-field" id="newPassword">
                                         </div>
                                     </div>
 
@@ -264,15 +264,38 @@ include "alert.php";
                                         <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New
                                             Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="renewpassword" type="password" class="form-control"
-                                                id="renewPassword">
+                                            <input name="renewpassword" type="password"
+                                                class="form-control password-field" id="renewPassword">
+                                        </div>
+                                    </div>
+
+                                    <!-- Show Password Checkbox -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-8 offset-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="showPasswords">
+                                                <label class="form-check-label" for="showPasswords">Show
+                                                    Passwords</label>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Change Password</button>
+                                        <button type="submit" class="btn btn-primary" name="changePassword">Change
+                                            Password</button>
                                     </div>
-                                </form><!-- End Change Password Form -->
+                                </form>
+                                <!-- End Change Password Form -->
+
+                                <!-- jQuery Script to Toggle Password Visibility -->
+                                <script>
+                                $(document).ready(function() {
+                                    $("#showPasswords").on("change", function() {
+                                        $(".password-field").attr("type", this.checked ? "text" :
+                                            "password");
+                                    });
+                                });
+                                </script>
 
                             </div>
 

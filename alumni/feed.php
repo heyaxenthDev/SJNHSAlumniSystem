@@ -119,10 +119,10 @@ include "alert.php";
                                                     </button>
                                                     <?php } ?>
                                                 </form>
-                                                <button class="btn btn-secondary" data-bs-toggle="modal"
+                                                <!-- <button class="btn btn-secondary" data-bs-toggle="modal"
                                                     data-bs-target="#ViewEventModal">
                                                     <i class="bi bi-eye-fill"></i>
-                                                </button>
+                                                </button> -->
                                             </div>
                                         </div>
                                     </div><!-- End Events -->

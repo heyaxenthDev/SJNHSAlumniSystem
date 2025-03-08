@@ -108,7 +108,23 @@ if (isset($_POST['complete'])) {
     $conn->close();
 }
 
+function replaceExistingFile($target_file) {
+    // Check if the file exists
+    if (file_exists($target_file)) {
+        // Attempt to delete the existing file
+        if (!unlink($target_file)) {
+            $_SESSION['status'] = "Error";
+            $_SESSION['status_text'] = "Error replacing existing file. Please try again.";
+            $_SESSION['status_code'] = "error";
+            header("Location: {$_SERVER['HTTP_REFERER']}");
+            exit();
+        }
+    }
+    return true; // Indicate success
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
+    
     $id = $_SESSION['user_cred']['id'];
     $table = $_SESSION['user_cred']['table'];
     $type = $_SESSION['user_cred']['type'];
@@ -117,40 +133,164 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
     $lastname = $_POST["lastname"];
     $company = $_POST["company"];
     $job = $_POST["job"];
-    // $country = $_POST["country"];
     $address = $_POST["address"];
     $phone = $_POST["phone"];
     $email = $_POST["email"];
-    $picture = $_FILES['profileImage']['name'];
 
-    // Handle the file upload
-    $target_dir = "uploads/$type/";
-    $target_file = $target_dir . basename($picture);
-    if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $target_file)) {
-        echo "The file " . htmlspecialchars(basename($picture)) . " has been uploaded.";
+    // Handle file upload
+    if (!empty($_FILES['profileImage']['name'])) {
+        $target_dir = "uploads/" . $type . "/";
+        $original_filename = basename($_FILES["profileImage"]["name"]);
+        $new_filename = $_SESSION['user_cred']['alumni_id'] . "_" . $original_filename;
+        $target_file = $target_dir . $new_filename;
+        $file_extension = strtolower(pathinfo($original_filename, PATHINFO_EXTENSION));
+        $allowed_extensions = array("jpg", "jpeg", "png", "gif");
+        
+        // Validate file extension
+        if (!in_array($file_extension, $allowed_extensions)) {
+            $_SESSION['status'] = "Error";
+            $_SESSION['status_text'] = "Only JPG, JPEG, PNG & GIF files are allowed.";
+            $_SESSION['status_code'] = "error";
+            header("Location: {$_SERVER['HTTP_REFERER']}");
+            exit();
+        }
+
+        // Check file size (1MB limit)
+        if ($_FILES["profileImage"]["size"] > 1048576) { // Adjust the size as needed
+            $_SESSION['status'] = "Error";
+            $_SESSION['status_text'] = "Your file is too large.";
+            $_SESSION['status_code'] = "error";
+            header("Location: {$_SERVER['HTTP_REFERER']}");
+            exit();
+        }
+
+        // Replace the existing file if it exists
+        replaceExistingFile($target_file);
+
+        // Upload the new file
+        if (!move_uploaded_file($_FILES["profileImage"]["tmp_name"], $target_file)) {
+            $_SESSION['status'] = "Error";
+            $_SESSION['status_text'] = "Error uploading your file.";
+            $_SESSION['status_code'] = "error";
+            header("Location: {$_SERVER['HTTP_REFERER']}");
+            exit();
+        }
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        $target_file = NULL; // No new file uploaded
     }
 
-    // Update query
+    // Use Prepared Statement to prevent SQL Injection
     $sql = "UPDATE $table SET 
-                firstname='$firstname', 
-                middlename='$middlename', 
-                lastname='$lastname', 
-                current_company_bus='$company', 
-                profession='$job', 
-                address='$address', 
-                phone_num='$phone', 
-                email='$email', 
-                profile_picture='$picture' 
-            WHERE id='$id'";
+                firstname = ?, 
+                middlename = ?, 
+                lastname = ?, 
+                current_company_bus = ?, 
+                profession = ?, 
+                address = ?, 
+                phone_num = ?, 
+                email = ?, 
+                profile_picture = COALESCE(?, profile_picture) 
+            WHERE id = ?";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Record updated successfully";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param(
+        "sssssssssi",
+        $firstname, 
+        $middlename, 
+        $lastname, 
+        $company, 
+        $job, 
+        $address, 
+        $phone, 
+        $email, 
+        $target_file, 
+        $id
+    );
+
+    if ($stmt->execute()) {
+        $_SESSION['status'] = "Success";
+        $_SESSION['status_text'] = "Profile updated successfully.";
+        $_SESSION['status_code'] = "success";
     } else {
-        echo "Error updating record: " . $conn->error;
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = "Error updating profile: " . $stmt->error;
+        $_SESSION['status_code'] = "error";
     }
 
+    $stmt->close();
     $conn->close();
+
+    header("Location: {$_SERVER['HTTP_REFERER']}");
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["changePassword"])) {
+    
+    // Get user ID from session
+    $id = $_SESSION['user_cred']['id'];
+    $table = $_SESSION['user_cred']['table'];
+
+    // Get form inputs
+    $currentPassword = $_POST["password"];
+    $newPassword = $_POST["newpassword"];
+    $renewPassword = $_POST["renewpassword"];
+
+    // Validate if new passwords match
+    if ($newPassword !== $renewPassword) {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = "New passwords do not match.";
+        $_SESSION['status_code'] = "error";
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+        exit();
+    }
+
+    // Fetch the current password hash from the database
+    $sql = "SELECT password FROM $table WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->store_result();
+    
+    // If user exists, verify the password
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($hashedPassword);
+        $stmt->fetch();
+        
+        if (password_verify($currentPassword, $hashedPassword)) {
+            // Hash the new password before saving
+            $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            // Update the password in the database
+            $updateSql = "UPDATE $table SET password = ? WHERE id = ?";
+            $updateStmt = $conn->prepare($updateSql);
+            $updateStmt->bind_param("si", $newHashedPassword, $id);
+
+            if ($updateStmt->execute()) {
+                $_SESSION['status'] = "Success";
+                $_SESSION['status_text'] = "Password changed successfully.";
+                $_SESSION['status_code'] = "success";
+            } else {
+                $_SESSION['status'] = "Error";
+                $_SESSION['status_text'] = "Error updating password.";
+                $_SESSION['status_code'] = "error";
+            }
+
+            $updateStmt->close();
+        } else {
+            $_SESSION['status'] = "Error";
+            $_SESSION['status_text'] = "Current password is incorrect.";
+            $_SESSION['status_code'] = "error";
+        }
+    } else {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = "User not found.";
+        $_SESSION['status_code'] = "error";
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    header("Location: {$_SERVER['HTTP_REFERER']}");
+    exit();
 }
 ?>

@@ -88,18 +88,59 @@ include 'includes/conn.php';
         </div><!-- End Logo -->
 
 
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
+                <li class="nav-item dropdown">
 
+                    <a class="nav-link nav-icon" href="feed.php">
+                        <i class="bi bi-newspaper"></i>
+                    </a><!-- End Feed Icon -->
+
+                </li><!-- End Feed Nav -->
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown" id="notificationBell">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-primary badge-number">0</span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" id="notificationList">
+                        <li class="dropdown-header">
+                            <span id="notificationCountText">You have 0 new notifications</span>
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-footer">
+                            <a href="#">Show all notifications</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Notifications Nav -->
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="badge bg-success badge-number" id="messageBadge" style="display: none;">0</span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages" id="messageList">
+                        <li class="dropdown-header" id="messageCountText">You have 0 new messages</li>
+                    </ul>
+                </li>
+
+                <!-- End Messages Nav -->
 
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <img src="<?= $picture ?>" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2">
-                            <?= $user ?></span>
+                            <?= $user ?>
+                        </span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -152,6 +193,9 @@ include 'includes/conn.php';
                 </li><!-- End Profile Nav -->
 
             </ul>
-        </nav><!-- End Icons Navigation -->
+        </nav>
+        <!-- End Icons Navigation -->
+
+        <script src="js/nav.js"></script>
 
     </header><!-- End Header -->
