@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2025 at 06:51 PM
+-- Generation Time: Mar 08, 2025 at 06:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -111,9 +111,9 @@ CREATE TABLE `alumni_shs` (
 
 INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
 (1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', '$2y$10$SgD2AY58hGMh2zo096IAB..LHx30j88Hxn6mdWoefCXyobqSRvX.G', '9798642852', '2020', 'A', 'STEM', 'Mechanical Engineer', 'ABC Robotech Inc.', 'Married', 'Tibao, Antique', 'uploads/SHS/ALUM65d44e8664057_team-4.jpg', '1', 0, '2024-02-20 07:02:30'),
-(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$CquYqaV4IhVYNjUCjYMjn.F/0312CC0.ECCQ2tVo4n366soEIwpHW', '548747324324', '2020', 'A', 'GAS', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', 0, '2024-02-20 13:31:34'),
+(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$a5F5XozJWY5rZ.F9kPLYY.yHTLDdFNQt0WgnTjG599MBjCqnx4gj6', '548747324324', '2020', 'A', 'GAS', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', 1, '2024-02-20 13:31:34'),
 (3, 'ALUM663e1691703db', 'Jenny Anne', 'Rosario', 'Moscoso', 'jennyanne.r@gmail.com', '$2y$10$PZ5otLf.78PMtMTf2OG6f.p6AJowR6xdJMTHacD1.JCRIWXoQxpZ6', 'N/A', '2020', '', 'STEM', 'Civil Engineer', '', 'Married', 'Tibiao, Antique', '', '', 0, '2024-05-10 12:44:01'),
-(4, 'ALUM663e19dd87119', 'Marcus Jey', 'Kalanin', 'Ongsa', 'mjongsa@gmail.com', '$2y$10$85pUGx5HG0mlFrubth2pquJQqUlluORbz/2izFxKYn56MUQPtRdAW', 'N/A', '2021', '', 'SPORTS', 'Teacher', '', 'Single', 'Tibiao, Antique', '', '', 0, '2024-05-10 12:58:05');
+(4, 'ALUM663e19dd87119', 'Marcus Jey', 'Kalanin', 'Ongsa', 'mjongsa@gmail.com', '$2y$10$o98qcg5J/Gf.oHQIP/t3i.9XMztaHr1.UxzUITCYNmepB6zftrkVm', '09651168472', '2020', 'A', 'SPORTS', 'Doctor', 'Antique Medical Center', 'Single', 'Purok 3, Hamtic, Antique', 'uploads/SHS/ALUM663e19dd87119_profile-img.jpg', '1', 0, '2024-05-10 12:58:05');
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,9 @@ INSERT INTO `chat` (`msg_id`, `conversationID`, `outgoing_msg_id`, `msg_content`
 (4, '1', 'ALUM65d44e8664057', 'dajda', '2025-02-06 15:43:04'),
 (5, '1', 'ALUM65d4a9b6191e2', 'askdjad', '2025-02-06 15:43:53'),
 (6, '1', 'ALUM65d4a9b6191e2', 'Testing', '2025-02-06 15:44:02'),
-(7, '1', 'ALUM65d44e8664057', 'nice', '2025-02-06 15:44:17');
+(7, '1', 'ALUM65d44e8664057', 'nice', '2025-02-06 15:44:17'),
+(8, '3', 'ALUM65d4226839559', 'asdasdsabdhbsa', '2025-03-03 03:38:36'),
+(9, '2', 'ALUM663e19dd87119', 'askdjasd', '2025-03-06 06:48:01');
 
 -- --------------------------------------------------------
 
@@ -180,6 +182,7 @@ CREATE TABLE `events` (
   `eventLocation` varchar(255) NOT NULL,
   `eventDescription` text NOT NULL,
   `eventPicture` varchar(255) NOT NULL,
+  `eventScope` varchar(255) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -187,10 +190,10 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `eventsCode`, `eventName`, `eventDate`, `eventStatus`, `eventLocation`, `eventDescription`, `eventPicture`, `date_created`) VALUES
-(1, 'EVENT65d465059f14f', 'Alumni Socials', '2024-10-05', 2, 'School Campus', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-3.jpg', '2024-02-20'),
-(2, 'EVENT65d4a67f85d2d', 'Araw ng Parangal', '2024-06-29', 1, 'School Campus', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-4.jpg', '2024-02-20'),
-(3, 'EVENT65d4a6c8e573d', 'Friendly Sports Game', '2024-06-19', 2, 'School Grounds', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-2.jpg', '2024-02-20');
+INSERT INTO `events` (`id`, `eventsCode`, `eventName`, `eventDate`, `eventStatus`, `eventLocation`, `eventDescription`, `eventPicture`, `eventScope`, `date_created`) VALUES
+(1, 'EVENT65d465059f14f', 'Alumni Socials', '2025-05-06', 2, 'School Campus', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-3.jpg', 'All', '2024-02-20'),
+(2, 'EVENT65d4a67f85d2d', 'Araw ng Parangal', '2025-06-28', 1, 'School Campus', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-4.jpg', 'All', '2024-02-20'),
+(3, 'EVENT65d4a6c8e573d', 'Friendly Sports Game', '2025-06-19', 2, 'School Grounds', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ', 'uploads/events/tabs-2.jpg', 'Senior High', '2024-02-20');
 
 -- --------------------------------------------------------
 
@@ -200,10 +203,20 @@ INSERT INTO `events` (`id`, `eventsCode`, `eventName`, `eventDate`, `eventStatus
 
 CREATE TABLE `event_participants` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `alumni_id` varchar(100) NOT NULL,
   `event_code` varchar(50) NOT NULL,
   `joined_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_participants`
+--
+
+INSERT INTO `event_participants` (`id`, `alumni_id`, `event_code`, `joined_at`) VALUES
+(1, 'ALUM65d4226839559', 'EVENT65d465059f14f', '2025-03-06 02:17:36'),
+(2, 'ALUM65d4226839559', 'EVENT65d4a67f85d2d', '2025-03-06 03:16:09'),
+(3, 'ALUM65d4a9b6191e2', 'EVENT65d465059f14f', '2025-03-06 03:28:25'),
+(4, 'ALUM663e19dd87119', 'EVENT65d465059f14f', '2025-03-06 05:47:54');
 
 -- --------------------------------------------------------
 
@@ -343,7 +356,7 @@ ALTER TABLE `batchyear`
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -355,7 +368,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `event_participants`
 --
 ALTER TABLE `event_participants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `faculty`
