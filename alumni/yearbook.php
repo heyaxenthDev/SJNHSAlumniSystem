@@ -140,7 +140,7 @@ include "alert.php";
                                                 echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
                                                         <button class=\"nav-link w-100$activeClass\" id=\"$grade-tab\" data-bs-toggle=\"tab\"
                                                         data-bs-target=\"#g_$grade\" type=\"button\" role=\"tab\" aria-controls=\"$grade\"
-                                                        aria-selected=\"" . ($isFirst ? 'true' : 'false') . "\">" . htmlspecialchars($grade) . "</button>
+                                                        aria-selected=\"" . ($isFirst ? 'true' : 'false') . "\">" . "Grade ". htmlspecialchars($grade) . "</button>
                                                     </li>";
                                                 $isFirst = false;
                                             }
