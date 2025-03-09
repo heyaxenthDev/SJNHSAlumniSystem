@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2025 at 06:33 PM
+-- Generation Time: Mar 09, 2025 at 03:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -57,6 +57,7 @@ CREATE TABLE `alumni_jhs` (
   `year_graduated` varchar(255) NOT NULL,
   `section` varchar(255) NOT NULL,
   `track` varchar(255) NOT NULL,
+  `awards` varchar(255) NOT NULL,
   `profession` varchar(255) NOT NULL,
   `current_company_bus` varchar(255) NOT NULL,
   `marital_stat` varchar(255) NOT NULL,
@@ -64,6 +65,9 @@ CREATE TABLE `alumni_jhs` (
   `profile_picture` varchar(255) DEFAULT NULL,
   `user_status` varchar(255) NOT NULL,
   `is_online` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'o=false, 1=true',
+  `security_question` varchar(255) NOT NULL,
+  `security_answer` varchar(255) NOT NULL,
+  `sq_status` tinyint(1) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -71,11 +75,11 @@ CREATE TABLE `alumni_jhs` (
 -- Dumping data for table `alumni_jhs`
 --
 
-INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
-(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '2020', 'A', 'JHS', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', 0, '2024-02-20 03:54:16'),
-(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '2020', 'C', 'JHS', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', 0, '2024-02-20 13:28:03'),
-(3, 'ALUM663e1624a07e7', 'Lucas Marvin', 'Quinto', 'Angel', 'lm.angel@gmail.com', '$2y$10$IZdGUrLAoI8Dt2bAwO2TsOGURE7Iky3wmzd9dl6Wg.YEk/k5eMhHa', 'N/A', '2020', '', 'JHS', 'Nurse', '', 'Single', 'Tibiao, Antique', NULL, '', 0, '2024-05-10 12:42:12'),
-(4, 'ALUM663fb429b3579', 'Herman John', 'Wentar', 'Polio', 'hjpolio@gmail.com', '$2y$10$2aDRnkN5wGuN4GLa17/MZevZpkfrj1UfTKDwkAYgGboP62Ey/jntS', 'N/A', '2020', '', 'JHS', 'Pharmacist', '', 'Divorced', 'Tibiao, Antique', NULL, '', 0, '2024-05-11 18:08:41');
+INSERT INTO `alumni_jhs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `awards`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `security_question`, `security_answer`, `sq_status`, `date_created`) VALUES
+(1, 'ALUM65d4226839559', 'Juan', 'Buena', 'Dela Cruz', 'juandc@gmail.com', '$2y$10$44clnUCFFD9PL3fEqxRNRuEJy2heY3jYQL2D9.TIoOc9eNCO.kPwq', '091265488795', '2020', 'A', 'JHS', '', 'Freelancer', 'VA Advertising Agency', 'Single', 'Oton, Iloilo City', 'uploads/JHS/ALUM65d4226839559_team-3.jpg', '1', 0, '', '', 0, '2024-02-20 03:54:16'),
+(2, 'ALUM65d4a8e3ab34b', 'Jane Joane', 'Angeles', 'Elizalde', 'jj.angeles@gmail.com', '$2y$10$QGIU2jyNhFT.5YZhqHdEw.P7D7Bjgnmp4UXGZizul6I9XzlsGjwqa', '09456775634', '2020', 'C', 'JHS', '', 'Business Analyst', 'Corporate Bank Inc.', 'Married', 'Quezon City, Manila', 'uploads/JHS/ALUM65d4a8e3ab34b_team-2.jpg', '1', 0, '', '', 0, '2024-02-20 13:28:03'),
+(3, 'ALUM663e1624a07e7', 'Lucas Marvin', 'Quinto', 'Angel', 'lm.angel@gmail.com', '$2y$10$IZdGUrLAoI8Dt2bAwO2TsOGURE7Iky3wmzd9dl6Wg.YEk/k5eMhHa', 'N/A', '2020', '', 'JHS', '', 'Nurse', '', 'Single', 'Tibiao, Antique', NULL, '', 0, '', '', 0, '2024-05-10 12:42:12'),
+(4, 'ALUM663fb429b3579', 'Herman John', 'Wentar', 'Polio', 'hjpolio@gmail.com', '$2y$10$2aDRnkN5wGuN4GLa17/MZevZpkfrj1UfTKDwkAYgGboP62Ey/jntS', 'N/A', '2020', '', 'JHS', '', 'Pharmacist', '', 'Divorced', 'Tibiao, Antique', NULL, '', 0, '', '', 0, '2024-05-11 18:08:41');
 
 -- --------------------------------------------------------
 
@@ -95,6 +99,7 @@ CREATE TABLE `alumni_shs` (
   `year_graduated` year(4) NOT NULL,
   `section` varchar(100) NOT NULL,
   `track` varchar(255) NOT NULL,
+  `awards` varchar(255) NOT NULL,
   `profession` varchar(255) NOT NULL,
   `current_company_bus` varchar(255) NOT NULL,
   `marital_stat` varchar(255) NOT NULL,
@@ -102,6 +107,9 @@ CREATE TABLE `alumni_shs` (
   `profile_picture` varchar(255) NOT NULL,
   `user_status` varchar(255) NOT NULL,
   `is_online` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=false, 1=true',
+  `security_question` varchar(255) NOT NULL,
+  `security_answer` varchar(255) NOT NULL,
+  `sq_status` tinyint(1) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -109,11 +117,11 @@ CREATE TABLE `alumni_shs` (
 -- Dumping data for table `alumni_shs`
 --
 
-INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `date_created`) VALUES
-(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', '$2y$10$SgD2AY58hGMh2zo096IAB..LHx30j88Hxn6mdWoefCXyobqSRvX.G', '9798642852', '2020', 'A', 'STEM', 'Mechanical Engineer', 'ABC Robotech Inc.', 'Married', 'Tibao, Antique', 'uploads/SHS/ALUM65d44e8664057_team-4.jpg', '1', 0, '2024-02-20 07:02:30'),
-(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$a5F5XozJWY5rZ.F9kPLYY.yHTLDdFNQt0WgnTjG599MBjCqnx4gj6', '548747324324', '2020', 'A', 'GAS', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', 1, '2024-02-20 13:31:34'),
-(3, 'ALUM663e1691703db', 'Jenny Anne', 'Rosario', 'Moscoso', 'jennyanne.r@gmail.com', '$2y$10$PZ5otLf.78PMtMTf2OG6f.p6AJowR6xdJMTHacD1.JCRIWXoQxpZ6', 'N/A', '2020', '', 'STEM', 'Civil Engineer', '', 'Married', 'Tibiao, Antique', '', '', 0, '2024-05-10 12:44:01'),
-(4, 'ALUM663e19dd87119', 'Marcus Jey', 'Kalanin', 'Ongsa', 'mjongsa@gmail.com', '$2y$10$o98qcg5J/Gf.oHQIP/t3i.9XMztaHr1.UxzUITCYNmepB6zftrkVm', '09651168472', '2020', 'A', 'SPORTS', 'Doctor', 'Antique Medical Center', 'Single', 'Purok 3, Hamtic, Antique', 'uploads/SHS/ALUM663e19dd87119_profile-img.jpg', '1', 0, '2024-05-10 12:58:05');
+INSERT INTO `alumni_shs` (`id`, `alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `section`, `track`, `awards`, `profession`, `current_company_bus`, `marital_stat`, `address`, `profile_picture`, `user_status`, `is_online`, `security_question`, `security_answer`, `sq_status`, `date_created`) VALUES
+(1, 'ALUM65d44e8664057', 'Feliza Marie', 'Pedro', 'Lacson', 'felizmarie.lacson@gmail.com', '$2y$10$SgD2AY58hGMh2zo096IAB..LHx30j88Hxn6mdWoefCXyobqSRvX.G', '9798642852', '2020', 'A', 'STEM', '', 'Mechanical Engineer', 'ABC Robotech Inc.', 'Married', 'Tibao, Antique', 'uploads/SHS/ALUM65d44e8664057_team-4.jpg', '1', 0, '', '', 0, '2024-02-20 07:02:30'),
+(2, 'ALUM65d4a9b6191e2', 'Angelo', 'Wences', 'Kim', 'angelokim@gmail.com', '$2y$10$mlD/TTKM9cu/zEsTz4tWJ.02ulfDlupSVNKICBzjHPd3T6n7.pBvS', '548747324324', '2020', 'A', 'GAS', 'With Honors', 'Teacher', 'Hello World School', 'Widowed', 'Tibiao, Antique', 'uploads/SHS/ALUM65d4a9b6191e2_team-1.jpg', '1', 1, 'What is your mother\'s maiden name?', '$2y$10$Zu2eQVdGTb5vhxIbwDtORuVsLDI4YIalaPkZGciBz/PBVVU1ZPZIq', 0, '2024-02-20 13:31:34'),
+(3, 'ALUM663e1691703db', 'Jenny Anne', 'Rosario', 'Moscoso', 'jennyanne.r@gmail.com', '$2y$10$PZ5otLf.78PMtMTf2OG6f.p6AJowR6xdJMTHacD1.JCRIWXoQxpZ6', 'N/A', '2020', '', 'STEM', '', 'Civil Engineer', '', 'Married', 'Tibiao, Antique', '', '', 0, '', '', 0, '2024-05-10 12:44:01'),
+(4, 'ALUM663e19dd87119', 'Marcus Jey', 'Kalanin', 'Ongsa', 'mjongsa@gmail.com', '$2y$10$o98qcg5J/Gf.oHQIP/t3i.9XMztaHr1.UxzUITCYNmepB6zftrkVm', '09651168472', '2020', 'A', 'SPORTS', '', 'Doctor', 'Antique Medical Center', 'Single', 'Purok 3, Hamtic, Antique', 'uploads/SHS/ALUM663e19dd87119_profile-img.jpg', '1', 0, '', '', 0, '2024-05-10 12:58:05');
 
 -- --------------------------------------------------------
 
