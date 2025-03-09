@@ -115,56 +115,57 @@ include "alert.php";
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Faculty Members -->
-                <div class="user" id="user">
+
+                    <!-- Faculty Members -->
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Faculty Members</h5>
                             <div class="mb-3">
-                                <!-- Department Tabs -->
-                                <ul class="nav nav-tabs d-flex" id="departmentTabs" role="tablist">
-                                    <?php
-                    $sql = "SELECT DISTINCT sect_subj FROM faculty WHERE sect_subj IS NOT NULL";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
 
-                    if ($result->num_rows > 0) {
-                        $isFirst = true;
-                        while ($row = $result->fetch_assoc()) {
-                            $department = htmlspecialchars($row['sect_subj']);
-                            $activeClass = $isFirst ? ' active' : '';
-                            echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
-                                    <button class=\"nav-link w-100$activeClass\" id=\"$department-tab\" data-bs-toggle=\"tab\"
-                                    data-bs-target=\"#$department\" type=\"button\" role=\"tab\" aria-controls=\"$department\"
-                                    aria-selected=\"" . ($isFirst ? 'true' : 'false') . "\">$department</button>
-                                </li>";
-                            $isFirst = false;
-                        }
-                    } else {
-                        echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
-                                <button class=\"nav-link w-100 disabled\" type=\"button\">No record found.</button>
-                            </li>";
-                    }
-                    ?>
+                                <!-- Grade Tabs -->
+                                <ul class="nav nav-tabs d-flex" id="gradeTabs" role="tablist">
+                                    <?php
+                                        $sql = "SELECT DISTINCT grade FROM faculty WHERE hs_type = ? AND grade IS NOT NULL";
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->bind_param("s", $type);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+
+                                        if ($result->num_rows > 0) {
+                                            $isFirst = true;
+                                            while ($row = $result->fetch_assoc()) {
+                                                $grade = htmlspecialchars($row['grade']);
+                                                $activeClass = $isFirst ? ' active' : '';
+                                                echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
+                                                        <button class=\"nav-link w-100$activeClass\" id=\"$grade-tab\" data-bs-toggle=\"tab\"
+                                                        data-bs-target=\"#g_$grade\" type=\"button\" role=\"tab\" aria-controls=\"$grade\"
+                                                        aria-selected=\"" . ($isFirst ? 'true' : 'false') . "\">" . htmlspecialchars($grade) . "</button>
+                                                    </li>";
+                                                $isFirst = false;
+                                            }
+                                        } else {
+                                            echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
+                                                    <button class=\"nav-link w-100 disabled\" type=\"button\">No record found.</button>
+                                                </li>";
+                                        }
+                                        ?>
                                 </ul>
 
                                 <!-- Tab Content -->
-                                <div class="tab-content pt-2" id="departmentTabsContent">
+                                <div class="tab-content pt-2" id="gradeTabsContent">
                                     <?php
-                    $result->data_seek(0);
-                    $isFirst = true;
-                    while ($row = $result->fetch_assoc()) {
-                        $department = htmlspecialchars($row['sect_subj']);
-                        $activeClass = $isFirst ? ' show active' : '';
-                        echo "<div class=\"tab-pane fade$activeClass\" id=\"$department\" role=\"tabpanel\" aria-labelledby=\"$department-tab\">
-                                <!-- Content for $department will be loaded here -->
-                            </div>";
-                        $isFirst = false;
-                    }
-                    ?>
+                                    $result->data_seek(0);
+                                    $isFirst = true;
+                                    while ($row = $result->fetch_assoc()) {
+                                        $grade = htmlspecialchars($row['grade']);
+                                        $activeClass = $isFirst ? ' show active' : '';
+                                        echo "<div class=\"tab-pane fade$activeClass\" id=\"$grade\" role=\"tabpanel\" aria-labelledby=\"$grade-tab\">
+                                                <!-- Content for $grade will be loaded here -->
+                                            </div>";
+                                        $isFirst = false;
+                                    }
+                                    ?>
                                 </div>
                             </div>
 
@@ -181,74 +182,60 @@ include "alert.php";
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
             $(document).ready(function() {
-                function loadAlumniContent(trackOrSec) {
-                    if (trackOrSec) {
+                function loadContent(target, url, data) {
+                    if (data) {
                         $.ajax({
-                            url: 'fetch_alumni.php',
+                            url: url,
                             type: 'POST',
-                            data: {
-                                track_or_sec: trackOrSec,
-                                year: '<?= htmlspecialchars($year) ?>'
-                            },
+                            data: data,
                             success: function(response) {
-                                $('#alumniContent').html(response);
+                                $(target).html(response);
                             },
                             error: function() {
-                                $('#alumniContent').html(
+                                $(target).html(
                                     '<div class="alert alert-danger">Error loading data. Please try again.</div>'
                                 );
                             }
                         });
                     } else {
-                        $('#alumniContent').empty();
+                        $(target).empty();
                     }
                 }
 
+                // Load Alumni Content
                 $('#trackOrSectionTabs button').on('shown.bs.tab', function(e) {
                     var selectedValue = $(e.target).attr('aria-controls');
-                    loadAlumniContent(selectedValue);
+                    loadContent('#alumniContent', 'fetch_alumni.php', {
+                        track_or_sec: selectedValue,
+                        year: '<?= htmlspecialchars($year) ?>'
+                    });
                 });
 
-                // Load content for the first tab automatically
-                var firstTabContent = $('#trackOrSectionTabs button.active').attr('aria-controls');
-                loadAlumniContent(firstTabContent);
-            });
+                // Load Faculty Content
+                $('#gradeTabs button').on('shown.bs.tab', function(e) {
+                    var selectedValue = $(e.target).attr('aria-controls');
+                    loadContent('#facultyContent', 'fetch_faculty.php', {
+                        grade: selectedValue
+                    });
+                });
 
-            $(document).ready(function() {
-                function loadFacultyContent(department) {
-                    if (department) {
-                        $.ajax({
-                            url: 'fetch_faculty.php',
-                            type: 'POST',
-                            data: {
-                                sect_subj: department
-                            },
-                            success: function(response) {
-                                $('#facultyContent').html(response);
-                            },
-                            error: function() {
-                                $('#facultyContent').html(
-                                    '<div class="alert alert-danger">Error loading data. Please try again.</div>'
-                                );
-                            }
-                        });
-                    } else {
-                        $('#facultyContent').empty();
-                    }
+                // Load default active tab content
+                var firstAlumniTab = $('#trackOrSectionTabs button.active').attr('aria-controls');
+                if (firstAlumniTab) {
+                    loadContent('#alumniContent', 'fetch_alumni.php', {
+                        track_or_sec: firstAlumniTab,
+                        year: '<?= htmlspecialchars($year) ?>'
+                    });
                 }
 
-                $('#departmentTabs button').on('shown.bs.tab', function(e) {
-                    var selectedValue = $(e.target).attr('aria-controls');
-                    loadFacultyContent(selectedValue);
-                });
-
-                // Load content for the first tab automatically
-                var firstTabContent = $('#departmentTabs button.active').attr('aria-controls');
-                loadFacultyContent(firstTabContent);
+                var firstFacultyTab = $('#gradeTabs button.active').attr('aria-controls');
+                if (firstFacultyTab) {
+                    loadContent('#facultyContent', 'fetch_faculty.php', {
+                        grade: firstFacultyTab
+                    });
+                }
             });
             </script>
-
-
 
         </div>
     </section>
