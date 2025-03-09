@@ -72,6 +72,7 @@ include 'includes/conn.php';
             $hs = $type;
             $security_question = $row['security_question'];
             $security_answer = $row['security_answer'];
+            $awards = $row['awards'];
             // Add more assignments as needed for other columns
         }
     } else {

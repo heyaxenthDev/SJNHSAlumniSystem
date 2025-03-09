@@ -148,6 +148,11 @@ include "alert.php";
                                     <div class="col-lg-9 col-md-8"><?= $email ?></div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Awards</div>
+                                    <div class="col-lg-9 col-md-8"><?= $awards ?></div>
+                                </div>
+
                             </div>
 
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
@@ -223,6 +228,14 @@ include "alert.php";
                                         <div class="col-md-8 col-lg-9">
                                             <input name="email" type="email" class="form-control" id="Email"
                                                 value="<?= $email ?>">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="Awards" class="col-md-4 col-lg-3 col-form-label">Awards</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="awards" type="text" class="form-control" id="Awards"
+                                                value="<?= $awards ?>">
                                         </div>
                                     </div>
 

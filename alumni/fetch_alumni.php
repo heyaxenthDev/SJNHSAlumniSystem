@@ -28,6 +28,7 @@ if ($result->num_rows > 0) {
                     <div class="member-info">
                         <h4>' . $row['firstname'] . " " . $middlenameInitial . ". " . $row['lastname'] . '</h4>
                         <span>Section: ' . $row['section'] . '</span>
+                        <span>Awards: ' .($row['awards'] == "" ? "Not Applicable" : $row['awards']) . '</span>
                         <span>Profession: ' . $row['profession'] . '</span>
                         <span>Address: ' . $row['address'] . '</span>
                     </div>

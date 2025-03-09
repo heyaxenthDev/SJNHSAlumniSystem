@@ -138,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
     $address = $_POST["address"];
     $phone = $_POST["phone"];
     $email = $_POST["email"];
+    $awards = $_POST["awards"];
     $securityQuestion = $_POST["securityQuestion"];
     $securityAnswer = $_POST["securityAnswer"];
 
@@ -195,6 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
                 address = ?, 
                 phone_num = ?, 
                 email = ?,
+                awards = ?,
                 security_question = ?,
                 security_answer = ?, 
                 profile_picture = COALESCE(?, profile_picture) 
@@ -202,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        "sssssssssssi",
+        "ssssssssssssi",
         $firstname, 
         $middlename, 
         $lastname, 
@@ -211,6 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
         $address, 
         $phone, 
         $email,
+        $awards,
         $securityQuestion,
         $hashAnswer,
         $target_file, 
