@@ -12,7 +12,9 @@ if (isset($_POST['complete'])) {
     $address = $_POST['address'];
     $password = $_POST['password'];
     $cpassword = $_POST['confirmPassword'];
-
+    $securityQuestion = $_POST['securityQuestion'];
+    $securityAnswer = $_POST['securityAnswer'];
+    
     // Check if password and confirm password match
     if ($password !== $cpassword) {
         $_SESSION['status'] = "Error";
@@ -86,8 +88,8 @@ if (isset($_POST['complete'])) {
     $table_name = ($hs_type == "SHS") ? "alumni_shs" : "alumni_jhs";
 
     // Prepare the update query
-    $stmt = $conn->prepare("UPDATE `$table_name` SET `section`=?, `profession`=?, `current_company_bus`=?, `phone_num`=?, `address`=?, `password`=?, `profile_picture`=?, `user_status`=1 WHERE `alumni_id`=?");
-    $stmt->bind_param("ssssssss", $section, $profession, $company, $contact, $address, $hashed_password, $profile_pic, $_SESSION['user_cred']['alumni_id']);
+    $stmt = $conn->prepare("UPDATE `$table_name` SET `section`=?, `profession`=?, `current_company_bus`=?, `phone_num`=?, `address`=?, `password`=?, `security_question`=?, `security_answe`=?, `profile_picture`=?, `user_status`=1 WHERE `alumni_id`=?");
+    $stmt->bind_param("ssssssssss", $section, $profession, $company, $contact, $address, $hashed_password, $securityQuestion, $securityAnswer, $profile_pic, $_SESSION['user_cred']['alumni_id']);
 
     // Execute the update query
     if ($stmt->execute()) {
@@ -136,6 +138,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
     $address = $_POST["address"];
     $phone = $_POST["phone"];
     $email = $_POST["email"];
+    $securityQuestion = $_POST["securityQuestion"];
+    $securityAnswer = $_POST["securityAnswer"];
+
+    $hashAnswer = password_hash($securityAnswer, PASSWORD_DEFAULT);
 
     // Handle file upload
     if (!empty($_FILES['profileImage']['name'])) {
@@ -188,13 +194,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
                 profession = ?, 
                 address = ?, 
                 phone_num = ?, 
-                email = ?, 
+                email = ?,
+                security_question = ?,
+                security_answer = ?, 
                 profile_picture = COALESCE(?, profile_picture) 
             WHERE id = ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(
-        "sssssssssi",
+        "sssssssssssi",
         $firstname, 
         $middlename, 
         $lastname, 
@@ -202,7 +210,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
         $job, 
         $address, 
         $phone, 
-        $email, 
+        $email,
+        $securityQuestion,
+        $hashAnswer,
         $target_file, 
         $id
     );

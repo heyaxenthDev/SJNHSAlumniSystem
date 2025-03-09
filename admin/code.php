@@ -290,16 +290,17 @@ function addAlumni($conn, $table, $prefix)
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $track = ($table == 'alumni_shs') ? mysqli_real_escape_string($conn, $_POST['track']) : 'JHS';
     $phone_num = mysqli_real_escape_string($conn, $_POST['phone_num']);
+    $awards = mysqli_real_escape_string($conn, $_POST['awards']);
     $year_graduated = mysqli_real_escape_string($conn, $_POST['year_graduated']);
     $profession = mysqli_real_escape_string($conn, $_POST['profession']);
     $marital_stat = mysqli_real_escape_string($conn, $_POST['marital_stat']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
 
     // Insert into database
-    $sql = "INSERT INTO $table (`alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `track`, `profession`, `marital_stat`, `address`)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO $table (`alumni_id`, `firstname`, `middlename`, `lastname`, `email`, `password`, `phone_num`, `year_graduated`, `track`, `awards`, `profession`, `marital_stat`, `address`)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $track, $profession, $marital_stat, $address);
+    mysqli_stmt_bind_param($stmt, "sssssssssssss", $alumni_id, $firstname, $middlename, $lastname, $email, $password, $phone_num, $year_graduated, $track, $awards, $profession, $marital_stat, $address);
 
     if (mysqli_stmt_execute($stmt)) {
         $_SESSION['status'] = "Success";

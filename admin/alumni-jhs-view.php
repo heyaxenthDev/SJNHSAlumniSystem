@@ -103,16 +103,27 @@ include "alert.php";
                                                 <div class="row mb-4 mt-2">
                                                     <div class="col-lg-5 col-md-5">
                                                         <!-- Profile Picture Preview -->
+                                                        <small>Default Profile Picture</small>
                                                         <center>
                                                             <img id="profilePicturePreview" src="assets/img/user.png"
                                                                 alt="Profile Picture Preview"
                                                                 style="max-width: 100%; max-height: 165px;">
                                                         </center>
-                                                        <!-- Profile Picture Input -->
-                                                        <small class="mt-2">Default Profile Picture</small>
+
                                                         <!-- <input type="file" name="profilePicture" class="form-control"
                                                             id="profilePicture" onchange="previewProfilePicture();"
                                                             accept="image/*" required> -->
+                                                        <div class="col-lg-12 col-md-12">
+                                                            <label for="password" class="form-label">Default
+                                                                Password</label>
+                                                            <?php
+                                                        $defaultPassword = "Welcome123!";
+                                                        // $hashedPassword = password_hash($defaultPassword, PASSWORD_DEFAULT);
+                                                        ?>
+                                                            <input type="text" name="password" class="form-control"
+                                                                id="password" value="<?php echo $defaultPassword; ?>"
+                                                                readonly>
+                                                        </div>
                                                     </div>
 
                                                     <div class="col-lg-7 col-md-7">
@@ -137,7 +148,7 @@ include "alert.php";
                                                     </div>
                                                 </div>
 
-                                                <div class="row mb-2">
+                                                <div class="row mb-3">
                                                     <div class="col-lg-3 col-md-3">
                                                         <label for="year_graduated" class="form-label">Year
                                                             Graduated</label>
@@ -215,33 +226,27 @@ include "alert.php";
 
                                                 <!-- <h5 style="color: #013220;" class="fst-italic fw-semibold">Contact
                                                     Details</h5> -->
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-md-4">
-                                                        <label for="email" class="form-label">Email</label>
+                                                <div class="row mb-1">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <label for="email" class="form-label">Email Address</label>
                                                         <input type="email" name="email" class="form-control" id="email"
                                                             required>
                                                     </div>
 
-                                                    <div class="col-lg-4 col-md-4">
-                                                        <label for="password" class="form-label">Default
-                                                            Password</label>
-                                                        <?php
-                                                        $defaultPassword = "Welcome123!";
-                                                        // $hashedPassword = password_hash($defaultPassword, PASSWORD_DEFAULT);
-                                                        ?>
-                                                        <input type="text" name="password" class="form-control"
-                                                            id="password" value="<?php echo $defaultPassword; ?>"
-                                                            readonly>
-                                                    </div>
-
-                                                    <div class="col-lg-4 col-md-4">
+                                                    <div class="col-lg-3 col-md-3">
                                                         <label for="phone_num" class="form-label">Phone Number</label>
                                                         <input type="tel" name="phone_num" class="form-control"
                                                             id="phone_num" required>
                                                     </div>
+
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <label for="awards" class="form-label">Awards</label>
+                                                        <input type="text" name="awards" class="form-control"
+                                                            id="awards" required>
+                                                    </div>
                                                 </div>
 
-                                                <div class="col-lg-12 col-md-12 mb-2">
+                                                <div class="col-lg-12 col-md-12 mb-3">
                                                     <label for="address" class="form-label">Address</label>
                                                     <textarea name="address" class="form-control" id="address" rows="2"
                                                         required></textarea>

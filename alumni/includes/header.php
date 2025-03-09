@@ -70,6 +70,8 @@ include 'includes/conn.php';
             $section = $row['section'];
             $address = $row['address'];
             $hs = $type;
+            $security_question = $row['security_question'];
+            $security_answer = $row['security_answer'];
             // Add more assignments as needed for other columns
         }
     } else {

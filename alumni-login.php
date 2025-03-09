@@ -109,10 +109,9 @@ include 'includes/conn.php';
                                     <button class="btn rounded-5 w-100 text-white btn-lg" type="submit"
                                         style="background-color: #013220;" name="alumniLogin">Login</button>
                                 </div>
-                                <!-- <div class="col-12 mt-5 mb-5 text-center">
-                                    <p class="small mb-0">Don't have account? <a href="#" class="text-success">Click
-                                            here</a></p>
-                                </div> -->
+                                <div class="col-12 mt-2 mb-2 text-center">
+                                    <a href="forgot-password" class="text-success">Forgot Password?</a>
+                                </div>
                             </form>
 
                             <div class="credits mt-5">

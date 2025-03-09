@@ -123,6 +123,59 @@ $(document).ready(function() {
                                             name="confirmPassword">
                                     </div>
                                 </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="securityQuestion" class="mb-2">Select a Security
+                                            Question</label>
+                                        <select id="securityQuestion" name="securityQuestion" class="form-select">
+                                            <option value="">-- Select a Question --</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="answer" class="form-label">Security Answer</label>
+                                        <input type="text" name="securityAnswer" class="form-control" id="answer"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <script>
+                                // List of random security questions
+                                const questions = [
+                                    "What is your mother's maiden name?",
+                                    "What was your first pet's name?",
+                                    "What is your favorite book?",
+                                    "What is the name of your first school?",
+                                    "What is your favorite movie?",
+                                    "What city were you born in?",
+                                    "What was your childhood nickname?",
+                                    "Who was your childhood best friend?",
+                                    "What was the model of your first car?",
+                                    "What is your favorite food?"
+                                ];
+
+                                // Select element
+                                const select = document.getElementById("securityQuestion");
+
+                                // Shuffle questions (Fisher-Yates shuffle)
+                                function shuffleArray(array) {
+                                    for (let i = array.length - 1; i > 0; i--) {
+                                        let j = Math.floor(Math.random() * (i + 1));
+                                        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+                                    }
+                                }
+
+                                // Shuffle and populate select options
+                                shuffleArray(questions);
+                                questions.forEach(question => {
+                                    let option = document.createElement("option");
+                                    option.value = question;
+                                    option.textContent = question;
+                                    select.appendChild(option);
+                                });
+                                </script>
+
                                 <center>
                                     <button type="submit" class="btn w-50 mt-2 mb-5 text-white"
                                         style="background-color: #028505;" name="complete">Complete</button>
