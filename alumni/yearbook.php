@@ -116,6 +116,66 @@ include "alert.php";
                         </div>
                     </div>
                 </div>
+
+                <!-- Faculty Members -->
+                <div class="user" id="user">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Faculty Members</h5>
+                            <div class="mb-3">
+                                <!-- Department Tabs -->
+                                <ul class="nav nav-tabs d-flex" id="departmentTabs" role="tablist">
+                                    <?php
+                    $sql = "SELECT DISTINCT sect_subj FROM faculty WHERE sect_subj IS NOT NULL";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        $isFirst = true;
+                        while ($row = $result->fetch_assoc()) {
+                            $department = htmlspecialchars($row['sect_subj']);
+                            $activeClass = $isFirst ? ' active' : '';
+                            echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
+                                    <button class=\"nav-link w-100$activeClass\" id=\"$department-tab\" data-bs-toggle=\"tab\"
+                                    data-bs-target=\"#$department\" type=\"button\" role=\"tab\" aria-controls=\"$department\"
+                                    aria-selected=\"" . ($isFirst ? 'true' : 'false') . "\">$department</button>
+                                </li>";
+                            $isFirst = false;
+                        }
+                    } else {
+                        echo "<li class=\"nav-item flex-fill\" role=\"presentation\">
+                                <button class=\"nav-link w-100 disabled\" type=\"button\">No record found.</button>
+                            </li>";
+                    }
+                    ?>
+                                </ul>
+
+                                <!-- Tab Content -->
+                                <div class="tab-content pt-2" id="departmentTabsContent">
+                                    <?php
+                    $result->data_seek(0);
+                    $isFirst = true;
+                    while ($row = $result->fetch_assoc()) {
+                        $department = htmlspecialchars($row['sect_subj']);
+                        $activeClass = $isFirst ? ' show active' : '';
+                        echo "<div class=\"tab-pane fade$activeClass\" id=\"$department\" role=\"tabpanel\" aria-labelledby=\"$department-tab\">
+                                <!-- Content for $department will be loaded here -->
+                            </div>";
+                        $isFirst = false;
+                    }
+                    ?>
+                                </div>
+                            </div>
+
+                            <div class="faculty-content row" id="facultyContent">
+                                <!-- Faculty information will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -153,7 +213,42 @@ include "alert.php";
                 var firstTabContent = $('#trackOrSectionTabs button.active').attr('aria-controls');
                 loadAlumniContent(firstTabContent);
             });
+
+            $(document).ready(function() {
+                function loadFacultyContent(department) {
+                    if (department) {
+                        $.ajax({
+                            url: 'fetch_faculty.php',
+                            type: 'POST',
+                            data: {
+                                sect_subj: department
+                            },
+                            success: function(response) {
+                                $('#facultyContent').html(response);
+                            },
+                            error: function() {
+                                $('#facultyContent').html(
+                                    '<div class="alert alert-danger">Error loading data. Please try again.</div>'
+                                );
+                            }
+                        });
+                    } else {
+                        $('#facultyContent').empty();
+                    }
+                }
+
+                $('#departmentTabs button').on('shown.bs.tab', function(e) {
+                    var selectedValue = $(e.target).attr('aria-controls');
+                    loadFacultyContent(selectedValue);
+                });
+
+                // Load content for the first tab automatically
+                var firstTabContent = $('#departmentTabs button.active').attr('aria-controls');
+                loadFacultyContent(firstTabContent);
+            });
             </script>
+
+
 
         </div>
     </section>
