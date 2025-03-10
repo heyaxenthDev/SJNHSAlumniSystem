@@ -88,7 +88,7 @@ if (isset($_POST['complete'])) {
     $table_name = ($hs_type == "SHS") ? "alumni_shs" : "alumni_jhs";
 
     // Prepare the update query
-    $stmt = $conn->prepare("UPDATE `$table_name` SET `section`=?, `profession`=?, `current_company_bus`=?, `phone_num`=?, `address`=?, `password`=?, `security_question`=?, `security_answe`=?, `profile_picture`=?, `user_status`=1 WHERE `alumni_id`=?");
+    $stmt = $conn->prepare("UPDATE `$table_name` SET `section`=?, `profession`=?, `current_company_bus`=?, `phone_num`=?, `address`=?, `password`=?, `security_question`=?, `security_answer`=?, `profile_picture`=?, `user_status`=1 WHERE `alumni_id`=?");
     $stmt->bind_param("ssssssssss", $section, $profession, $company, $contact, $address, $hashed_password, $securityQuestion, $securityAnswer, $profile_pic, $_SESSION['user_cred']['alumni_id']);
 
     // Execute the update query

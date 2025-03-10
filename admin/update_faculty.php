@@ -13,12 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $designation = $_POST['designation'];
     $grade = $_POST['grade'];
     $sect_subj = $_POST['section'];
+    $hsType = $_POST['hs_type'];
 
     $profile_picture = null;
 
     // Check if a new profile picture is uploaded
     if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['size'] > 0) {
-        $target_dir = "uploads/"; // Directory where images will be stored
+        $target_dir = "uploads/$hsType/"; // Directory where images will be stored
         $target_file = $target_dir . basename($_FILES["profilePicture"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 

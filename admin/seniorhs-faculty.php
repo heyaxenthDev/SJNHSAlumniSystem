@@ -1,5 +1,6 @@
 <?php
 include 'authentication.php';
+checkLogin(); // Call the function to check if the user is logged in
 include_once 'includes/header.php';
 include_once 'includes/conn.php';
 
@@ -251,6 +252,7 @@ include "alert.php";
                                         <form class="row g-3" method="POST" action="update_faculty.php"
                                             enctype="multipart/form-data">
                                             <input type="hidden" name="faculty_id" id="editFacultyId">
+                                            <input type="hidden" name="hs_type" value="SHS">
 
 
                                             <h5 style="color: #013220;" class="fst-italic fw-semibold">General
