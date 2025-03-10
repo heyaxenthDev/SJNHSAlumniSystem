@@ -17,51 +17,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $profile_picture = null;
 
-    // Check if a new profile picture is uploaded
-    if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['size'] > 0) {
-        $target_dir = "uploads/$hsType/"; // Directory where images will be stored
-        $target_file = $target_dir . basename($_FILES["profilePicture"]["name"]);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        // Check if file is an actual image
-        $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
-        if ($check === false) {
-            $_SESSION['status'] = "Error";
-            $_SESSION['status_text'] = "File is not an image.";
-            $_SESSION['status_code'] = "error";
-            header("Location: {$_SERVER['HTTP_REFERER']}");
-            exit();
-        }
-
-        // Check file size (max 2MB)
-        if ($_FILES["profilePicture"]["size"] > 2000000) {
-            $_SESSION['status'] = "Error";
-            $_SESSION['status_text'] = "Sorry, file is too large.";
-            $_SESSION['status_code'] = "error";
-            header("Location: {$_SERVER['HTTP_REFERER']}");
-            exit();
-        }
-
-        // Allow only JPG, JPEG, PNG
-        if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
-            $_SESSION['status'] = "Error";
-            $_SESSION['status_text'] = "Only JPG, JPEG & PNG files are allowed.";
-            $_SESSION['status_code'] = "error";
-            header("Location: {$_SERVER['HTTP_REFERER']}");
-            exit();
-        }
-
-        // Move uploaded file to the server
-        if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $target_file)) {
-            $profile_picture = basename($_FILES["profilePicture"]["name"]);
-        } else {
-            $_SESSION['status'] = "Error";
-            $_SESSION['status_text'] = "There was an error uploading your file.";
-            $_SESSION['status_code'] = "error";
-            header("Location: {$_SERVER['HTTP_REFERER']}");
-            exit();
-        }
+   // Check if a new profile picture is uploaded
+if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['size'] > 0) {
+    $targetDir = "uploads/$hsType/";
+    
+    // Ensure directory exists
+    if (!is_dir($targetDir)) {
+        mkdir($targetDir, 0777, true);
     }
+
+    $targetFile = $targetDir . basename($_FILES["profilePicture"]["name"]);
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Check if file is an actual image
+    $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
+    if ($check === false) {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = "File is not an image.";
+        $_SESSION['status_code'] = "error";
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+        exit();
+    }
+
+    // Check file size (max 2MB)
+    if ($_FILES["profilePicture"]["size"] > 2000000) {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = "Sorry, file is too large.";
+        $_SESSION['status_code'] = "error";
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+        exit();
+    }
+
+    // Allow only JPG, JPEG, PNG
+    if (!in_array($imageFileType, ["jpg", "jpeg", "png"])) {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = "Only JPG, JPEG & PNG files are allowed.";
+        $_SESSION['status_code'] = "error";
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+        exit();
+    }
+
+    // Move uploaded file to the server
+    if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
+        $profile_picture = $targetFile;
+    } else {
+        $_SESSION['status'] = "Error";
+        $_SESSION['status_text'] = "There was an error uploading your file.";
+        $_SESSION['status_code'] = "error";
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+        exit();
+    }
+}
+
 
     // Prepare SQL statement (Update faculty details)
     if ($profile_picture) {
