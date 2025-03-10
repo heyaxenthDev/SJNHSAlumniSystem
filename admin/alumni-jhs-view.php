@@ -33,8 +33,8 @@ include "alert.php";
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
 
                                 <div class="search-bar">
-                                    <input type="text" name="query" id="search" placeholder="Search"
-                                        title="Enter search keyword">
+                                    <!-- <input type="text" name="query" id="search" placeholder="Search"
+                                        title="Enter search keyword"> -->
                                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                     <script>
                                     $(document).ready(function() {
