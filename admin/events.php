@@ -150,9 +150,15 @@ include "alert.php";
                                         }
                                         echo "</td>";
                                         echo "<td>{$row['eventScope']}</td>";
-                                        echo "<td>
-                                        <button class='btn btn-primary btn-sm' onclick='viewEditEvent({$row['id']})' data-bs-toggle='modal' data-bs-target='#eventModal'>View &amp; Edit</button>";
-                                        echo "</td>";
+                                        echo '<td>
+                                                <button class="btn btn-primary btn-sm" onclick="viewEditEvent(' . $row["id"] . ')" 
+                                                    data-bs-toggle="modal" data-bs-target="#eventModal">View &amp; Edit</button>
+                                                <button class="btn btn-secondary btn-sm" onclick="viewParticipants(\'' . $row["eventsCode"] . '\')" 
+                                                    data-bs-toggle="modal" data-bs-target="#eventParticipants">
+                                                    <i class="bi bi-people-fill"></i>
+                                                </button>
+                                            </td>';
+                                    
                                         echo "</tr>";
                                     }
                                 } else {
@@ -174,7 +180,7 @@ include "alert.php";
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body event">
                                 <!-- Event details will be loaded here dynamically via AJAX -->
                             </div>
                         </div>
@@ -193,9 +199,127 @@ include "alert.php";
                         },
                         success: function(response) {
                             // Display event details in modal body
-                            $('.modal-body').html(response);
+                            $('.event').html(response);
                         }
                     });
+                }
+                </script>
+
+                <div class="modal fade" id="eventParticipants" tabindex="-1" aria-labelledby="eventParticipantsLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="eventParticipantsLabel">Event Participants</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h6>Total Participants: <span id="totalParticipants">0</span></h6>
+                                <h6>JHS Participants: <span id="totalJHS">0</span></h6>
+                                <h6>SHS Participants: <span id="totalSHS">0</span></h6>
+                                <table class="table table-striped mt-3" id="participantsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Alumni ID</th>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Joined At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="participantsList">
+                                        <!-- Data will be loaded dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-success print-button" onclick="printParticipants()">
+                                    <i class="bi bi-printer"></i> Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+                function viewParticipants(eventCode) {
+                    $.ajax({
+                        url: 'get_participants.php',
+                        type: 'POST',
+                        data: {
+                            eventCode: eventCode
+                        },
+                        success: function(response) {
+                            let data = JSON.parse(response);
+
+                            if (data.success) {
+                                let participants = data.participants;
+                                let tableBody = '';
+
+                                participants.forEach((participant, index) => {
+                                    tableBody += `<tr>
+                        <td>${index + 1}</td>
+                        <td>${participant.alumni_id}</td>
+                        <td>${participant.firstname} ${participant.lastname}</td>
+                        <td>${participant.type}</td>
+                        <td>${new Date(participant.joined_at).toLocaleString()}</td>
+                    </tr>`;
+                                });
+
+                                $("#participantsList").html(tableBody);
+                                $("#totalParticipants").text(data.total);
+                                $("#totalJHS").text(data.totalJHS);
+                                $("#totalSHS").text(data.totalSHS);
+                            } else {
+                                $("#participantsList").html(
+                                    '<tr><td colspan="5">No participants found</td></tr>');
+                                $("#totalParticipants").text(0);
+                                $("#totalJHS").text(0);
+                                $("#totalSHS").text(0);
+                            }
+                        }
+                    });
+                }
+
+                function printParticipants() {
+                    let modalContent = document.getElementById('eventParticipants').innerHTML;
+
+                    // Create a temporary element to remove the print button before printing
+                    let tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = modalContent;
+
+                    // Remove the print button
+                    let printButton = tempDiv.querySelector(".print-button");
+                    if (printButton) {
+                        printButton.remove();
+                    }
+
+                    let modalTitle = tempDiv.querySelector(".modal-title").style.display = "none";
+
+                    let newWindow = window.open('', '', 'width=900,height=600');
+                    newWindow.document.write(`
+                        <html>
+                            <head>
+                                <title>Print Event Participants</title>
+                                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+                                <style>
+                                    body { font-family: Arial, sans-serif; padding: 20px; }
+                                    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+                                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                                    th { background-color: #f8f9fa; }
+                                    h2 { text-align: center; margin-bottom: 20px; }
+                                </style>
+                            </head>
+                            <body>
+                                <h2>Event Participants</h2>
+                                ${tempDiv.innerHTML}
+                                <script>window.print(); setTimeout(() => window.close(), 500);<\/script>
+                            </body>
+                        </html>
+                    `);
+                    newWindow.document.close();
                 }
                 </script>
 

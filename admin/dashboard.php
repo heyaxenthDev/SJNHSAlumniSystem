@@ -319,8 +319,14 @@ Toast.fire({
                         <div class="events">
 
                             <?php
-                            // Fetch ongoing and upcoming events from the database
-                            $sql = "SELECT * FROM `events` WHERE `eventStatus` IN (1, 2)";
+                            // Get the current date
+                            $currentDate = date('Y-m-d');
+
+                            // Fetch ongoing and upcoming events based on eventDate
+                            $sql = "SELECT * FROM `events` 
+                                    WHERE `eventDate` >= '$currentDate'
+                                    ORDER BY `eventDate` ASC";
+
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -335,7 +341,7 @@ Toast.fire({
                                 }
                                 echo '</div>';
                             } else {
-                                echo 'No events found';
+                                echo 'No upcoming or ongoing events found';
                             }
                             ?>
 

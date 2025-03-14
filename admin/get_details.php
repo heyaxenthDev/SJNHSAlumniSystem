@@ -42,6 +42,7 @@ if (isset($_POST['id'])) {
                         <select class='form-select' id='editStatus' name='editStatus'>
                             <option value='1' " . ($row['newsStatus'] == '1' ? 'selected' : '') . ">Published</option>
                             <option value='2' " . ($row['newsStatus'] == '2' ? 'selected' : '') . ">Draft</option>
+                            <option value='0' " . ($row['newsStatus'] == '0' ? 'selected' : '') . ">Unpublished</option>
                         </select>
                     </div>
                     

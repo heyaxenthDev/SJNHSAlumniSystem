@@ -120,12 +120,15 @@ include "alert.php";
                                         echo "<td>" . date("M d, Y", strtotime($row['publication_date'])) . "</td>";
                                         echo "<td>";
                                         switch ($row['newsStatus']) {
+                                            case "0":
+                                                echo '<span class="badge bg-danger">Unpublished</span>';
+                                                break;     
                                             case "1":
                                                 echo '<span class="badge bg-success">Published</span>';
                                                 break;
                                             case "2":
                                                 echo '<span class="badge bg-primary">Draft</span>';
-                                                break;
+                                                break;                                       
                                             default:
                                                 echo "Unknown";
                                         }
