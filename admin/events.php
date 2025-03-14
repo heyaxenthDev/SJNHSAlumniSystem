@@ -153,12 +153,12 @@ include "alert.php";
                                         echo '<td>
                                                 <button class="btn btn-primary btn-sm" onclick="viewEditEvent(' . $row["id"] . ')" 
                                                     data-bs-toggle="modal" data-bs-target="#eventModal">View &amp; Edit</button>
-                                                <button class="btn btn-secondary btn-sm" onclick="viewParticipants(\'' . $row["eventsCode"] . '\')" 
+                                                
+                                                <button class="btn btn-secondary btn-sm" onclick="viewParticipants(\'' . $row["eventsCode"] . '\', \'' . $row["eventScope"] . '\')" 
                                                     data-bs-toggle="modal" data-bs-target="#eventParticipants">
                                                     <i class="bi bi-people-fill"></i>
                                                 </button>
-                                            </td>';
-                                    
+                                            </td>';                                   
                                         echo "</tr>";
                                     }
                                 } else {
@@ -244,7 +244,7 @@ include "alert.php";
 
 
                 <script>
-                function viewParticipants(eventCode) {
+                function viewParticipants(eventCode, eventScope) {
                     $.ajax({
                         url: 'get_participants.php',
                         type: 'POST',
@@ -269,18 +269,31 @@ include "alert.php";
                                 });
 
                                 $("#participantsList").html(tableBody);
-                                $("#totalParticipants").text(data.total);
-                                $("#totalJHS").text(data.totalJHS);
-                                $("#totalSHS").text(data.totalSHS);
+
+                                if (eventScope === "Junior High") {
+                                    $("#totalParticipants").text(data.totalJHS);
+                                    $("#totalJHS").text(data.totalJHS).parent().show();
+                                    $("#totalSHS").parent().hide();
+                                } else if (eventScope === "Senior High") {
+                                    $("#totalParticipants").text(data.totalSHS);
+                                    $("#totalSHS").text(data.totalSHS).parent().show();
+                                    $("#totalJHS").parent().hide();
+                                } else {
+                                    $("#totalParticipants").text(data.total);
+                                    $("#totalJHS").text(data.totalJHS).parent().show();
+                                    $("#totalSHS").text(data.totalSHS).parent().show();
+                                }
                             } else {
                                 $("#participantsList").html(
                                     '<tr><td colspan="5">No participants found</td></tr>');
                                 $("#totalParticipants").text(0);
-                                $("#totalJHS").text(0);
-                                $("#totalSHS").text(0);
+                                $("#totalJHS").text(0).parent().hide();
+                                $("#totalSHS").text(0).parent().hide();
                             }
                         }
                     });
+
+                    console.log(eventScope);
                 }
 
                 function printParticipants() {
